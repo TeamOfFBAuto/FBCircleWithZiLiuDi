@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>special</key>
+	<array>
+		<string>汽车</string>
+		<string>大队</string>
+		<string>赛事</string>
+		<string>摄影</string>
+		<string>改装</string>
+		<string>旅行</string>
+		<string>美食</string>
+		<string>公益</string>
+	</array>
+	<key>normal</key>
+	<array>
+		<string>户外</string>
+		<string>宠物</string>
+		<string>摩托</string>
+		<string>文学</string>
+		<string>文玩</string>
+		<string>影视</string>
+		<string>音乐</string>
+		<string>数码</string>
+		<string>运动</string>
+		<string>情感</string>
+		<string>跳蚤</string>
+		<string>品牌</string>
+		<string>其他</string>
+	</array>
+</dict>
+</plist>
