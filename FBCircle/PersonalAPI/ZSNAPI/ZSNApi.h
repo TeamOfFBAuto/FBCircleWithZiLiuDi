@@ -11,6 +11,7 @@
 #import "NSString+Emoji.h"
 #import "MBProgressHUD.h"
 #import "OHLableHelper.h"
+#import "NSString+ZSNString.h"
 #define PERSONAL_DEFAULTS_IMAGE [UIImage imageNamed:@"gtouxiangHolderImage.png"]
 
 ///大表情
@@ -113,6 +114,11 @@
 +(NSArray *)sortArrayWith:(NSArray *)array;
 ///去除所有带<>类的标签
 +(NSString *)cleanHTMLWithString:(NSString *)string;
+///匹配是否是网址URL
++(BOOL)matchURLWithString:(NSString *)string;
+///匹配是否是纯数字
++(BOOL)matchIntWithString:(NSString *)string;
+
 @end
 
 

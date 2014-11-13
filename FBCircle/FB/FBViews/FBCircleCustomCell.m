@@ -403,9 +403,9 @@
         
         if (theInfo.rfb_face.length > 0 && ![theInfo.rfb_face isEqualToString:@"(null)"] && ![theInfo.rfb_face isKindOfClass:[NSNull class]])
         {
-            NSString * image_url = theInfo.fb_face;
-            if ([theInfo.fb_face rangeOfString:@"img10.fblife.com"].length) {
-                image_url = [NSString stringWithFormat:@"%@.120x120.jpg",theInfo.fb_face];
+            NSString * image_url = theInfo.rfb_face;
+            if ([theInfo.rfb_face rangeOfString:@"img10.fblife.com"].length) {
+                image_url = [NSString stringWithFormat:@"%@.120x120.jpg",theInfo.rfb_face];
             }
             [_rContentImageView loadImageFromURL:image_url withPlaceholdImage:FBCIRCLE_DEFAULT_IMAGE];
             _rContent_label.frame = CGRectMake(54,5.5,180,40);
@@ -792,19 +792,29 @@
 #pragma mark - OHLbaleDelegate
 -(BOOL)attributedLabel:(OHAttributedLabel*)attributedLabel shouldFollowLink:(NSTextCheckingResult*)linkInfo
 {
-    UIViewController *VCtest=(UIViewController *)self.delegate;
-    FBCircleWebViewController * webVC = [[FBCircleWebViewController alloc] init];
-    webVC.web_url = [linkInfo.URL absoluteString];
-    webVC.hidesBottomBarWhenPushed = YES;
-    [VCtest.navigationController pushViewController:webVC animated:YES];
+    NSString * url = [linkInfo.URL absoluteString];
+    if ([ZSNApi matchURLWithString:url]) {
+        UIViewController *VCtest=(UIViewController *)self.delegate;
+        FBCircleWebViewController * webVC = [[FBCircleWebViewController alloc] init];
+        webVC.web_url = [linkInfo.URL absoluteString];
+        webVC.hidesBottomBarWhenPushed = YES;
+        [VCtest.navigationController pushViewController:webVC animated:YES];
+    }else if([ZSNApi matchIntWithString:url])
+    {
+        ///张少南 ，这里需要一个跳转方向，到个人信息的
+        [ZSNApi showAutoHiddenMBProgressWithText:[NSString stringWithFormat:@"跳到个人信息的%@",url] addToView:self];
+    }else
+    {
+        
+    }
+    
     return NO;
 }
 
 -(UIColor*)colorForLink:(NSTextCheckingResult*)linkInfo underlineStyle:(int32_t*)underlineStyle
 {
-    return [UIColor redColor];
+    return RGBCOLOR(86,105,153);
 }
-
 
 #pragma mark-RTLabelDelegate
 

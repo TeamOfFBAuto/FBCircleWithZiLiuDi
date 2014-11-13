@@ -743,12 +743,67 @@
 {
     NSString *regex_email = @"<([^>]*)>";
     NSArray *array_email = [string componentsMatchedByRegex:regex_email];
-    for (NSString * aStr in array_email) {
+     NSMutableDictionary * aDic = [NSMutableDictionary dictionary];
+    if ([string rangeOfString:@"<a>"].length && [string rangeOfString:@"</a>"].length)
+    {
+        NSString * title = [[string substringToIndex:[string rangeOfString:@"</a>"].location] substringFromIndex:[string rangeOfString:@"<a>"].location+3];
+        [aDic setObject:@"主题" forKey:title];
+    }
+    string.myDic = [NSMutableDictionary dictionaryWithDictionary:aDic];
+    
+    if (array_email.count <= 1)
+    {
+        aDic = nil;
+        return string;
+    }
+   
+    for (NSString * aStr in array_email)
+    {
+        if ([aStr rangeOfString:@"<a "].length)
+        {
+            NSArray * array = [aStr componentsSeparatedByString:@"\""];
+            if (array.count > 2)
+            {
+                NSString * url = [array objectAtIndex:1];
+                NSString * title = [[string substringToIndex:[string rangeOfString:@"</a>"].location] substringFromIndex:[string rangeOfString:aStr].location+aStr.length];
+                [aDic setObject:url forKey:title];
+            }
+        }
+        
         string = [string stringByReplacingOccurrencesOfString:aStr withString:@""];
     }
+    string.myDic = [NSMutableDictionary dictionaryWithDictionary:aDic];
+    [aDic removeAllObjects];
+    aDic = nil;
     return string;
 }
 
+#pragma mark - 匹配是否是网址URL
++(BOOL)matchURLWithString:(NSString *)string
+{
+    NSString *regex_email = @"[a-zA-z]+://[^\\s]*";
+    NSArray *array_email = [string componentsMatchedByRegex:regex_email];
+    if (array_email.count == 0)
+    {
+        return NO;
+    }else
+    {
+        return YES;
+    }
+}
+#pragma mark - 匹配是否是纯数字
++(BOOL)matchIntWithString:(NSString *)string
+{
+    NSString *regex_email = @"^[1-9]\\d*$";
+    NSArray *array_email = [string componentsMatchedByRegex:regex_email];
+    if (array_email.count == 0)
+    {
+        return NO;
+    }else
+    {
+        return YES;
+    }
+}
 
 @end
 

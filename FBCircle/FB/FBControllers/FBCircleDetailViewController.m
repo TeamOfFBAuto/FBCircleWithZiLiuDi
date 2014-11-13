@@ -76,6 +76,10 @@
              loadview.normalLabel.text = @"";
          }
          
+         if (thePage == 1 && array.count < 10) {
+             loadview.hidden = YES;
+         }
+         
         bself.data_array = [NSMutableArray arrayWithArray:array];
         [bself.myTableView reloadData];
          
@@ -128,7 +132,7 @@
         self.gmyMessagePassBlock();
         
     }
-    
+ 
     self.titleLabel.text = @"详情";
     
     [self setMyViewControllerLeftButtonType:MyViewControllerLeftbuttonTypeNull WithRightButtonType:MyViewControllerRightbuttonTypeNull];
@@ -146,7 +150,7 @@
     temp_count = 1;
     
     isFace = YES;
-    
+
     [self loadCommentsWithPage:_currentPage];
     
     _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,320,(iPhone5?568:480)-64-44) style:UITableViewStylePlain];
@@ -154,7 +158,7 @@
     _myTableView.dataSource = self;
     _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_myTableView];
-    
+
     loadview=[[LoadingIndicatorView alloc]initWithFrame:CGRectMake(0, 900, 320, 40)];
     _myTableView.tableFooterView = loadview;
     
@@ -183,17 +187,12 @@
         
         return;
     }
-    
-    /**
-     test
-     */
-    
+
+    ///test
     if ([_flag isEqualToString:@"test"]) {
         [self testqushuju];
         
     }
-    
-    
 }
 
 -(void)testqushuju{
@@ -534,7 +533,7 @@
     [self.myTableView reloadData];
     
     
-    NSString * fullUrl = [NSString stringWithFormat:FBCIRCLE_PRAISE_URL,[[NSUserDefaults standardUserDefaults] objectForKey:@"autherkey"],_theModel.fb_tid];
+    NSString * fullUrl = [NSString stringWithFormat:FBCIRCLE_PRAISE_URL,[SzkAPI getAuthkeyGBK],_theModel.fb_tid];
     
     self.inputToolBarView.myTextView.text = @"";
     
@@ -798,11 +797,10 @@
     [alert show];
     
     
-    ASIFormDataRequest * request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:FBCIRCLE_FORWARD_URL]];
+    ASIFormDataRequest * request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:URL_FORWARD]];
     [request setPostValue:[string stringByReplacingEmojiUnicodeWithCheatCodes] forKey:@"content"];
     [request setPostValue:[SzkAPI getAuthkey] forKey:@"authkey"];
-    [request setPostValue:isForward?model.rfb_tid:model.fb_tid forKey:@"tid"];
-    [request setPostValue:isForward?model.rfb_uid:model.fb_uid forKey:@"touid"];
+    [request setPostValue:isForward?model.rfb_tid:model.fb_tid forKey:@"forwardtid"];
     
     __weak typeof(request)arequest = request;
     __weak typeof(self) bself = self;
@@ -887,10 +885,9 @@
     }];
     
     
-    ASIFormDataRequest * comment_request = [[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:FBCIRCLE_COMMENT_URL]];
+    ASIFormDataRequest * comment_request = [[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:URL_REPLY]];
     [comment_request setPostValue:[SzkAPI getAuthkey] forKey:@"authkey"];
     [comment_request setPostValue:_theModel.fb_tid forKey:@"tid"];
-    [comment_request setPostValue:_theModel.fb_uid forKey:@"touid"];
     [comment_request setPostValue:[content stringByReplacingEmojiUnicodeWithCheatCodes] forKey:@"content"];
     __weak typeof(comment_request)brequest = comment_request;
     

@@ -125,6 +125,16 @@
             [label addCustomLink:[NSURL URLWithString:httpStr] inRange:[string rangeOfString:httpStr]];
         }
     }
+    
+    if ([o_text.myDic count])
+    {
+        NSArray * keys = [o_text.myDic allKeys];
+        for (NSString * key in keys) {
+            NSRange range = [o_text rangeOfString:key];
+            [label addCustomLink:[NSURL URLWithString:[o_text.myDic objectForKey:key]] inRange:range];
+        }
+    }
+    
     label.delegate = delegate;
     CGRect labelRect = label.frame;
     labelRect.size.width = isBreak?labelRect.size.width:[label sizeThatFits:CGSizeMake(label.frame.size.width, CGFLOAT_MAX)].width;

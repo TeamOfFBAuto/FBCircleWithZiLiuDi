@@ -380,7 +380,7 @@
     [self.view addSubview:_inputToolBarView];
     
     
-    [self loadCacheData];
+  //  [self loadCacheData];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(FBCirclehandleWillShowKeyboard:)
@@ -1420,7 +1420,7 @@
             
             BOOL isForward = NO;
             
-            if ([model.fb_topic_type intValue] == 2)
+            if ([model.fb_topic_type intValue] == 2 || [model.fb_sort intValue] == 1)
             {
                 isForward = YES;
             }
@@ -1609,12 +1609,11 @@
     
     [self.myTableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil] withRowAnimation:UITableViewRowAnimationLeft];
     
-    
-    ASIFormDataRequest * request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:FBCIRCLE_FORWARD_URL]];
+//#define URL_FORWARD @"http://fb.fblife.com/openapi/index.php?mod=doweibo&code=addforward&content=%@&tid=%@&forwardtid=%@&type=%@&fromtype=b5eeec0b&authkey=%@&fbtype=json"
+    ASIFormDataRequest * request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:URL_FORWARD]];
     [request setPostValue:[string stringByReplacingEmojiUnicodeWithCheatCodes] forKey:@"content"];
     [request setPostValue:[SzkAPI getAuthkey] forKey:@"authkey"];
-    [request setPostValue:isForward?model.rfb_tid:model.fb_tid forKey:@"tid"];
-    [request setPostValue:isForward?model.rfb_uid:model.fb_uid forKey:@"touid"];
+    [request setPostValue:isForward?model.rfb_tid:model.fb_tid forKey:@"forwardtid"];
     
     __weak typeof(request)arequest = request;
     __weak typeof(self) bself = self;
@@ -2204,11 +2203,10 @@
     self.inputToolBarView.frame = CGRectMake(0,(iPhone5?568:480)-20-44,320,44);
     self.inputToolBarView.myTextView.frame = CGRectMake(17,6,248,32);
     self.inputToolBarView.myTextView.text = @"";
-    
-    ASIFormDataRequest * comment_request = [[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:FBCIRCLE_COMMENT_URL]];
+
+    ASIFormDataRequest * comment_request = [[ASIFormDataRequest alloc] initWithURL:[NSURL URLWithString:URL_REPLY]];
     [comment_request setPostValue:[SzkAPI getAuthkey] forKey:@"authkey"];
     [comment_request setPostValue:model.fb_tid forKey:@"tid"];
-    [comment_request setPostValue:model.fb_uid forKey:@"touid"];
     [comment_request setPostValue:[theContent stringByReplacingEmojiUnicodeWithCheatCodes] forKey:@"content"];
     __weak typeof(comment_request)brequest = comment_request;
     

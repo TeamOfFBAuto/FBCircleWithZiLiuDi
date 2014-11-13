@@ -100,7 +100,6 @@
     return images;
 }
 
-
 -(FBCircleModel *)initWithDictionary:(NSDictionary *)dic
 {
     self = [super init];
@@ -110,7 +109,6 @@
         self.fb_uid = [NSString stringWithFormat:@"%@",[dic objectForKey:@"uid"]];
         self.fb_username = [NSString stringWithFormat:@"%@",[dic objectForKey:@"username"]];
         self.fb_content = [ZSNApi cleanHTMLWithString:[ZSNApi ddecodeSpecialCharactersStringWith:[NSString stringWithFormat:@"%@",[dic objectForKey:@"content"]]]];
-        
         self.fb_imageid = [NSString stringWithFormat:@"%@",[dic objectForKey:@"imageid"]];
         if ([self.fb_imageid isEqualToString:@"<null>"] || [self.fb_imageid isEqual:[NSNull null]])
         {
@@ -232,7 +230,7 @@
                 self.rfb_zan_num  = [NSString stringWithFormat:@"http://cmsweb.fblife.com/web.php?c=listnews&a=jump&id=%@",[dic objectForKey:@"sortid"]];
             }else if([self.fb_sort isEqualToString:@"10"]&&[[dic objectForKey:@"type"] isEqualToString:@"first"])
             {
-                //资源分享
+                //资源分享（论坛鼠标滑过的分享）
                 NSDictionary *newsSendjson= [[dic objectForKey:FB_EXTENSION] objectFromJSONString];
                 
                 Extension * ex=[[Extension alloc] initWithJson:newsSendjson];
@@ -240,8 +238,7 @@
                 self.rfb_username = ex.title;
                 self.rfb_content = ex.forum_content;
                 self.rfb_face = ex.photoFlg?[NSString stringWithFormat:@"http://fb.cn%@",ex.photo]:@"";
-                self.rfb_zan_num  = [NSString stringWithFormat:@"http://bbs.fblife.com/thread_%@.html",ex.authorid];
-                ///张少南，这里缺少资源分享的链接地址
+                self.rfb_zan_num  = [NSString stringWithFormat:@"http://bbs.fblife.com/thread_%@.html",[dic objectForKey:@"sortid"]];
                 
             }else if (([self.fb_sort isEqualToString:@"9"]&&[[dic objectForKey:@"type"] isEqualToString:@"first"]))
             {
@@ -309,6 +306,8 @@
         }
         
         */
+        
+        
         if (![[dic objectForKey:@"roottid"] isEqualToString:@"0"])
         {
             NSDictionary * rDic = [dic objectForKey:@"followinfo"];
@@ -321,6 +320,15 @@
             if ([self.rfb_imageid isEqualToString:@"<null>"] || [self.rfb_imageid isEqual:[NSNull null]])
             {
                 self.rfb_imageid = @"";
+            }
+            
+            
+            if ([[rDic objectForKey:FB_IMAGEID] isEqualToString:@"0"]) {
+                self.rfb_image = [NSMutableArray array];
+            }else
+            {
+                NSString * image_string = [rDic objectForKey:@"image_small_m"];
+                self.rfb_image = [NSMutableArray arrayWithArray:[image_string componentsSeparatedByString:@"|"]];
             }
             
             self.rfb_topic_type = [NSString stringWithFormat:@"%@",[rDic objectForKey:@"topic_type"]];
@@ -337,7 +345,6 @@
             self.rfb_deteline = [NSString stringWithFormat:@"%@",[rDic objectForKey:@"dateline"]];
             self.rfb_face = [NSString stringWithFormat:@"%@",[rDic objectForKey:@"face"]];
             self.rfb_sort = [NSString stringWithFormat:@"%@",[rDic objectForKey:@"sort"]];
-            self.rfb_image = [NSMutableArray arrayWithArray:[rDic objectForKey:@"image"]];
             
             NSArray * comments = [rDic objectForKey:@"comment"];
             
@@ -476,12 +483,8 @@
                 }
             }
             
-            self.fb_sort = @"1";
-            self.fb_topic_type = @"1";
-            
-            
-            
-            
+            self.fb_sort = @"0";
+            self.fb_topic_type = @"2";
             
             if ([self.rfb_sort isEqualToString:@"1"])
             {
@@ -1200,9 +1203,7 @@
     {
         for (int i=0; i<info.fb_image.count; i++)
         {
-            NSDictionary *dicimgurl=[info.fb_image objectAtIndex:i];
-            
-            string = [NSString stringWithFormat:@"%@||%@",string,[dicimgurl objectForKey:@"link"]];
+            string = [NSString stringWithFormat:@"%@||%@",string,[info.fb_image objectAtIndex:i]];
         }
     }
     
@@ -1214,9 +1215,7 @@
     {
         for (int i=0; i<info.rfb_image.count; i++)
         {
-            NSDictionary *dicimgurl=[info.rfb_image objectAtIndex:i];
-            
-            rstring = [NSString stringWithFormat:@"%@||%@",rstring,[dicimgurl objectForKey:@"link"]];
+            rstring = [NSString stringWithFormat:@"%@||%@",rstring,[info.rfb_image objectAtIndex:i]];
         }
     }
     
@@ -1741,9 +1740,7 @@
     {
         for (int i=0; i<info.fb_image.count; i++)
         {
-            NSDictionary *dicimgurl=[info.fb_image objectAtIndex:i];
-            
-            string = [NSString stringWithFormat:@"%@||%@",string,[dicimgurl objectForKey:@"link"]];
+            string = [NSString stringWithFormat:@"%@||%@",string,[info.fb_image objectAtIndex:i]];
         }
     }
     
@@ -1755,9 +1752,7 @@
     {
         for (int i=0; i<info.rfb_image.count; i++)
         {
-            NSDictionary *dicimgurl=[info.rfb_image objectAtIndex:i];
-            
-            rstring = [NSString stringWithFormat:@"%@||%@",rstring,[dicimgurl objectForKey:@"link"]];
+            rstring = [NSString stringWithFormat:@"%@||%@",rstring,[info.rfb_image objectAtIndex:i]];
         }
     }
     

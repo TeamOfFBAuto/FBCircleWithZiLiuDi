@@ -195,7 +195,7 @@
     FBCircleCommentModel * model = (FBCircleCommentModel *)data;
     
     
-    ASIFormDataRequest * request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:FBCIRCLE_FORWARD_URL]];
+    ASIFormDataRequest * request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:URL_FORWARD]];
     [request setPostValue:[model.comment_content stringByReplacingEmojiUnicodeWithCheatCodes] forKey:@"content"];
     [request setPostValue:[SzkAPI getAuthkey] forKey:@"authkey"];
     [request setPostValue:model.comment_tid forKey:@"tid"];
@@ -271,11 +271,10 @@
     FBCircleCommentModel * model = (FBCircleCommentModel *)data;
     
     
-    ASIFormDataRequest * request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:FBCIRCLE_COMMENT_URL]];
+    ASIFormDataRequest * request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:URL_REPLY]];
     [request setPostValue:[model.comment_content stringByReplacingEmojiUnicodeWithCheatCodes] forKey:@"content"];
     [request setPostValue:[SzkAPI getAuthkey] forKey:@"authkey"];
-    [request setPostValue:model.comment_tid forKey:@"tid"];
-    [request setPostValue:model.comment_uid forKey:@"touid"];
+    [request setPostValue:model.comment_tid forKey:@"forwardtid"];
     
     __weak typeof(request)arequest = request;
     [request setCompletionBlock:^{

@@ -267,6 +267,7 @@
 		566E88861A0C9B7B0061DBE1 /* ImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 566E88851A0C9B7B0061DBE1 /* ImagesViewController.m */; };
 		566E88891A0C9BA90061DBE1 /* ImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 566E88881A0C9BA90061DBE1 /* ImagesCell.m */; };
 		5683B5131994726E007B94A6 /* CreateNewBBSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5683B5121994726E007B94A6 /* CreateNewBBSViewController.m */; };
+		5690AEF01A13582500CD00A1 /* NSString+ZSNString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5690AEEF1A13582500CD00A1 /* NSString+ZSNString.m */; };
 		56A647F5198F3A8B00451413 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A647F4198F3A8B00451413 /* Foundation.framework */; };
 		56A647F7198F3A8B00451413 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A647F6198F3A8B00451413 /* CoreGraphics.framework */; };
 		56A647F9198F3A8B00451413 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A647F8198F3A8B00451413 /* UIKit.framework */; };
@@ -1460,6 +1461,8 @@
 		566E88881A0C9BA90061DBE1 /* ImagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagesCell.m; sourceTree = "<group>"; };
 		5683B5111994726E007B94A6 /* CreateNewBBSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateNewBBSViewController.h; sourceTree = "<group>"; };
 		5683B5121994726E007B94A6 /* CreateNewBBSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateNewBBSViewController.m; sourceTree = "<group>"; };
+		5690AEEE1A13582500CD00A1 /* NSString+ZSNString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ZSNString.h"; sourceTree = "<group>"; };
+		5690AEEF1A13582500CD00A1 /* NSString+ZSNString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ZSNString.m"; sourceTree = "<group>"; };
 		56A647F1198F3A8B00451413 /* FBCircle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FBCircle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A647F4198F3A8B00451413 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		56A647F6198F3A8B00451413 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -3195,6 +3198,8 @@
 				56AFD61719A33297005125F6 /* ZActionSheet.m */,
 				56163A8419C2DEFB007345F6 /* OHLableHelper.h */,
 				56163A8519C2DEFB007345F6 /* OHLableHelper.m */,
+				5690AEEE1A13582500CD00A1 /* NSString+ZSNString.h */,
+				5690AEEF1A13582500CD00A1 /* NSString+ZSNString.m */,
 			);
 			path = ZSNAPI;
 			sourceTree = "<group>";
@@ -5197,6 +5202,7 @@
 				56A64B65198F6BC700451413 /* ZkingSearchView.m in Sources */,
 				56A64A39198F69A800451413 /* FBCircleCommentView.m in Sources */,
 				56A64B49198F6BC700451413 /* FBQuanMessageModel.m in Sources */,
+				5690AEF01A13582500CD00A1 /* NSString+ZSNString.m in Sources */,
 				56A64B59198F6BC700451413 /* FbRegistCell.m in Sources */,
 				1341646819937B1F00189A46 /* BBSTopicController.m in Sources */,
 				56A64B61198F6BC700451413 /* SuggestFriendCell.m in Sources */,

@@ -139,15 +139,8 @@
         }
         height = 16+rows*40;
         
-//        _left_view.frame = CGRectMake(_left_view.frame.origin.x,_left_view.frame.origin.y,_left_view.frame.size.width,height -5);
-//        
-//        _right_view.frame = CGRectMake(_right_view.frame.origin.x,_right_view.frame.origin.y,_right_view.frame.size.width,height -5);
-        
         _bottom_line_view.frame = CGRectMake(_bottom_line_view.frame.origin.x,height - 0.5,_bottom_line_view.frame.size.width,_bottom_line_view.frame.size.height);
     }
-    
-    
-    
     
     return height;
 }

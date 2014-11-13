@@ -266,6 +266,8 @@ alpha:(a)]
 #define FB_DELETEWEIBO_URL @"http://fb.fblife.com/openapi/index.php?mod=doweibo&code=delcontent&tid=%@&fromtype=b5eeec0b&authkey=%@&fbtype=json"
 
 
+#pragma mark - 获取某篇微博内容及评论
+#define FB_WEIBO_DETAIL_COMMENTS @"http://fb.fblife.com/openapi/index.php?mod=getweibo&code=weibocomment&tid=%@&fromtype=b5eeec0b&authkey=%@&page=%d&fbtype=json"
 
 //文集接口
 
@@ -288,9 +290,9 @@ alpha:(a)]
 //获取微博详细包括评论信息
 #define  URL_WEIBO_DETAIL @"http://fb.fblife.com/openapi/index.php?mod=getweibo&code=weibocomment&tid=%@&fromtype=b5eeec0b&authkey=%@&page=%i&fbtype=json"
 //发表评论信息
-#define  URL_REPLY @"http://fb.fblife.com/openapi/index.php?mod=doweibo&code=addcomment&content=%@&tid=%@&type=%@&fromtype=b5eeec0b&authkey=%@&isyw=%@&fbtype=json"
+#define  URL_REPLY @"http://fb.fblife.com/openapi/index.php?mod=doweibo&code=addcomment&type=reply&fromtype=b5eeec0b&isyw=-1&fbtype=json"
 //转发
-#define URL_FORWARD @"http://fb.fblife.com/openapi/index.php?mod=doweibo&code=addforward&content=%@&tid=%@&forwardtid=%@&type=%@&fromtype=b5eeec0b&authkey=%@&fbtype=json"
+#define URL_FORWARD @"http://fb.fblife.com/openapi/index.php?mod=doweibo&code=addforward&type=forward&fromtype=b5eeec0b&fbtype=json"
 //获取用户信息
 #define URL_USERMESSAGE @"http://fb.fblife.com/openapi/index.php?mod=getuser&code=base&uid=%@&fromtype=b5eeec0b&authkey=%@&fbtype=json"
 

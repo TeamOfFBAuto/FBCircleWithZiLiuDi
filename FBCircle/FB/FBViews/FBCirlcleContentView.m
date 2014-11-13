@@ -268,8 +268,7 @@
         {
             for (int i=0; i<theInfo.fb_image.count; i++)
             {
-                NSDictionary *dicimgurl=[theInfo.fb_image objectAtIndex:i];
-                [arry_url addObject:[dicimgurl objectForKey:@"link"]];
+                [arry_url addObject:[theInfo.fb_image objectAtIndex:i]];
             }
         }
         
@@ -354,12 +353,11 @@
             
             if (theInfo.rfb_imageid.length > 0)
             {
-                NSDictionary *dicimgurl=[theInfo.rfb_image objectAtIndex:0];
-                
-                NSString * urlImage = [dicimgurl objectForKey:@"link"];
-                
+                NSString * urlImage = @"";
+                if (theInfo.rfb_image.count > 0) {
+                    urlImage = [theInfo.rfb_image objectAtIndex:0];
+                }
                 [_rContentImageView loadImageFromURL:urlImage withPlaceholdImage:FBCIRCLE_DEFAULT_IMAGE];
-                
                 _rContent_label.frame = CGRectMake(54,28,180,20);
                 
             }else
@@ -421,14 +419,7 @@
     {
         _menu_view.frame = CGRectMake(0,menu_background_height + 5,320,38);
         
-//        UIView * uilineview = [[UIView alloc] initWithFrame:CGRectMake(0,53,320,0.5)];
-//        
-//        uilineview.backgroundColor = RGBCOLOR(229,229,229);
-//        
-//        [_menu_background_view addSubview:uilineview];
-        
         menu_background_height += 40;
-        
         
         _menu_background_view.frame = CGRectMake(0,menubuttonFrame.origin.y + menubuttonFrame.size.height,320,menu_background_height);
         

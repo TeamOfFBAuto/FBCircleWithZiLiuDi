@@ -13,6 +13,7 @@
 #import "FBCirclePraiseModel.h"
 #import "DataBase.h"
 #import "FBCircleExtension.h"
+#import "NSString+ZSNString.h"
 
 
 typedef void(^FBCircleModelBlock)(NSMutableArray * array);

@@ -12,20 +12,24 @@
 	<dict>
 		<key>6171C8C83DE9AE0D66421630E3F75E00FA0C4CB0</key>
 		<string>https://github.com/TeamOfFBAuto/FBCircle0806.git</string>
+		<key>CA41A1990A4FF5C0EFD8C9412FB482930BE0A900</key>
+		<string>https://github.com/TeamOfFBAuto/FBCircleWithZiLiuDi.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>FBCircle/FBCircle.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>6171C8C83DE9AE0D66421630E3F75E00FA0C4CB0</key>
+		<string>../../../FBCircle0806</string>
+		<key>CA41A1990A4FF5C0EFD8C9412FB482930BE0A900</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/TeamOfFBAuto/FBCircle0806.git</string>
+	<string>https://github.com/TeamOfFBAuto/FBCircleWithZiLiuDi.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>6171C8C83DE9AE0D66421630E3F75E00FA0C4CB0</string>
+	<string>CA41A1990A4FF5C0EFD8C9412FB482930BE0A900</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>6171C8C83DE9AE0D66421630E3F75E00FA0C4CB0</string>
 			<key>IDESourceControlWCCName</key>
 			<string>FBCircle0806</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CA41A1990A4FF5C0EFD8C9412FB482930BE0A900</string>
+			<key>IDESourceControlWCCName</key>
+			<string>FBCircleWithZiLiuDi</string>
 		</dict>
 	</array>
 </dict>

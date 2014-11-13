@@ -104,42 +104,24 @@
         
         if (!_cancel_button) {
             _cancel_button = [UIButton buttonWithType:UIButtonTypeCustom];
-            
             _cancel_button.frame = CGRectMake(0,151,135,44);
-            
             _cancel_button.backgroundColor = [UIColor clearColor];
-            
-//            [_cancel_button setBackgroundImage:[UIImage imageNamed:@"button1-up252_94.png"] forState:UIControlStateNormal];
-//            
             [_cancel_button setBackgroundImage:[UIImage imageNamed:@"button1-down252_94.png"] forState:UIControlStateHighlighted];
-            
             [_cancel_button setTitle:@"取消" forState:UIControlStateNormal];
-            
             [_cancel_button setTitleColor:RGBCOLOR(18,107,255) forState:UIControlStateNormal];
-            
             [_cancel_button addTarget:self action:@selector(cancelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-            
             [_backgroundImageView addSubview:_cancel_button];
         }
         
         
         if (!_done_button) {
             _done_button = [UIButton buttonWithType:UIButtonTypeCustom];
-            
             _done_button.frame = CGRectMake(136,151,135,44);
-            
             _done_button.backgroundColor = [UIColor clearColor];
-            
-//            [_done_button setBackgroundImage:[UIImage imageNamed:@"button2-up252_94.png"] forState:UIControlStateNormal];
-//            
             [_done_button setBackgroundImage:[UIImage imageNamed:@"button2-down252_94.png"] forState:UIControlStateHighlighted];
-            
             [_done_button addTarget:self action:@selector(doneButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-            
             [_done_button setTitle:@"确认" forState:UIControlStateNormal];
-            
             [_done_button setTitleColor:RGBCOLOR(18,107,255) forState:UIControlStateNormal];
-            
             [_backgroundImageView addSubview:_done_button];
         }
         
@@ -152,11 +134,21 @@
 
 -(void)setInformationWithUrl:(NSString *)url WithUserName:(NSString *)userName WithContent:(NSString *)content WithBlock:(ZSNAlertViewBlock)theBlock
 {
+    
+    if ([content isKindOfClass:[NSNull class]] || content == nil || [content isEqualToString:@"(null)"]) {
+        _content_label.frame = CGRectMake(75,72.5,180,0);
+        _userName_label.frame = CGRectMake(75,52.5,180,40);
+    }else
+    {
+        _content_label.frame = CGRectMake(75,72.5,180,22);
+        _userName_label.frame = CGRectMake(75,52.5,180,15);
+        [OHLableHelper creatAttributedText:[[ZSNApi decodeSpecialCharactersString:content] stringByReplacingEmojiCheatCodesWithUnicode] Label:_content_label OHDelegate:nil WithWidht:IMAGE_SMALL_WIDTH WithHeight:IMAGE_SMALL_HEIGHT WithLineBreak:YES];
+    }
+    
     zsnAlertViewBlock = theBlock;
-    _content_label.frame = CGRectMake(75,72.5,180,22);
     [_imageView loadImageFromURL:url withPlaceholdImage:PERSONAL_DEFAULTS_IMAGE];
     _userName_label.text = userName;
-    [OHLableHelper creatAttributedText:[[ZSNApi decodeSpecialCharactersString:content] stringByReplacingEmojiCheatCodesWithUnicode] Label:_content_label OHDelegate:nil WithWidht:IMAGE_SMALL_WIDTH WithHeight:IMAGE_SMALL_HEIGHT WithLineBreak:YES];
+    
     
 }
 
