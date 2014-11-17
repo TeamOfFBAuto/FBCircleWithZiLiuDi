@@ -255,9 +255,9 @@
             [arr_mine addObject:[[BBSInfoModel alloc]initWithDictionary:aDic]];
         }
         
-        if (arr_mine.count == 3) {
-            return arr_mine;
-        }
+//        if (arr_mine.count == 3) {
+//            return arr_mine;
+//        }
     }
     
     NSArray *join = [dataInfo objectForKey:@"join"];
@@ -274,9 +274,9 @@
             
         }
         
-        if (arr_mine.count == 3) {
-            return arr_mine;
-        }
+//        if (arr_mine.count == 3) {
+//            return arr_mine;
+//        }
     }
     
     return arr_mine;
@@ -368,7 +368,7 @@
     __weak typeof(self)weakSelf = self;
     __weak typeof(RefreshTableView *)weakTable = _table;
     
-    NSString *url = [NSString stringWithFormat:FBCIRCLE_BBS_MINE,[SzkAPI getAuthkey],1,3];
+    NSString *url = [NSString stringWithFormat:FBCIRCLE_BBS_MINE,[SzkAPI getAuthkey],1,100];
     LTools *tool = [[LTools alloc]initWithUrl:url isPost:NO postData:nil];
     
     [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
@@ -382,6 +382,8 @@
             [LTools cache:dataInfo ForKey:CACHE_MY_BBS];
             
             //一共需要三个,优先“创建的论坛”,不够再用“加入的论坛”
+            
+            //修改：有多少就多少，可滑动
             
             _myBBSArray = [weakSelf parseForMyBBS:dataInfo];
             
@@ -646,29 +648,64 @@
     secondBgView.backgroundColor = [UIColor whiteColor];
     [_mybbsView addSubview:secondBgView];
     
-    CGFloat aWidth = [self fitWidth:_myBBSArray];
+    UIScrollView *second_scroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, secondBgView.width, secondBgView.height)];
+//    second_scroll.backgroundColor = [UIColor orangeColor];
+    second_scroll.showsHorizontalScrollIndicator = NO;
+    [secondBgView addSubview:second_scroll];
     
+    
+    CGFloat lastRight = 0.f; //上一个的右坐标
     for (int i = 0 ; i < _myBBSArray.count; i ++) {
         
-        if ((i + 1) * aWidth <= 300) {
-            NSString *title = ((BBSInfoModel *)[_myBBSArray objectAtIndex:i]).name;
-            
-            UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-            [btn setTitle:title forState:UIControlStateNormal];
-            [btn.titleLabel setFont:[UIFont systemFontOfSize:FONT_SIZE_MID]];
-            btn.frame = CGRectMake(aWidth * i, 0, aWidth, 40);
-            [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [secondBgView addSubview:btn];
-            btn.tag = 100 + i;
-            [btn addTarget:self action:@selector(clickToBBSList:) forControlEvents:UIControlEventTouchUpInside];
-            
-            if (i != 2 && i != (300 / aWidth - 1)) {
-                UIView *line = [[UIView alloc]initWithFrame:CGRectMake(btn.right, 10, 1, 20)];
-                line.backgroundColor = [UIColor colorWithHexString:@"dfdfdf"];
-                [secondBgView addSubview:line];
-            }
+        NSString *title = ((BBSInfoModel *)[_myBBSArray objectAtIndex:i]).name;
+        
+        CGFloat aWidth = [LTools widthForText:title font:FONT_SIZE_MID];
+        
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [btn setTitle:title forState:UIControlStateNormal];
+        [btn.titleLabel setFont:[UIFont systemFontOfSize:FONT_SIZE_MID]];
+        btn.frame = CGRectMake(lastRight, 0, aWidth + 20, 40);
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [second_scroll addSubview:btn];
+        
+        lastRight = btn.right;//记录上一个的 right
+        
+        btn.tag = 100 + i;
+        [btn addTarget:self action:@selector(clickToBBSList:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if (i != _myBBSArray.count - 1) {
+            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(btn.right, 10, 1, 20)];
+            line.backgroundColor = [UIColor colorWithHexString:@"dfdfdf"];
+            [second_scroll addSubview:line];
         }
+        
+        second_scroll.contentSize = CGSizeMake(btn.right, second_scroll.height);
     }
+
+    
+//    CGFloat aWidth = [self fitWidth:_myBBSArray];
+//    
+//    for (int i = 0 ; i < _myBBSArray.count; i ++) {
+//        
+//        if ((i + 1) * aWidth <= 300) {
+//            NSString *title = ((BBSInfoModel *)[_myBBSArray objectAtIndex:i]).name;
+//            
+//            UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+//            [btn setTitle:title forState:UIControlStateNormal];
+//            [btn.titleLabel setFont:[UIFont systemFontOfSize:FONT_SIZE_MID]];
+//            btn.frame = CGRectMake(aWidth * i, 0, aWidth, 40);
+//            [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//            [secondBgView addSubview:btn];
+//            btn.tag = 100 + i;
+//            [btn addTarget:self action:@selector(clickToBBSList:) forControlEvents:UIControlEventTouchUpInside];
+//            
+//            if (i != 2 && i != (300 / aWidth - 1)) {
+//                UIView *line = [[UIView alloc]initWithFrame:CGRectMake(btn.right, 10, 1, 20)];
+//                line.backgroundColor = [UIColor colorWithHexString:@"dfdfdf"];
+//                [secondBgView addSubview:line];
+//            }
+//        }
+//    }
     
     if (_myBBSArray.count == 0) {
         
