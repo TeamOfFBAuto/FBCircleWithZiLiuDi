@@ -673,6 +673,16 @@
 
 #pragma - mark 非空字符串
 
++(NSString *)numberToString:(long)number
+{
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior: NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle: NSNumberFormatterDecimalStyle];
+    NSString *numberString = [numberFormatter stringFromNumber: [NSNumber numberWithInteger: number]];
+    return numberString;
+}
+
+
 + (NSString *)NSStringNotNull:(NSString *)text
 {
     if (![text isKindOfClass:[NSString class]]) {
