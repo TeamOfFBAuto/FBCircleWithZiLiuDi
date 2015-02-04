@@ -43,6 +43,7 @@
         [_locationManager startUpdatingLocation];
     }
     
+    
         
     _uploadData = [[FBCircleUploadData alloc] init];
     
