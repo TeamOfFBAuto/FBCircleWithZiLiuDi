@@ -42,7 +42,7 @@
     self.my_right_button.hidden = YES;
     
     
-    _myWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0,0,320,(iPhone5?568:480)-64)];
+    _myWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,DEVICE_HEIGHT-64)];
     
     _myWebView.delegate = self;
     
@@ -139,7 +139,7 @@
     
     myAlertView = [[FBQuanAlertView alloc]  initWithFrame:CGRectMake(0,0,138,50)];
     
-    myAlertView.center = CGPointMake(160,(iPhone5?568:480)/2-50);
+    myAlertView.center = CGPointMake(DEVICE_WIDTH/2,DEVICE_HEIGHT/2-50);
     
     [myAlertView setType:FBQuanAlertViewTypeHaveJuhua thetext:@"正在转发"];
     

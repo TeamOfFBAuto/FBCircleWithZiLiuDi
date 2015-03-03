@@ -72,7 +72,7 @@
         }
         
         if (!_content_label) {
-            _content_label = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(89,33,212,0)];
+            _content_label = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(89,33,DEVICE_WIDTH-108,0)];
             _content_label.textAlignment = NSTextAlignmentLeft;
             _content_label.lineBreakMode = NSLineBreakByCharWrapping;
             _content_label.font = [UIFont systemFontOfSize:14];
@@ -83,14 +83,14 @@
         
         if (!_upLine_view)
         {
-            _upLine_view = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,0)];
+            _upLine_view = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,0)];
             _upLine_view.backgroundColor = RGBCOLOR(215,215,215);
             [self addSubview:_upLine_view];
         }
         
         if (!_bottomLine_view)
         {
-            _bottomLine_view = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,0.5)];
+            _bottomLine_view = [[UIView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,0.5)];
             _bottomLine_view.backgroundColor = RGBCOLOR(237,237,237);
             _bottomLine_view.hidden = YES;
             
@@ -105,7 +105,7 @@
 
 -(float)setInfomationWith:(FBCircleCommentModel *)model isFirst:(BOOL)isfirst
 {
-    _content_label.frame = CGRectMake(89,33,212,0);
+    _content_label.frame = CGRectMake(89,33,DEVICE_WIDTH-108,0);
     
     myModel = model;
     

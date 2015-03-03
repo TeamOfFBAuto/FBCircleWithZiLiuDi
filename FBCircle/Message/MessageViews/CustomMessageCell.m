@@ -45,7 +45,7 @@
     {
         if (!_NameLabel)
         {
-            _NameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60,6,170,20)];
+            _NameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60,6,DEVICE_WIDTH-150,20)];
             _NameLabel.font = [UIFont boldSystemFontOfSize:15];
             _NameLabel.backgroundColor = [UIColor clearColor];
             _NameLabel.textAlignment = NSTextAlignmentLeft;
@@ -58,7 +58,7 @@
         
         if (!_timeLabel)
         {
-            _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(220,6,90,20)];
+            _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(DEVICE_WIDTH-100,6,90,20)];
             _timeLabel.textAlignment = NSTextAlignmentRight;
             _timeLabel.backgroundColor = [UIColor clearColor];
             _timeLabel.font = [UIFont systemFontOfSize:11];
@@ -72,7 +72,7 @@
         
         if (!_contentLabel1)
         {
-            _contentLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(60,30,240,20)];
+            _contentLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(60,30,DEVICE_WIDTH-80,20)];
             _contentLabel1.textColor = RGBCOLOR(79,79,79);
             _contentLabel1.backgroundColor = [UIColor clearColor];
             _contentLabel1.font = [UIFont systemFontOfSize:14];
@@ -85,7 +85,7 @@
         
         if (!_tixing_label)
         {
-            _tixing_label = [[UIImageView alloc] initWithFrame:CGRectMake(230,8,7,7)];
+            _tixing_label = [[UIImageView alloc] initWithFrame:CGRectMake(DEVICE_WIDTH-90,8,7,7)];
             _tixing_label.hidden = YES;
             _tixing_label.backgroundColor = [UIColor redColor];
             _tixing_label.layer.cornerRadius = 7/2;
@@ -96,7 +96,7 @@
     {
         if (!_contentLabel)
         {
-            _contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(60,15,260,30)];
+            _contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(60,15,DEVICE_WIDTH-60,30)];
             _contentLabel.textColor = RGBCOLOR(79,79,79);
             _contentLabel.backgroundColor = [UIColor clearColor];
             _contentLabel.font = [UIFont boldSystemFontOfSize:15];
@@ -286,7 +286,7 @@
         [UIView animateWithDuration:0.5 animations:^{
             //            self.timeLabel.frame = CGRectMake(160,5,90,20);
             self.timeLabel.hidden = YES;
-            self.contentLabel.frame = CGRectMake(50,30,180,20);
+            self.contentLabel.frame = CGRectMake(50,30,DEVICE_WIDTH-140,20);
         } completion:^(BOOL finished)
          {
              
@@ -328,7 +328,7 @@
         [UIView animateWithDuration:0.3 animations:^{
             //            self.timeLabel.frame = CGRectMake(220,5,90,20);
             self.timeLabel.hidden = NO;
-            self.contentLabel.frame = CGRectMake(50,30,240,20);
+            self.contentLabel.frame = CGRectMake(50,30,DEVICE_WIDTH-80,20);
         } completion:^(BOOL finished)
          {
              

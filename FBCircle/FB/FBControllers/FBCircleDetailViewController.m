@@ -153,22 +153,22 @@
 
     [self loadCommentsWithPage:_currentPage];
     
-    _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,320,(iPhone5?568:480)-64-44) style:UITableViewStylePlain];
+    _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,DEVICE_HEIGHT-64-44) style:UITableViewStylePlain];
     _myTableView.delegate = self;
     _myTableView.dataSource = self;
     _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_myTableView];
 
-    loadview=[[LoadingIndicatorView alloc]initWithFrame:CGRectMake(0, 900, 320, 40)];
+    loadview=[[LoadingIndicatorView alloc]initWithFrame:CGRectMake(0, 900, DEVICE_WIDTH, 40)];
     _myTableView.tableFooterView = loadview;
     
-    faceScrollView = [[WeiBoFaceScrollView alloc] initWithFrame:CGRectMake(0,0,320,215) target:self];
+    faceScrollView = [[WeiBoFaceScrollView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,215) target:self];
     faceScrollView.delegate = self;
     faceScrollView.bounces = NO;
     faceScrollView.contentSize = CGSizeMake(320*3,0);
 
     
-    _inputToolBarView = [[ChatInputView alloc] initWithFrame:CGRectMake(0,(iPhone5?568:480)-20-44-44,320,44)];
+    _inputToolBarView = [[ChatInputView alloc] initWithFrame:CGRectMake(0,DEVICE_HEIGHT-20-44-44,DEVICE_WIDTH,44)];
     _inputToolBarView.myTextView.delegate = self;
     _inputToolBarView.delegate = self;
     _inputToolBarView.myTextView.returnKeyType = UIReturnKeySend;
@@ -293,12 +293,12 @@
     if (indexPath.row == 0)
     {
         if (!contentView) {
-            contentView = [[FBCirlcleContentView alloc] initWithFrame:CGRectMake(0,0,320,0)];
+            contentView = [[FBCirlcleContentView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,0)];
         }
         
         height = [contentView setInfoWith:_theModel]-6;
         
-        contentView.frame = CGRectMake(0,0,320,height);
+        contentView.frame = CGRectMake(0,0,DEVICE_WIDTH,height);
         
     }else if (indexPath.row == 1)
     {
@@ -346,10 +346,10 @@
     
     if (indexPath.row == 0) {
     
-        FBCirlcleContentView * contentView1 = [[FBCirlcleContentView alloc] initWithFrame:CGRectMake(0,0,320,0)];
+        FBCirlcleContentView * contentView1 = [[FBCirlcleContentView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,0)];
         contentView1.delegate = self;
         
-        contentView1.frame = CGRectMake(0,0,320,[contentView1 setInfoWith:_theModel]);
+        contentView1.frame = CGRectMake(0,0,DEVICE_WIDTH,[contentView1 setInfoWith:_theModel]);
         NSLog(@"theContent ---  %@",_theModel.fb_face);
         [cell.contentView addSubview:contentView1];
         
@@ -357,7 +357,7 @@
         
     }else if (indexPath.row == 1)
     {
-        FBCircleDetailPraiseView * thePraiseView = [[FBCircleDetailPraiseView alloc] initWithFrame:CGRectMake(0,0,320,[tableView rectForRowAtIndexPath:indexPath].size.height)];
+        FBCircleDetailPraiseView * thePraiseView = [[FBCircleDetailPraiseView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,[tableView rectForRowAtIndexPath:indexPath].size.height)];
         thePraiseView.delegate = self;
         [thePraiseView loadAllUserImagesWith:_theModel.fb_praise_array];
         [cell.contentView addSubview:thePraiseView];
@@ -366,7 +366,7 @@
         
         FBCircleCommentModel * model = [self.data_array objectAtIndex:indexPath.row-2];
         
-        FBCircleDetailCommentsView * commentsView = [[FBCircleDetailCommentsView alloc] initWithFrame:CGRectMake(0,0,320,[tableView rectForRowAtIndexPath:indexPath].size.height)];
+        FBCircleDetailCommentsView * commentsView = [[FBCircleDetailCommentsView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,[tableView rectForRowAtIndexPath:indexPath].size.height)];
         
         commentsView.delegate = self;
         
@@ -460,7 +460,7 @@
             if ((_theModel.rfb_tid.length == 0 || [_theModel.rfb_tid isEqualToString:@"(null)"] || [_theModel.rfb_tid isKindOfClass:[NSNull class]]) && [_theModel.rfb_content isEqualToString:@"此内容已删除"])
             {
                 myAlertView = [[FBQuanAlertView alloc]  initWithFrame:CGRectMake(0,0,138,50)];
-                myAlertView.center = CGPointMake(160,(iPhone5?568:480)/2-70);
+                myAlertView.center = CGPointMake(DEVICE_WIDTH/2,DEVICE_HEIGHT/2-70);
                 [myAlertView setType:FBQuanAlertViewTypeNoJuhua thetext:@"此内容已删除"];
                 [self.view addSubview:myAlertView];
                 [self performSelector:@selector(dismissPromptView) withObject:nil afterDelay:1];
@@ -514,7 +514,7 @@
         if ([praiseModel.praise_username isEqualToString:[SzkAPI getUsername]])
         {
             myAlertView = [[FBQuanAlertView alloc]  initWithFrame:CGRectMake(0,0,138,50)];
-            myAlertView.center = CGPointMake(160,(iPhone5?568:480)/2-70);
+            myAlertView.center = CGPointMake(DEVICE_WIDTH/2,DEVICE_HEIGHT/2-70);
             [myAlertView setType:FBQuanAlertViewTypeNoJuhua thetext:@"您已经赞过了"];
             [self.view addSubview:myAlertView];
             [self performSelector:@selector(dismissPromptView) withObject:nil afterDelay:0.7];
@@ -645,7 +645,7 @@
                                                                   inputViewFrame.size.height);
                          
                          
-                         _theTouchView.frame = CGRectMake(0,0,320,self.inputToolBarView.frame.origin.y);
+                         _theTouchView.frame = CGRectMake(0,0,DEVICE_WIDTH,self.inputToolBarView.frame.origin.y);
                      }
                      completion:^(BOOL finished) {
                      }];
@@ -655,7 +655,7 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     _theTouchView.hidden = YES;
-    self.inputToolBarView.frame = CGRectMake(0,(iPhone5?568:480)-20-44-44,320,44);
+    self.inputToolBarView.frame = CGRectMake(0,DEVICE_HEIGHT-20-44-44,DEVICE_WIDTH,44);
     temp_count = 1;
     [self.inputToolBarView resetInputView];
     isMyTextView = NO;
@@ -683,7 +683,7 @@
     
     if (!_theTouchView)
     {
-        _theTouchView = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,self.inputToolBarView.frame.origin.y)];
+        _theTouchView = [[UIView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,self.inputToolBarView.frame.origin.y)];
         
         _theTouchView.backgroundColor = [UIColor clearColor];
         
@@ -759,7 +759,7 @@
                                                                       inputViewFrame.size.height + theheight);
                              
                              [self.inputToolBarView adjustTextViewHeightBy:count WihtHeight:theheight];
-                             _theTouchView.frame = CGRectMake(0,0,320,self.inputToolBarView.frame.origin.y);
+                             _theTouchView.frame = CGRectMake(0,0,DEVICE_WIDTH,self.inputToolBarView.frame.origin.y);
                          }
                      }
                      completion:^(BOOL finished) {
@@ -849,7 +849,7 @@
     if (myTextString.length == 0)
     {
         myAlertView = [[FBQuanAlertView alloc]  initWithFrame:CGRectMake(0,0,138,50)];
-        myAlertView.center = CGPointMake(160,(iPhone5?568:480)/2-20);
+        myAlertView.center = CGPointMake(DEVICE_WIDTH/2,DEVICE_HEIGHT/2-20);
         [myAlertView setType:FBQuanAlertViewTypeNoJuhua thetext:@"发送内容不能为空"];
         [self.view addSubview:myAlertView];
         [self performSelector:@selector(dismissPromptView) withObject:nil afterDelay:1];
@@ -876,7 +876,7 @@
     __weak typeof(self) bself = self;
     [UIView animateWithDuration:0.4 animations:^{
         _theTouchView.hidden = YES;
-        bself.inputToolBarView.frame = CGRectMake(0,(iPhone5?568:480)-20-44-44,320,44);
+        bself.inputToolBarView.frame = CGRectMake(0,DEVICE_HEIGHT-20-44-44,DEVICE_WIDTH,44);
         temp_count = 1;
         [bself.inputToolBarView resetInputView];
         isMyTextView = NO;

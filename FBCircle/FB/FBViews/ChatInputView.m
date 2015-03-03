@@ -30,7 +30,7 @@
         self.layer.borderWidth = 0.5;
         
         
-        _myTextView = [[UITextView alloc] initWithFrame:CGRectMake(17,6,248,32)];
+        _myTextView = [[UITextView alloc] initWithFrame:CGRectMake(17,6,DEVICE_WIDTH-72,32)];
         _myTextView.backgroundColor = [UIColor whiteColor];
         _myTextView.delegate = self;
         _myTextView.contentMode = UIViewContentModeCenter;
@@ -44,32 +44,32 @@
         
         
         _sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _sendButton.frame = CGRectMake(270,2,40,40);
+        _sendButton.frame = CGRectMake(DEVICE_WIDTH-50,2,40,40);
         [_sendButton setImage:[UIImage imageNamed:!isFace?@"biaoqing-icon-56_56.png":@"jianpan-icon-56_56.png"] forState:UIControlStateNormal];
         [_sendButton setTitleColor:RGBCOLOR(91,138,59) forState:UIControlStateNormal];
         [_sendButton addTarget:self action:@selector(sendMessageTap:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_sendButton];
         
         
-        line_view = [[UIView alloc] initWithFrame:CGRectMake(0,43.5,320,0.5)];
+        line_view = [[UIView alloc] initWithFrame:CGRectMake(0,43.5,DEVICE_WIDTH,0.5)];
         
         line_view.backgroundColor = RGBCOLOR(202,202,202);
         
         [self addSubview:line_view];
         
         
-        _face_back_view = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,215)];
+        _face_back_view = [[UIView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,215)];
         
         
-        faceScrollView = [[WeiBoFaceScrollView alloc] initWithFrame:CGRectMake(0,0,320,215) target:self];
+        faceScrollView = [[WeiBoFaceScrollView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,215) target:self];
         faceScrollView.delegate = self;
         faceScrollView.bounces = NO;
-        faceScrollView.contentSize = CGSizeMake(320*1,0);//设置有多少页表情
+        faceScrollView.contentSize = CGSizeMake(DEVICE_WIDTH*1,0);//设置有多少页表情
         [_face_back_view addSubview:faceScrollView];
         
         
-        pageControl = [[GrayPageControl alloc] initWithFrame:CGRectMake(0,0,320,9)];
-        pageControl.center = CGPointMake(160,215-20);
+        pageControl = [[GrayPageControl alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,9)];
+        pageControl.center = CGPointMake(DEVICE_WIDTH/2,215-20);
         pageControl.numberOfPages = 3;
         pageControl.currentPage = 0;
      //   [_face_back_view addSubview:pageControl];
@@ -173,8 +173,8 @@
     [_myTextView resignFirstResponder];
     _myTextView.text = @"";
     _myTextView.inputView = nil;
-    _myTextView.frame = CGRectMake(17,6,248,32);
-    line_view.frame = CGRectMake(0,43.5,320,0.5);
+    _myTextView.frame = CGRectMake(17,6,DEVICE_WIDTH-72,32);
+    line_view.frame = CGRectMake(0,43.5,DEVICE_WIDTH,0.5);
 }
 
 /*

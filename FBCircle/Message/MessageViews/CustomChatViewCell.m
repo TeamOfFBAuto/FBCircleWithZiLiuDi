@@ -46,13 +46,14 @@
     
     UIImage * image = [UIImage imageNamed:theType == MyChatViewCellTypeOutgoing ?@"duihua2-66_82.png":@"duihua1-66_82.png"];
     
-    _background_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(theType == MyChatViewCellTypeOutgoing?(320 - point.x - 75):55,34,point.x+20,point.y+8)];
+    _background_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(theType == MyChatViewCellTypeOutgoing?(DEVICE_WIDTH - point.x - 65):50,34,point.x+15,point.y)];
     _background_imageView.userInteractionEnabled = YES;
     _background_imageView.image = [image stretchableImageWithLeftCapWidth:30.f topCapHeight:30.f];
     [self.contentView addSubview:_background_imageView];
     
     
     self.timestampLabel = [[UILabel alloc] initWithFrame:CGRectMake(105,5,110,16)];
+    self.timestampLabel.center = CGPointMake(DEVICE_WIDTH/2.0,self.timestampLabel.center.y);
     self.timestampLabel.textAlignment = NSTextAlignmentCenter;
     self.timestampLabel.backgroundColor = [UIColor clearColor];
     self.timestampLabel.layer.cornerRadius = 8;
@@ -83,7 +84,7 @@
     
     if(type == MyChatViewCellTypeOutgoing)
     {
-        avatarX = (self.contentView.frame.size.width - kJSAvatarSize - 10);
+        avatarX = (DEVICE_WIDTH - kJSAvatarSize - 10);
     }
     
     self.avatarImageView = [[AsyncImageView alloc] initWithFrame:CGRectMake(avatarX,
@@ -173,7 +174,7 @@
                 theHeight = theHeight + optimumSize.height;
              */
                 
-                CGRect content_frame = CGRectMake(theType ==MyChatViewCellTypeIncoming?12:7,theHeight?theHeight:6,200,50);
+                CGRect content_frame = CGRectMake(theType ==MyChatViewCellTypeIncoming?12:7,theHeight?theHeight:6,DEVICE_WIDTH-120,50);
                 OHAttributedLabel * content_label = [[OHAttributedLabel alloc] initWithFrame:content_frame];
                 content_label.textColor = theType==MyChatViewCellTypeIncoming?[UIColor whiteColor]:RGBCOLOR(3,3,3);
                 content_label.font = [UIFont systemFontOfSize:14];
@@ -249,7 +250,7 @@
                  */
                 
                 
-                CGRect content_frame = CGRectMake(theType ==MyChatViewCellTypeIncoming?10:5,theHeight?theHeight:6,200,50);
+                CGRect content_frame = CGRectMake(theType ==MyChatViewCellTypeIncoming?10:5,theHeight?theHeight:6,DEVICE_WIDTH-120,50);
                 OHAttributedLabel * content_label = [[OHAttributedLabel alloc] initWithFrame:content_frame];
                 content_label.textColor = theType==MyChatViewCellTypeIncoming?[UIColor whiteColor]:RGBCOLOR(3,3,3);
                 content_label.font = [UIFont systemFontOfSize:14];
@@ -259,8 +260,8 @@
                 theHeight = theHeight + content_label.frame.size.height;
                 
                 theWidth = content_label.frame.size.width>theWidth?content_label.frame.size.width:theWidth;
-                if (content_label.frame.size.width >= 190 || content_label.frame.size.width == 0) {
-                    theWidth = 200;
+                if (content_label.frame.size.width >= (DEVICE_WIDTH-130) || content_label.frame.size.width == 0) {
+                    theWidth = DEVICE_WIDTH-120;
                 }
             }
         }

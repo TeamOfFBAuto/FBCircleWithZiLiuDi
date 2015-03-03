@@ -21,6 +21,8 @@
         self.autoresizesSubviews = NO;
         
         self.clipsToBounds = YES;
+        
+        CGFloat the_width = (DEVICE_WIDTH-2)/3.0f;
                 
         NSArray * imageArray = [NSArray arrayWithObjects:@"pinglun-xin_up-24_24.png",@"pinglun-pinglun_up24_24.png",@"pinglun-zhuanfa_up-24_24.png",@"pinglun-xin-down-24_24.png",@"pinglun-pinglun_up24_24.png",@"pinglun-zhuanfa_up-24_24.png",nil];
         
@@ -30,7 +32,7 @@
         for (int i = 0;i < 3;i++) {
             
             UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.frame = CGRectMake((106+1)*i,0,106,38);
+            button.frame = CGRectMake((the_width+1)*i,0,the_width,38);
             button.tag = 100 + i;
             [button setBackgroundImage:[UIImage imageNamed:@"pinglun-bg1-up-212_76.png"] forState:UIControlStateNormal];
             [button setBackgroundImage:[UIImage imageNamed:@"pinglun-bg1-down212_76.png"] forState:UIControlStateHighlighted];

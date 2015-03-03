@@ -77,7 +77,7 @@
     
     [self setMyViewControllerLeftButtonType:MyViewControllerLeftbuttonTypeNull WithRightButtonType:MyViewControllerRightbuttonTypeNull];
     
-    self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,320,(iPhone5?568:480)-20-44-49) style:UITableViewStylePlain];
+    self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,DEVICE_HEIGHT-20-44-49) style:UITableViewStylePlain];
     self.myTableView.delegate = self;
     self.myTableView.dataSource = self;
     self.myTableView.rowHeight = 60;
@@ -95,7 +95,7 @@
 	[_refreshHeaderView refreshLastUpdatedDate];
     [_myTableView addSubview:_refreshHeaderView];
     
-    UIView * footerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,0)];
+    UIView * footerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,0)];
     footerView.backgroundColor = SEPARATOR_COLOR;
     _myTableView.tableFooterView = footerView;
     

@@ -87,7 +87,7 @@
     _currentPage = 1;
     
     
-    _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,320,(iPhone5?568:480)-20-44-44) style:UITableViewStylePlain];
+    _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,DEVICE_HEIGHT-20-44-44) style:UITableViewStylePlain];
     
     self.mytableView.delegate = self;
     
@@ -110,7 +110,7 @@
     }];
     
     
-    _inputToolBarView = [[ChatInputView alloc] initWithFrame:CGRectMake(0,(iPhone5?568:480)-20-44-44,320,44)];
+    _inputToolBarView = [[ChatInputView alloc] initWithFrame:CGRectMake(0,DEVICE_HEIGHT-20-44-44,DEVICE_WIDTH,44)];
         
     _inputToolBarView.myTextView.delegate = self;
     
@@ -208,7 +208,7 @@
                          self.mytableView.scrollIndicatorInsets = insets;
                          
                          
-                         _theTouchView.frame = CGRectMake(0,0,320,self.inputToolBarView.frame.origin.y);
+                         _theTouchView.frame = CGRectMake(0,0,DEVICE_WIDTH,self.inputToolBarView.frame.origin.y);
                      }
                      completion:^(BOOL finished) {
                      }];
@@ -420,7 +420,7 @@
     
     if (indexPath.row==0 && isShow) {
         
-        UIActivityIndicatorView * activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0,0,320,30)];
+        UIActivityIndicatorView * activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,30)];
         
         activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
         
@@ -505,7 +505,7 @@
     
     if (!_theTouchView)
     {
-        _theTouchView = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,self.inputToolBarView.frame.origin.y)];
+        _theTouchView = [[UIView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,self.inputToolBarView.frame.origin.y)];
         
         _theTouchView.backgroundColor = [UIColor clearColor];
         
@@ -687,8 +687,8 @@
 }
 
 -(void)finnishendsend2{
-    self.inputToolBarView.frame = CGRectMake(0,(iPhone5?568:480)-20-44-44,320,44);
-    self.inputToolBarView.myTextView.frame = CGRectMake(17,6,248,32);
+    self.inputToolBarView.frame = CGRectMake(0,DEVICE_HEIGHT-20-44-44,DEVICE_WIDTH,44);
+    self.inputToolBarView.myTextView.frame = CGRectMake(17,6,DEVICE_WIDTH-72,32);
     [self.inputToolBarView.myTextView setText:@""];
     [self textViewDidChange:self.inputToolBarView.myTextView];
     [self.mytableView reloadData];

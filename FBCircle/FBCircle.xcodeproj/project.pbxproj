@@ -241,6 +241,7 @@
 		562CC7DC19C417D800251DAA /* FBCircle_menu_background_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 562CC7DB19C417D800251DAA /* FBCircle_menu_background_image@2x.png */; };
 		56475E5319931B190099760F /* qbasset_collection_chose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56475E5219931B190099760F /* qbasset_collection_chose@2x.png */; };
 		56475E5419931B190099760F /* qbasset_collection_chose@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56475E5219931B190099760F /* qbasset_collection_chose@2x.png */; };
+		565737A51AA590EA00501A7F /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 565737A41AA590EA00501A7F /* Launch Screen.xib */; };
 		56582016199857E000A5E882 /* BBSAddMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56582015199857E000A5E882 /* BBSAddMemberViewController.m */; };
 		565820191998605200A5E882 /* CustomSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 565820181998605200A5E882 /* CustomSearchView.m */; };
 		5658201C19986FF200A5E882 /* bbs_add_member_quan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5658201A19986FF200A5E882 /* bbs_add_member_quan@2x.png */; };
@@ -1414,6 +1415,7 @@
 		56475E4D199314BF0099760F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		56475E4E199314BF0099760F /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		56475E5219931B190099760F /* qbasset_collection_chose@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qbasset_collection_chose@2x.png"; sourceTree = "<group>"; };
+		565737A41AA590EA00501A7F /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		56582014199857E000A5E882 /* BBSAddMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBSAddMemberViewController.h; sourceTree = "<group>"; };
 		56582015199857E000A5E882 /* BBSAddMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSAddMemberViewController.m; sourceTree = "<group>"; };
 		565820171998605200A5E882 /* CustomSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSearchView.h; sourceTree = "<group>"; };
@@ -2892,6 +2894,7 @@
 				56A6480B198F3A8B00451413 /* Images.xcassets */,
 				56A64808198F3A8B00451413 /* FBCircle.xcdatamodeld */,
 				56A647FD198F3A8B00451413 /* Supporting Files */,
+				565737A41AA590EA00501A7F /* Launch Screen.xib */,
 			);
 			path = FBCircle;
 			sourceTree = "<group>";
@@ -4411,6 +4414,7 @@
 				56A64AE0198F6AD800451413 /* geren_qingchu_up212_212@2x.png in Resources */,
 				56A64DC4198F72E900451413 /* youxiang-34-34@2x.png in Resources */,
 				1366027F1990A82900F2BEEC /* chahua@2x.png in Resources */,
+				565737A51AA590EA00501A7F /* Launch Screen.xib in Resources */,
 				56A64AFC198F6AD800451413 /* qingkong_40_40@2x.png in Resources */,
 				56A64801198F3A8B00451413 /* InfoPlist.strings in Resources */,
 				56A64D92198F72E900451413 /* tianjia_button-100_60@2x.png in Resources */,
@@ -5619,7 +5623,7 @@
 					"$(SRCROOT)/",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "f6d5e8cf-22e5-4e59-a7b6-e6626c6b1daa";
+				PROVISIONING_PROFILE = "3a5a1603-9d1e-4ee9-952f-2765405c4b6b";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -5659,7 +5663,7 @@
 					"$(SRCROOT)/",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "f6d5e8cf-22e5-4e59-a7b6-e6626c6b1daa";
+				PROVISIONING_PROFILE = "3a5a1603-9d1e-4ee9-952f-2765405c4b6b";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s";
@@ -5671,7 +5675,7 @@
 			baseConfigurationReference = EFC5F1F3A29F440FB92E1246 /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Bing Jin (KMZ2AD5LZY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bing Jin (KMZ2AD5LZY)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -5685,7 +5689,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f6d5e8cf-22e5-4e59-a7b6-e6626c6b1daa";
+				PROVISIONING_PROFILE = "3a5a1603-9d1e-4ee9-952f-2765405c4b6b";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -5697,7 +5701,7 @@
 			baseConfigurationReference = EFC5F1F3A29F440FB92E1246 /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Bing Jin (KMZ2AD5LZY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bing Jin (KMZ2AD5LZY)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -5711,7 +5715,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f6d5e8cf-22e5-4e59-a7b6-e6626c6b1daa";
+				PROVISIONING_PROFILE = "3a5a1603-9d1e-4ee9-952f-2765405c4b6b";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

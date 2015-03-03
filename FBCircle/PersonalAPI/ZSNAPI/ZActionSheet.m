@@ -49,7 +49,7 @@
         if (aTitle)
         {
             content_height = 30;
-            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,10,280,20)];
+            UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,10,DEVICE_WIDTH-40,20)];
             titleLabel.backgroundColor = [UIColor clearColor];
             titleLabel.textAlignment = NSTextAlignmentCenter;
             titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
@@ -66,7 +66,7 @@
             for (int i = 0;i < buttonTitles.count;i++)
             {
                 UIButton *b = [UIButton buttonWithType:UIButtonTypeCustom];
-                b.frame = CGRectMake(20,22+53*i,280,44);
+                b.frame = CGRectMake(20,22+53*i,DEVICE_WIDTH-40,44);
                 b.tag = 101 + i;
                 b.layer.cornerRadius = 5.0f;
                 b.layer.masksToBounds = YES;
@@ -85,7 +85,7 @@
         if (canceTitle)
         {
             UIButton *b = [UIButton buttonWithType:UIButtonTypeCustom];
-            b.frame = CGRectMake(20,content_height+20,280,44);
+            b.frame = CGRectMake(20,content_height+20,DEVICE_WIDTH-40,44);
             b.tag = 100;
             b.layer.cornerRadius = 5.0f;
             b.layer.masksToBounds = YES;
@@ -101,7 +101,7 @@
         }
         content_height += 20;
         
-        _content_view.frame = CGRectMake(0,(iPhone5?568:480),320,content_height);
+        _content_view.frame = CGRectMake(0,DEVICE_HEIGHT,DEVICE_WIDTH,content_height);
     }
     
     return self;
@@ -138,7 +138,7 @@
     
     CGRect content_frame = _content_view.frame;
     
-    content_frame.origin.y = (iPhone5?568:480) -  content_frame.size.height;
+    content_frame.origin.y = DEVICE_HEIGHT -  content_frame.size.height;
 
     if (animation)
     {
@@ -165,7 +165,7 @@
     
     CGRect content_frame = _content_view.frame;
     
-    content_frame.origin.y = (iPhone5?568:480);
+    content_frame.origin.y = DEVICE_HEIGHT;
     
     if (animation)
     {

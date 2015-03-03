@@ -53,7 +53,7 @@
         
         
         if (!_userName_label) {
-            _userName_label = [[UILabel alloc] initWithFrame:CGRectMake(64,11,200,18)];
+            _userName_label = [[UILabel alloc] initWithFrame:CGRectMake(64,11,DEVICE_WIDTH-120,18)];
             _userName_label.textAlignment = NSTextAlignmentLeft;
             _userName_label.textColor = RGBCOLOR(3,3,3);
             _userName_label.font = [UIFont boldSystemFontOfSize:15];
@@ -66,7 +66,7 @@
         
         
         if (!_content_label) {
-            _content_label = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(64,36,247,13)];
+            _content_label = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(64,36,DEVICE_WIDTH-73,13)];
             _content_label.textAlignment = NSTextAlignmentLeft;
             _content_label.textColor = RGBCOLOR(4,4,4);
             _content_label.backgroundColor = [UIColor clearColor];
@@ -81,7 +81,7 @@
         
         
         if (!_PictureViews) {
-            _PictureViews = [[FBCirclePicturesViews alloc]  initWithFrame:CGRectMake(64,0,231,0)];
+            _PictureViews = [[FBCirclePicturesViews alloc]  initWithFrame:CGRectMake(64,0,DEVICE_WIDTH-89,0)];
             
             [self addSubview:_PictureViews];
         }else
@@ -90,13 +90,13 @@
                 [view removeFromSuperview];
             }
             
-            _PictureViews.frame = CGRectMake(64,0,231,0);
+            _PictureViews.frame = CGRectMake(64,0,DEVICE_WIDTH-89,0);
         }
         
         
         if (!_forwardBackGroundImageView) {
             
-            _forwardBackGroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(64,0,245,51)];
+            _forwardBackGroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(64,0,DEVICE_WIDTH-75,51)];
             
             _forwardBackGroundImageView.layer.borderWidth = 0.5;
             
@@ -120,7 +120,7 @@
         
         
         if (!_rUserName_label) {
-            _rUserName_label = [[UILabel alloc] initWithFrame:CGRectMake(54,5.5,180,20)];
+            _rUserName_label = [[UILabel alloc] initWithFrame:CGRectMake(54,5.5,DEVICE_WIDTH-140,20)];
             
             _rUserName_label.textAlignment = NSTextAlignmentLeft;
             
@@ -138,7 +138,7 @@
         
         
         if (!_rContent_label) {
-            _rContent_label = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(54,28,235,21)];
+            _rContent_label = [[OHAttributedLabel alloc] initWithFrame:CGRectMake(54,28,DEVICE_WIDTH-85,21)];
             _rContent_label.textAlignment = NSTextAlignmentLeft;
             _rContent_label.textColor = RGBCOLOR(3,3,3);
             _rContent_label.backgroundColor = [UIColor clearColor];
@@ -163,7 +163,7 @@
         
         
         if (!_date_label) {
-            _date_label = [[UILabel alloc]  initWithFrame:CGRectMake(64,0,200,15)];
+            _date_label = [[UILabel alloc]  initWithFrame:CGRectMake(64,0,DEVICE_WIDTH-120,15)];
             _date_label.textColor = RGBCOLOR(120,120,120);
             _date_label.textAlignment = NSTextAlignmentLeft;
             _date_label.backgroundColor = [UIColor clearColor];
@@ -177,7 +177,7 @@
         
         if (!_menu_button) {
             _menu_button = [UIButton buttonWithType:UIButtonTypeCustom];
-            _menu_button.frame = CGRectMake(279,0,40,20);
+            _menu_button.frame = CGRectMake(DEVICE_WIDTH-41,0,40,20);
             [_menu_button setImage:[UIImage imageNamed:@"pinglun-icon-66_24.png"] forState:UIControlStateNormal];
             [_menu_button addTarget:self action:@selector(clickMenuTap:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:_menu_button];
@@ -185,12 +185,12 @@
         
         
         if (!_menu_background_view) {
-            _menu_background_view = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,0)];
+            _menu_background_view = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,0)];
             _menu_background_view.userInteractionEnabled = YES;
             [self addSubview:_menu_background_view];
         }else
         {
-            _menu_background_view.frame = CGRectMake(0,0,320,0);
+            _menu_background_view.frame = CGRectMake(0,0,DEVICE_WIDTH,0);
             
             for (UIView * view in _menu_background_view.subviews) {
                 if (![view isKindOfClass:[FBCircleMenuView class]] && ![view isKindOfClass:[RTLabel class]])
@@ -201,20 +201,20 @@
         }
         
         if (!_menu_view) {
-            _menu_view = [[FBCircleMenuView alloc] initWithFrame:CGRectMake(0,10,320,0)];
+            _menu_view = [[FBCircleMenuView alloc] initWithFrame:CGRectMake(0,10,DEVICE_WIDTH,0)];
             _menu_view.backgroundColor = RGBCOLOR(144,144,144);
             _menu_view.delegate = self;
             _menu_button.clipsToBounds = YES;
             [_menu_background_view addSubview:_menu_view];
         }else
         {
-            _menu_view.frame = CGRectMake(0,0,320,0);
+            _menu_view.frame = CGRectMake(0,0,DEVICE_WIDTH,0);
         }
     }
     
     
     if (!_sep_line_view) {
-        _sep_line_view = [[UIImageView alloc] initWithFrame:CGRectMake(11,0,297.5,5)];
+        _sep_line_view = [[UIImageView alloc] initWithFrame:CGRectMake(11,0,DEVICE_WIDTH-22.5,5)];
         _sep_line_view.backgroundColor = RGBCOLOR(221,221,221);
         
         //  [self addSubview:_sep_line_view];
@@ -278,7 +278,7 @@
         
         float height = 75*(i+j)+2.5*(j + i - 1);
         
-        _PictureViews.frame = CGRectMake(64,cellHeight+10,231,height);
+        _PictureViews.frame = CGRectMake(64,cellHeight+10,DEVICE_WIDTH-89,height);
         
         [_PictureViews setimageArr:arry_url withSize:75 isjuzhong:NO];
         
@@ -311,13 +311,13 @@
         {
             [_rContentImageView loadImageFromURL:theInfo.rfb_face withPlaceholdImage:FBCIRCLE_DEFAULT_IMAGE];
             
-            _rContent_label.frame = CGRectMake(54,5.5,180,40);
+            _rContent_label.frame = CGRectMake(54,5.5,DEVICE_WIDTH-140,40);
         }else
         {
-            _rContent_label.frame = CGRectMake(5,5.5,180+49,_rContent_label.frame.size.height);
+            _rContent_label.frame = CGRectMake(5,5.5,(DEVICE_WIDTH-140)+49,_rContent_label.frame.size.height);
         }
         
-        _forwardBackGroundImageView.frame = CGRectMake(64,cellHeight + 8,245,51);
+        _forwardBackGroundImageView.frame = CGRectMake(64,cellHeight + 8,DEVICE_WIDTH-75,51);
         
         forwardHeight += 5;
         
@@ -332,9 +332,9 @@
             
             _rUserName_label.hidden = YES;
             
-            _forwardBackGroundImageView.frame = CGRectMake(64,cellHeight + 8,245,30);
+            _forwardBackGroundImageView.frame = CGRectMake(64,cellHeight + 8,DEVICE_WIDTH-75,30);
             
-            _rContent_label.frame = CGRectMake(5,8,235,_rContent_label.frame.size.height);
+            _rContent_label.frame = CGRectMake(5,8,DEVICE_WIDTH-85,_rContent_label.frame.size.height);
             
         }else
         {
@@ -345,11 +345,11 @@
             _rUserName_label.text = theInfo.rfb_username;
             _rUserName_label.hidden = NO;
                         
-            _rUserName_label.frame = CGRectMake(54,5,180,20);
+            _rUserName_label.frame = CGRectMake(54,5,DEVICE_WIDTH-140,20);
             
             [OHLableHelper creatAttributedText:[[ZSNApi decodeSpecialCharactersString:theInfo.rfb_content] stringByReplacingEmojiCheatCodesWithUnicode] Label:_rContent_label OHDelegate:self WithWidht:IMAGE_WIDHT WithHeight:IMAGE_HEIGHT WithLineBreak:YES];
             
-            _rContent_label.frame = CGRectMake(54,28,180,_rContent_label.frame.size.height);
+            _rContent_label.frame = CGRectMake(54,28,DEVICE_WIDTH-140,_rContent_label.frame.size.height);
             
             if (theInfo.rfb_imageid.length > 0)
             {
@@ -358,16 +358,16 @@
                     urlImage = [theInfo.rfb_image objectAtIndex:0];
                 }
                 [_rContentImageView loadImageFromURL:urlImage withPlaceholdImage:FBCIRCLE_DEFAULT_IMAGE];
-                _rContent_label.frame = CGRectMake(54,28,180,20);
+                _rContent_label.frame = CGRectMake(54,28,DEVICE_WIDTH-140,20);
                 
             }else
             {
-                _rUserName_label.frame = CGRectMake(5,5,180+49,20);
+                _rUserName_label.frame = CGRectMake(5,5,(DEVICE_WIDTH-140)+49,20);
                 
-                _rContent_label.frame = CGRectMake(5,28,180+49,20);
+                _rContent_label.frame = CGRectMake(5,28,(DEVICE_WIDTH-140)+49,20);
             }
             
-            _forwardBackGroundImageView.frame = CGRectMake(64,cellHeight + 10,245,51);
+            _forwardBackGroundImageView.frame = CGRectMake(64,cellHeight + 10,DEVICE_WIDTH-75,51);
             
         }
         
@@ -417,11 +417,11 @@
     
     if (theInfo.isShowMenuView)
     {
-        _menu_view.frame = CGRectMake(0,menu_background_height + 5,320,38);
+        _menu_view.frame = CGRectMake(0,menu_background_height + 5,DEVICE_WIDTH,38);
         
         menu_background_height += 40;
         
-        _menu_background_view.frame = CGRectMake(0,menubuttonFrame.origin.y + menubuttonFrame.size.height,320,menu_background_height);
+        _menu_background_view.frame = CGRectMake(0,menubuttonFrame.origin.y + menubuttonFrame.size.height,DEVICE_WIDTH,menu_background_height);
         
         _menu_background_view.image = [[UIImage imageNamed:@"FBCircle_menu_background_image.png"] stretchableImageWithLeftCapWidth:50 topCapHeight:5];
         

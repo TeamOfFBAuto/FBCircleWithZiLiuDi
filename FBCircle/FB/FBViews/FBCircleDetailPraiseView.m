@@ -158,7 +158,7 @@
     
     float height = 0;
     
-    RTLabel * _zan_label = [[RTLabel alloc] initWithFrame:CGRectMake(80,18,230,0)];
+    RTLabel * _zan_label = [[RTLabel alloc] initWithFrame:CGRectMake(80,18,DEVICE_WIDTH-90,0)];
     
     _zan_label.font = [UIFont systemFontOfSize:14];
     

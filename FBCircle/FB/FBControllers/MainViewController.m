@@ -30,7 +30,7 @@
 #define INPUT_HEIGHT 44.0f
 #define DegreesToRadians(x) ((x) * M_PI / 180.0)
 
-
+#define BANNAR_HEIGHT 510*DEVICE_HEIGHT/1334
 
 @interface MainViewController (){
     
@@ -112,11 +112,10 @@
     }];
     */
     
-    
-    MBProgressHUD * hud = [ZSNApi showMBProgressWithText:@"正在加载..." addToView:self.view];
-    
-    NSString* fullURL = [NSString stringWithFormat:FB_WEIBOMYSELF_URL,[SzkAPI getAuthkeyGBK],currentPage];
-    
+    ///张少南 这里需要换成正式数据
+    NSString* fullURL = [NSString stringWithFormat:FB_WEIBOMYSELF_URL,[SzkAPI getAuthkey],currentPage];
+//    NSString * fullURL = [NSString stringWithFormat:@"http://t.fblife.com/openapi/index.php?mod=getweibo_quan&code=myfeed&fromtype=b5eeec0b&authkey=%@&page=%d&fbtype=json",[SzkAPI getAuthkeyGBK],currentPage];
+
     NSLog(@"请求微博url---%@",fullURL);
     
     ASIHTTPRequest * weiBo_request = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:fullURL]];
@@ -127,8 +126,8 @@
     [wRequest setCompletionBlock:^{
         @try
         {
-            [hud hide:YES];
             [loadview stopLoading:1];
+            [self doneLoadingTableViewData];
             NSDictionary * rootObject = [[NSDictionary alloc] initWithDictionary:[weiBo_request.responseData objectFromJSONData]];
             NSString *errcode =[NSString stringWithFormat:@"%@",[rootObject objectForKey:ERRCODE]];
             
@@ -149,9 +148,8 @@
     }];
     
     [wRequest setFailedBlock:^{
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"加载失败";
-        [hud hide:YES afterDelay:1.5];
+        [ZSNApi showAutoHiddenMBProgressWithText:@"加载失败" addToView:self.view];
+        [self doneLoadingTableViewData];
         [loadview stopLoading:1];
         [bself.myTableView reloadData];
     }];
@@ -197,16 +195,28 @@
         return;
     }else
     {
-        NSArray * arr = [ZSNApi sortArrayWith:[userinfo allKeys]];
-        NSMutableArray * temp = [NSMutableArray array];
-        for (int i = 0;i < arr.count;i++) {
-            NSString * key = [NSString stringWithFormat:@"%@",[arr objectAtIndex:i]];
-            FBCircleModel * model = [[FBCircleModel alloc] initWithDictionary:[userinfo objectForKey:key]];
-            [temp addObject:model];
-        }
-        [_data_array addObjectsFromArray:temp];
-        [self returnCellHeightWith:temp WithNew:YES];
-        [self.myTableView reloadData];
+                
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
+            
+            NSArray * arr = [ZSNApi sortArrayWith:[userinfo allKeys]];
+            NSMutableArray * temp = [NSMutableArray array];
+            for (int i = 0;i < arr.count;i++) {
+                NSString * key = [NSString stringWithFormat:@"%@",[arr objectAtIndex:i]];
+                FBCircleModel * model = [[FBCircleModel alloc] initWithDictionary:[userinfo objectForKey:key]];
+                [temp addObject:model];
+            }
+            
+            
+            [_data_array addObjectsFromArray:temp];
+            [self returnCellHeightWith:temp WithNew:YES];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.myTableView reloadData];
+            });
+        });
+        
+        
+        
     }
     
     
@@ -292,8 +302,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[NSUserDefaults standardUserDefaults] setObject:@"V2FbOVI8VT5XZ1E5ATZWLVYoAnZaNABgVmI=" forKey:AUTHERKEY_GBK];
-    [[NSUserDefaults standardUserDefaults] setObject:@"V2FbOVI8VT5XZ1E5ATZWLVYoAnZaNABgVmI=" forKey:AUTHERKEY];
     loadsucess=YES;
 
     self.titleLabel.text = @"fb圈";
@@ -332,7 +340,7 @@
     
     [self loadTableHeaderView];
     
-    _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,320,(iPhone5?568:480)-64-49) style:UITableViewStylePlain];
+    _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,DEVICE_HEIGHT-64-49) style:UITableViewStylePlain];
     _myTableView.delegate = self;
     _myTableView.dataSource = self;
     _myTableView.separatorColor = RGBCOLOR(204,204,204);
@@ -345,7 +353,7 @@
         [self.myTableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
     }
     
-    loadview=[[LoadingIndicatorView alloc]initWithFrame:CGRectMake(0, 900, 320, 40)];
+    loadview=[[LoadingIndicatorView alloc]initWithFrame:CGRectMake(0, 900, DEVICE_WIDTH, 40)];
     _myTableView.tableFooterView = loadview;
     [loadview startLoading];
     
@@ -361,13 +369,13 @@
     
     
     
-    faceScrollView = [[WeiBoFaceScrollView alloc] initWithFrame:CGRectMake(0,0,320,215) target:self];
+    faceScrollView = [[WeiBoFaceScrollView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,215) target:self];
     faceScrollView.delegate = self;
     faceScrollView.bounces = NO;
-    faceScrollView.contentSize = CGSizeMake(320*3,0);
+    faceScrollView.contentSize = CGSizeMake(DEVICE_WIDTH*3,0);
     
     
-    _inputToolBarView = [[ChatInputView alloc] initWithFrame:CGRectMake(0,(iPhone5?568:480)-20-44,320,44)];
+    _inputToolBarView = [[ChatInputView alloc] initWithFrame:CGRectMake(0,DEVICE_HEIGHT-20-44,DEVICE_WIDTH,44)];
     _inputToolBarView.myTextView.delegate = self;
     _inputToolBarView.myTextView.returnKeyType = UIReturnKeySend;
     _inputToolBarView.myTextView.textColor = RGBCOLOR(153,153,153);
@@ -1063,12 +1071,12 @@
 
 -(void)loadTableHeaderView
 {
-    self.myTableView.sectionHeaderHeight = isHaveNewMessage?360:320;
+    self.myTableView.sectionHeaderHeight = BANNAR_HEIGHT + 70 + (isHaveNewMessage?40:0);
     
     if (!headerView)
     {
-        headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,isHaveNewMessage?360:306)];
-        bannerView = [[AsyncImageView alloc]  initWithFrame:CGRectMake(0,0,320,256)];
+        headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,BANNAR_HEIGHT + 70 + (isHaveNewMessage?40:0))];
+        bannerView = [[AsyncImageView alloc]  initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,BANNAR_HEIGHT)];
         bannerView.backgroundColor = [UIColor whiteColor];
         bannerView.tag = 319;
         bannerView.clipsToBounds = YES;
@@ -1082,17 +1090,21 @@
         [headerView addSubview:bannerView];
         
         
-        UIView * headerBackView = [[UIView alloc] initWithFrame:CGRectMake(234.5,205.5,75,75)];
+        UIView * headerBackView = [[UIView alloc] initWithFrame:CGRectMake(234.5,204,75,75)];
         headerBackView.layer.cornerRadius = 5;
-        headerBackView.layer.borderWidth = 0.5;
+        headerBackView.layer.borderWidth = 2;
         headerBackView.layer.borderColor = [RGBACOLOR(198, 196, 196, 0.75) CGColor];
         headerBackView.backgroundColor = [UIColor whiteColor];
-        [headerView addSubview:headerBackView];
+      //  [headerView addSubview:headerBackView];
         
         
-        user_header_imageView = [[AsyncImageView alloc] initWithFrame:CGRectMake(234,205,70,70)];
-        user_header_imageView.center = CGPointMake(75.0/2,75.0/2);
+        user_header_imageView = [[AsyncImageView alloc] initWithFrame:CGRectMake(DEVICE_WIDTH-85,BANNAR_HEIGHT-48,75,75)];
+//        user_header_imageView.center = CGPointMake(75.0/2,75.0/2);
         user_header_imageView.layer.masksToBounds = YES;
+//        user_header_imageView.layer.cornerRadius = 5;
+        user_header_imageView.layer.borderWidth = 2;
+        user_header_imageView.layer.borderColor = [[UIColor whiteColor] CGColor];
+
         user_header_imageView.tag = 320;
         user_header_imageView.layer.cornerRadius = 5;
         
@@ -1102,9 +1114,9 @@
         [user_header_imageView addGestureRecognizer:tap_one];
         
         
-        [headerBackView addSubview:user_header_imageView];
+        [headerView addSubview:user_header_imageView];
         
-        userName_label = [[UILabel alloc] initWithFrame:CGRectMake(22,225,190,20)];
+        userName_label = [[UILabel alloc] initWithFrame:CGRectMake(22,225,DEVICE_WIDTH-130,20)];
         userName_label.textAlignment = NSTextAlignmentRight;
         userName_label.layer.masksToBounds = NO;
         userName_label.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -1117,7 +1129,7 @@
         [headerView addSubview:userName_label];
         
         
-        bottom_line_view = [[UIView alloc] initWithFrame:CGRectMake(0,isHaveNewMessage?359.5:319.5,320,0.5)];
+        bottom_line_view = [[UIView alloc] initWithFrame:CGRectMake(0,BANNAR_HEIGHT + 70 + (isHaveNewMessage?40:0) - 0.5,DEVICE_WIDTH,0.5)];
         bottom_line_view.backgroundColor = RGBCOLOR(233,233,233);
         bottom_line_view.hidden = YES;
         [headerView addSubview:bottom_line_view];
@@ -1132,7 +1144,7 @@
     }
     
     
-    headerView.frame = CGRectMake(0,0,320,isHaveNewMessage?360:306);
+    headerView.frame = CGRectMake(0,0,DEVICE_WIDTH,BANNAR_HEIGHT + 70 + (isHaveNewMessage?40:0));
     
 //    if ([GlocalUserImage getUserBannerImage])
 //    {
@@ -1173,7 +1185,7 @@
         userName_label.text = _personModel.person_username;
     }
     
-    bottom_line_view.frame = CGRectMake(0,isHaveNewMessage?359.5:305.5,320,0.5);
+    bottom_line_view.frame = CGRectMake(0,BANNAR_HEIGHT + 70 + (isHaveNewMessage?40:0)-0.5,DEVICE_WIDTH,0.5);
     
     
     if (isHaveNewMessage)
@@ -1270,7 +1282,7 @@
             [bself.cell_height_array addObject:[NSNumber numberWithFloat:height]];
         }
         
-        [bself.myTableView reloadData];
+//        [bself.myTableView reloadData];
 }
 
 
@@ -1945,7 +1957,7 @@
                                                                   inputViewFrame.size.width,
                                                                   inputViewFrame.size.height);
                          
-                         _theTouchView.frame = CGRectMake(0,0,320,self.inputToolBarView.frame.origin.y);
+                         _theTouchView.frame = CGRectMake(0,0,DEVICE_WIDTH,self.inputToolBarView.frame.origin.y);
                      }
                      completion:^(BOOL finished) {
                      }];
@@ -1955,7 +1967,7 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     _theTouchView.hidden = YES;
-    self.inputToolBarView.frame = CGRectMake(0,(iPhone5?568:480)-20-44,320,44);
+    self.inputToolBarView.frame = CGRectMake(0,DEVICE_HEIGHT-20-44,DEVICE_WIDTH,44);
 //    self.inputToolBarView.myTextView.frame = CGRectMake(17,6,248,32);
     temp_count = 1;
     [self.inputToolBarView resetInputView];
@@ -2001,7 +2013,7 @@
     
     if (!_theTouchView)
     {
-        _theTouchView = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,self.inputToolBarView.frame.origin.y)];
+        _theTouchView = [[UIView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,self.inputToolBarView.frame.origin.y)];
         _theTouchView.backgroundColor = [UIColor clearColor];
         [self.view bringSubviewToFront:_theTouchView];
         [self.view addSubview:_theTouchView];
@@ -2078,7 +2090,7 @@
                                                                       inputViewFrame.size.height + theheight);
                              
                              [self.inputToolBarView adjustTextViewHeightBy:count WihtHeight:theheight];
-                             _theTouchView.frame = CGRectMake(0,0,320,self.inputToolBarView.frame.origin.y);
+                             _theTouchView.frame = CGRectMake(0,0,DEVICE_WIDTH,self.inputToolBarView.frame.origin.y);
                          }
                      }
                      completion:^(BOOL finished) {
@@ -2200,7 +2212,7 @@
     float height = [test_cell returnCellHeightWith:model];
     [self.cell_height_array replaceObjectAtIndex:history_selected_menu_page withObject:[NSNumber numberWithFloat:height]];
     [self.myTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:history_selected_menu_page inSection:0], nil] withRowAnimation:UITableViewRowAnimationAutomatic];
-    self.inputToolBarView.frame = CGRectMake(0,(iPhone5?568:480)-20-44,320,44);
+    self.inputToolBarView.frame = CGRectMake(0,DEVICE_HEIGHT-20-44,DEVICE_WIDTH,44);
     self.inputToolBarView.myTextView.frame = CGRectMake(17,6,248,32);
     self.inputToolBarView.myTextView.text = @"";
 

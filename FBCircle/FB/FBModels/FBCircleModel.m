@@ -147,10 +147,10 @@
             self.fb_topic_type = @"1";
             
             FBCircleExtension * extension = [[FBCircleExtension alloc] initWithDictionary:[[dic objectForKey:@"extension"] objectFromJSONString]];
-            self.rfb_username = extension.extentsion_title;
+            self.rfb_username = [zsnApi exchangeStringForDeleteNULL:extension.extentsion_title];
             self.rfb_content = [ZSNApi decodeSpecialCharactersString:extension.extentsion_content];
-            self.rfb_face = extension.extentsion_image;
-            self.rfb_zan_num  = extension.extentsion_link;
+            self.rfb_face = [zsnApi exchangeStringForDeleteNULL:extension.extentsion_image];
+            self.rfb_zan_num  = [zsnApi exchangeStringForDeleteNULL:extension.extentsion_link];
         }
         
        
@@ -169,12 +169,12 @@
                 //解析图集
                 NSDictionary *photojson= [[dic objectForKey:FB_CONTENT] objectFromJSONString];
                 PhotoFeed * photo=[[PhotoFeed alloc]initWithJson:photojson];
-                
-                self.rfb_username = photo.title;
+                self.fb_content = @"";
+                self.rfb_username = [zsnApi exchangeStringForDeleteNULL:photo.title];
                 self.rfb_content = [ZSNApi decodeSpecialCharactersString:photo.title];
                 NSArray * image_array = [photo.image_string componentsSeparatedByString:@"|"];
                 if (image_array.count > 0) {
-                    self.rfb_face = [image_array objectAtIndex:0];
+                    self.rfb_face = [zsnApi exchangeStringForDeleteNULL:[image_array objectAtIndex:0]];
                 }else
                 {
                     self.rfb_face = @"";
@@ -186,12 +186,12 @@
             {
                 //解析文集
                 NSDictionary *blogjson= [[dic objectForKey:FB_CONTENT] objectFromJSONString];
-                
+                NSLog(@"blogjson ----   %@",blogjson);
                 BlogFeed * blog=[[BlogFeed alloc]initWithJson:blogjson];
-                
-                self.rfb_username = blog.title;
-                self.rfb_content = blog.content;
-                self.rfb_face = blog.photo;
+                self.fb_content = @"";
+                self.rfb_username = [zsnApi exchangeStringForDeleteNULL:blog.title];
+                self.rfb_content = [zsnApi exchangeStringForDeleteNULL:blog.content];
+                self.rfb_face = [zsnApi exchangeStringForDeleteNULL:blog.photo];
                 self.rfb_zan_num  = [NSString stringWithFormat:@"http://www.fb.cn/blog/view/%@",blog.blogid];
                 
             }else if([self.fb_sort isEqualToString:@"4"]&&[[dic objectForKey:@"type"] isEqualToString:@"first"])
@@ -203,7 +203,7 @@
                 self.fb_content = @"";
                 self.rfb_username = fbnews.title;
                 self.rfb_content = fbnews.content;
-                self.rfb_face = fbnews.photo;
+                self.rfb_face = [NSString stringWithFormat:@"%@",fbnews.photo];
                 self.rfb_zan_num  = [NSString stringWithFormat:@"http://bbs.fblife.com/thread_%@.html",fbnews.bbsid];
             }else if([self.fb_sort isEqualToString:@"5"]&&[[dic objectForKey:@"type"] isEqualToString:@"first"])
             {
@@ -214,11 +214,11 @@
                 
                 self.rfb_username = ex.title;
                 self.rfb_content = ex.forum_content;
-                self.rfb_face = ex.photo;
+                self.rfb_face = [zsnApi exchangeStringForDeleteNULL:ex.photo];
                 self.rfb_zan_num  = [NSString stringWithFormat:@"http://bbs.fblife.com/thread_%@.html",ex.authorid];
                 
                 
-            }else if (([self.fb_sort isEqualToString:@"8"] || [self.fb_sort isEqualToString:@"7"] || [self.fb_sort isEqualToString:@"6"])&&[[dic objectForKey:@"type"] isEqualToString:@"first"])
+            }else if (([self.fb_sort isEqualToString:@"7"] || [self.fb_sort isEqualToString:@"6"])&&[[dic objectForKey:@"type"] isEqualToString:@"first"])
             {
                 ///新闻
                 NSDictionary *exjson= [[dic objectForKey:FB_EXTENSION] objectFromJSONString];
@@ -226,8 +226,18 @@
                 
                 self.rfb_username = ex.title;
                 self.rfb_content = ex.forum_content;
-                self.rfb_face = ex.photo;
+                self.rfb_face = [NSString stringWithFormat:@"%@",ex.photo];
                 self.rfb_zan_num  = [NSString stringWithFormat:@"http://cmsweb.fblife.com/web.php?c=listnews&a=jump&id=%@",[dic objectForKey:@"sortid"]];
+            }else if ([self.fb_sort isEqualToString:@"8"]&&[[dic objectForKey:@"type"] isEqualToString:@"first"])
+            {
+                ///新闻分享
+                NSDictionary *exjson= [[dic objectForKey:FB_EXTENSION] objectFromJSONString];
+                self.rfb_username = [NSString stringWithFormat:@"%@",[exjson objectForKey:@"title"]];
+                self.rfb_content = [NSString stringWithFormat:@"%@",[exjson objectForKey:@"intro"]];
+                self.rfb_face = [NSString stringWithFormat:@"%@",[exjson objectForKey:@"photo"]];
+                
+                self.rfb_zan_num  = [NSString stringWithFormat:@"http://cmsweb.fblife.com/web.php?c=listnews&a=jump&id=%@",[dic objectForKey:@"sortid"]];
+                NSLog(@"sssss ---  %@ ---   %@ ----  %@ ----  %@",self.rfb_username,self.rfb_content,self.rfb_face,self.rfb_zan_num);
             }else if([self.fb_sort isEqualToString:@"10"]&&[[dic objectForKey:@"type"] isEqualToString:@"first"])
             {
                 //资源分享（论坛鼠标滑过的分享）
@@ -278,7 +288,7 @@
         }
         
         
-        /*
+        
         NSArray * comments = [dic objectForKey:@"comment"];
         
         self.fb_comment_array = [NSMutableArray array];
@@ -305,7 +315,7 @@
             }
         }
         
-        */
+        
         
         
         if (![[dic objectForKey:@"roottid"] isEqualToString:@"0"])
@@ -406,10 +416,9 @@
             }else if([self.rfb_sort isEqualToString:@"4"]&&[[rDic objectForKey:@"type"] isEqualToString:@"first"])
             {
                 //论坛帖子转发为微博
-                NSDictionary * newsForwoadjson= [[dic objectForKey:FB_CONTENT] objectFromJSONString];
+                NSDictionary * newsForwoadjson= [[rDic objectForKey:FB_CONTENT] objectFromJSONString];
                 FbNewsFeed * fbnews= [[FbNewsFeed alloc] initWithJson:newsForwoadjson];
                 
-                self.fb_content = @"";
                 self.rfb_username = fbnews.title;
                 self.rfb_content = fbnews.content;
                 self.rfb_face = fbnews.photo;
