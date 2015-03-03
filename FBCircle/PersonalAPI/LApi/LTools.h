@@ -147,6 +147,8 @@ typedef void(^versionBlock)(BOOL isNewVersion,NSString *updateUrl,NSString *upda
 
 #pragma mark - 字符串的处理
 
++(NSString *)numberToString:(long)number;//千分位
+
 + (NSString *)NSStringNotNull:(NSString *)text;
 
 + (NSString *)NSStringAddComma:(NSString *)string; //添加逗号
