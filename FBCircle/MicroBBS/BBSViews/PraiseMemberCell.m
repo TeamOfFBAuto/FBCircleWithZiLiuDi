@@ -16,11 +16,11 @@
     if (self) {
         // Initialization code
         
-        self.upMask = [[UIView alloc]initWithFrame:CGRectMake(12, 0, 320 - 24, 4)];
+        self.upMask = [[UIView alloc]initWithFrame:CGRectMake(12, 0, DEVICE_WIDTH - 24, 4)];
         _upMask.backgroundColor = [UIColor whiteColor];
         [self addSubview:_upMask];
         
-        self.bgView = [[UIView alloc]initWithFrame:CGRectMake(12, 0, 320 - 24, 55)];
+        self.bgView = [[UIView alloc]initWithFrame:CGRectMake(12, 0, DEVICE_WIDTH - 24, 55)];
         _bgView.backgroundColor = [UIColor whiteColor];
         [self addSubview:_bgView];
         
@@ -31,7 +31,7 @@
         _aTitleLabel.font = [UIFont systemFontOfSize:15];
         [self addSubview:_aTitleLabel];
         
-        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(12, 54, 320-24, 1.f)];
+        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(12, 54, DEVICE_WIDTH - 24, 1.f)];
         line.backgroundColor = COLOR_TABLE_LINE;
         [self addSubview:line];
         self.bottomLine = line;

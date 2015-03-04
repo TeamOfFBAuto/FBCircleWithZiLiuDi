@@ -86,7 +86,7 @@
     // Do any additional setup after loading the view.
     
     //    self.view.backgroundColor = [UIColor redColor];
-    
+
     self.title = @"微论坛";
     self.titleLabel.text = @"微论坛";
     self.rightImageName = @"+";
@@ -96,7 +96,7 @@
     [self.left_button addTarget:self action:@selector(clickToClassifyBBS) forControlEvents:UIControlEventTouchUpInside];
     
     //数据展示table
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0,0, 320, self.view.height - 44 - 49 - 20) showLoadMore:NO];
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0,0, DEVICE_WIDTH, self.view.height - 44 - 49 - 20) showLoadMore:NO];
     _table.backgroundColor = self.view.backgroundColor;
     _table.refreshDelegate = self;
     _table.dataSource = self;
@@ -108,7 +108,7 @@
     _table.separatorInset = UIEdgeInsetsZero;
     [self.view addSubview:_table];
     
-    UIView *footer_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 15)];
+    UIView *footer_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 15)];
     footer_view.backgroundColor = [UIColor clearColor];
     _table.tableFooterView = footer_view;
     
@@ -580,13 +580,13 @@
  */
 - (UIView *)createSearchView
 {
-    UIView *search_bgview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 45)];
+    UIView *search_bgview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 45)];
     //    search_bgview.backgroundColor = [UIColor colorWithHexString:@"cac9ce"];
     
     //    search_bgview.backgroundColor = [UIColor redColor];
     [self.view addSubview:search_bgview];
     
-    UISearchBar *bar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 320, 45)];
+    UISearchBar *bar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 45)];
     bar.placeholder = @"搜索";
     bar.delegate = self;
     bar.layer.borderWidth = 2.f;
@@ -626,7 +626,7 @@
         headerView = nil;
     }
     
-    headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 100)];
+    headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 100)];
     headerView.backgroundColor = [UIColor clearColor];
     
     //搜索view
@@ -636,12 +636,12 @@
     
     //我的论坛
     
-    _mybbsView = [[UIView alloc]initWithFrame:CGRectMake(8, 19 + 45, 304, 80)];
+    _mybbsView = [[UIView alloc]initWithFrame:CGRectMake(8, 19 + 45, DEVICE_WIDTH - 8*2, 80)];
     _mybbsView.layer.cornerRadius = 3.f;
     _mybbsView.clipsToBounds = YES;
     [headerView addSubview:_mybbsView];
     
-    LSecionView *section = [[LSecionView alloc]initWithFrame:CGRectMake(0, 0, 304, 40) title:TITLE_MY_MY_BBS target:self action:@selector(clickToMyBBS:)];
+    LSecionView *section = [[LSecionView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH-8 * 2, 40) title:TITLE_MY_MY_BBS target:self action:@selector(clickToMyBBS:)];
     [_mybbsView addSubview:section];
     
     UIView *secondBgView = [[UIView alloc]initWithFrame:CGRectMake(section.left, section.bottom ,section.width, 40)];
@@ -715,57 +715,10 @@
         
     }
     
-    headerView.frame = CGRectMake(0, 0, 320, _mybbsView.bottom);
+    headerView.frame = CGRectMake(0, 0, DEVICE_WIDTH, _mybbsView.bottom);
     
     return headerView;
 }
-
-
-/**
- *  创建热门推荐部分
- */
-//- (UIView *)createRecommenView
-//{
-//    //热门推荐
-//    
-//    UIView * recommendView = [[UIView alloc]init];
-//    recommendView.layer.cornerRadius = 3.f;
-//    recommendView.clipsToBounds = YES;
-//    //    [headerView addSubview:recommendView];
-//    
-//    LSecionView *section2 = [[LSecionView alloc]initWithFrame:CGRectMake(0, 0, 304, 40) title:TITLE_MY_HOT_RECOMMEND target:self action:@selector(clickToMore:)];
-//    section2.rightBtn.tag = 100;
-//    [recommendView addSubview:section2];
-//    
-//    
-//    //推荐列表
-//    for (int i = 0; i < _hot_array.count; i ++) {
-//        
-//        TopicModel *aModel = [_hot_array objectAtIndex:i];
-//        
-//        LBBSCellView *cell_view = [[LBBSCellView alloc]initWithFrame:CGRectMake(0, section2.bottom + 75 * i, 320, 75) target:self action:@selector(clickToTopicInfo:)];
-//        cell_view.backgroundColor = [UIColor whiteColor];
-//        [_recommendView addSubview:cell_view];
-//        cell_view.tag = 1000 + i;
-//        
-//        [cell_view setCellWithModel:aModel];
-//        
-//        if (i < 1) {
-//            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, cell_view.bottom - 1, 304, 0.5)];
-//            line.backgroundColor = COLOR_TABLE_LINE;
-//            [_recommendView addSubview:line];
-//        }
-//    }
-//    
-//    recommendView.frame = CGRectMake(8, 0, 304, section2.height + 75 * _hot_array.count);
-//    
-//    //    headerView.frame = CGRectMake(0, 0, 320, _recommendView.bottom + 15);
-//    //
-//    //    _table.tableHeaderView = headerView;
-//    
-//    return recommendView;
-//}
-
 
 
 #pragma mark - delegate
@@ -912,12 +865,8 @@
             cell.backgroundColor = [UIColor clearColor];
             cell.separatorInset = UIEdgeInsetsZero;
             
-            //透明空格
-//            UIView *clearView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 15)];
-//            clearView.backgroundColor = [UIColor clearColor];
-//            [cell addSubview:clearView];
             
-            LSecionView *section = [[LSecionView alloc]initWithFrame:CGRectMake(8, 15, 304, 40) title:TITLE_RECOMMEND_BBS target:self action:@selector(clickToMore:)];
+            LSecionView *section = [[LSecionView alloc]initWithFrame:CGRectMake(8, 15, DEVICE_WIDTH - 8 * 2, 40) title:TITLE_RECOMMEND_BBS target:self action:@selector(clickToMore:)];
 //            section.rightBtn.hidden = YES;
             section.rightBtn.tag = 999;
             [cell addSubview:section];
@@ -936,7 +885,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
 //        cell.separatorInset = UIEdgeInsetsZero;
-        cell.bgView.width = 304;
+        cell.bgView.width = DEVICE_WIDTH - 8 * 2;
         cell.bgView.left = 8.f;
         __weak typeof(self)weakSelf = self;
         __weak typeof(JoinBBSCell *)weakCell = cell;
@@ -980,14 +929,14 @@
 
         cell.separatorInset = UIEdgeInsetsZero;
         //透明空格
-        UIView *clearView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 15)];
+        UIView *clearView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 15)];
         clearView.backgroundColor = [UIColor clearColor];
         [cell addSubview:clearView];
         
         NSString *title = (indexPath.section == 0) ? TITLE_MY_HOT_RECOMMEND : TITLE_MY_CONCERN_HOT;
         int tag = (indexPath.section == 0) ? 100 : 101;
         
-        LSecionView *section = [[LSecionView alloc]initWithFrame:CGRectMake(8, clearView.bottom, 304, 40) title:title target:self action:@selector(clickToMore:)];
+        LSecionView *section = [[LSecionView alloc]initWithFrame:CGRectMake(8, clearView.bottom, DEVICE_WIDTH - 8 * 2, 40) title:title target:self action:@selector(clickToMore:)];
         section.rightBtn.tag = tag;
         [cell addSubview:section];
         

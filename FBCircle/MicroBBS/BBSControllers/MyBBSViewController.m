@@ -68,7 +68,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateBBS:) name:NOTIFICATION_UPDATE_BBS_JOINSTATE object:nil];
     
     //数据展示table
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 44 - 20)];
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, self.view.height - 44 - 20)];
     _table.backgroundColor = [UIColor clearColor];
     _table.refreshDelegate = self;
     _table.dataSource = self;
@@ -292,7 +292,7 @@
 
 -(UIView *)viewForHeaderInSection:(NSInteger)section
 {
-    UIView *header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 32)];
+    UIView *header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 32)];
     header.backgroundColor = [UIColor colorWithHexString:@"f6f7f9"];
     
     NSString *title1 = [NSString stringWithFormat:@"%@ (%d)",@"我创建的论坛",createNum];

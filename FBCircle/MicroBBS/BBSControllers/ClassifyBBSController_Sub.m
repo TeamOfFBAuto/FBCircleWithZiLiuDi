@@ -57,7 +57,7 @@
     [self createSearchView];
     
     //数据展示table
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 45, 320, self.view.height - 44 - 45 - 20)];
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 45, DEVICE_WIDTH, self.view.height - 44 - 45 - 20)];
     _table.backgroundColor = [UIColor clearColor];
     _table.refreshDelegate = self;
     _table.dataSource = self;
@@ -185,11 +185,11 @@
  */
 - (void)createSearchView
 {
-    UIView *search_bgview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 45)];
+    UIView *search_bgview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 45)];
     search_bgview.backgroundColor = [UIColor colorWithHexString:@"cac9ce"];
     [self.view addSubview:search_bgview];
     
-    UISearchBar *bar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 320, 45)];
+    UISearchBar *bar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 45)];
     bar.placeholder = @"搜索";
     bar.layer.borderWidth = 2.f;
     bar.layer.borderColor = COLOR_SEARCHBAR.CGColor;

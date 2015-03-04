@@ -53,7 +53,7 @@
     [self setMyViewControllerLeftButtonType:MyViewControllerLeftbuttonTypeNull WithRightButtonType:MyViewControllerRightbuttonTypeNull];
     
     //数据展示table
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 44 - 20)];
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, self.view.height - 44 - 20)];
     _table.backgroundColor = [UIColor clearColor];
     _table.refreshDelegate = self;
     _table.dataSource = (id)self;
@@ -146,25 +146,25 @@
 {
     UIView *header = [[UIView alloc]init];
     
-    LButtonView *btn = [[LButtonView alloc]initWithFrame:CGRectMake(12, 15, 320 - 24, 43) leftImage:Nil rightImage:[UIImage imageNamed:@"jiantou"] title:@"添加成员" target:self action:@selector(clickToAddMember:) lineDirection:Line_No];
+    LButtonView *btn = [[LButtonView alloc]initWithFrame:CGRectMake(12, 15, DEVICE_WIDTH - 24, 43) leftImage:Nil rightImage:[UIImage imageNamed:@"jiantou"] title:@"添加成员" target:self action:@selector(clickToAddMember:) lineDirection:Line_No];
     btn.layer.cornerRadius = 3.f;
     [header addSubview:btn];
     
     NSString *title = [NSString stringWithFormat:@"成员 (%d)",0];
-    btn2 = [[LButtonView alloc]initWithFrame:CGRectMake(12, btn.bottom + 15, 320 - 24, 43) leftImage:Nil rightImage:Nil title:title target:Nil action:Nil lineDirection:Line_No];
+    btn2 = [[LButtonView alloc]initWithFrame:CGRectMake(12, btn.bottom + 15, DEVICE_WIDTH - 24, 43) leftImage:Nil rightImage:Nil title:title target:Nil action:Nil lineDirection:Line_No];
     [header addSubview:btn2];
     btn2.backgroundColor = [UIColor colorWithHexString:@"f5f8f8"];
     
-    UIView *bottom = [[UIView alloc]initWithFrame:CGRectMake(12, btn2.bottom - 2, 320 - 24, 2)];
+    UIView *bottom = [[UIView alloc]initWithFrame:CGRectMake(12, btn2.bottom - 2, DEVICE_WIDTH - 24, 2)];
     bottom.backgroundColor = [UIColor colorWithHexString:@"f5f8f8"];
     [header addSubview:bottom];
     
     
-    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(12, btn2.bottom - 1, 320 - 24, 0.5)];
+    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(12, btn2.bottom - 1, DEVICE_WIDTH - 24, 0.5)];
     line.backgroundColor = [UIColor colorWithHexString:@"e9e9e9"];
     [header addSubview:line];
     
-    header.frame = CGRectMake(0, 0, 320, btn2.bottom);
+    header.frame = CGRectMake(0, 0, DEVICE_WIDTH, btn2.bottom);
     
     return header;
 }

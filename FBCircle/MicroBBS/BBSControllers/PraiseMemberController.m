@@ -40,7 +40,7 @@
     [self setMyViewControllerLeftButtonType:MyViewControllerLeftbuttonTypeNull WithRightButtonType:MyViewControllerRightbuttonTypeNull];
     
     //数据展示table
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 44 - 20)];
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, self.view.height - 44 - 20)];
     _table.backgroundColor = [UIColor clearColor];
     _table.refreshDelegate = self;
     _table.dataSource = self;
@@ -186,7 +186,7 @@
     
     cell.aTitleLabel.text = [aZan objectForKey:@"username"];
     cell.bottomLine.left = cell.aImageView.left;
-    cell.bottomLine.width = 320.f;
+    cell.bottomLine.width = DEVICE_WIDTH;
     
     return cell;
     

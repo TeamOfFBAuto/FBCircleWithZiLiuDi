@@ -74,7 +74,7 @@
     self.titleLabel.text = self.navigationTitle;
     
     //数据展示table
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height - 44 - 20)];
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, self.view.height - 44 - 20)];
     _table.backgroundColor = [UIColor clearColor];
     _table.refreshDelegate = self;
     _table.dataSource = self;
@@ -426,7 +426,7 @@
     memberLabel.attributedText = contentText;
     
     
-    UIImageView *arrow_image = [[UIImageView alloc]initWithFrame:CGRectMake(320 - 12 - 8, basic_view.height/2.f - 13/2.f, 8, 13)];
+    UIImageView *arrow_image = [[UIImageView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH - 12 - 8, basic_view.height/2.f - 13/2.f, 8, 13)];
     arrow_image.image = [UIImage imageNamed:@"jiantou"];
     [basic_view addSubview:arrow_image];
     
@@ -489,7 +489,7 @@
        
         TopicModel *aModel = [top_array objectAtIndex:i];
         
-        LButtonView *btnV = [[LButtonView alloc]initWithFrame:CGRectMake(0, 40 * i, 304, 40) leftImage:[UIImage imageNamed:@"qi"] title:aModel.title target:self action:@selector(clickToRecommend:)];
+        LButtonView *btnV = [[LButtonView alloc]initWithFrame:CGRectMake(0, 40 * i, DEVICE_WIDTH - 16, 40) leftImage:[UIImage imageNamed:@"qi"] title:aModel.title target:self action:@selector(clickToRecommend:)];
         [recommed_view addSubview:btnV];
         btnV.tag = 10 + i;
         btnV.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -515,20 +515,20 @@
     headerView.backgroundColor = [UIColor clearColor];
     //基本信息部分
     
-    UIView *basic_view = [self createBBSInfoViewFrame:CGRectMake(0, 0, 320, 75)];
+    UIView *basic_view = [self createBBSInfoViewFrame:CGRectMake(0, 0, DEVICE_WIDTH, 75)];
     [headerView addSubview:basic_view];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickToBBSInfo:)];
     [basic_view addGestureRecognizer:tap];
     
     
-    UIView *recommed_view = [self createRecommendViewFrame:CGRectMake(8, basic_view.bottom + 15, 304, 80)];
+    UIView *recommed_view = [self createRecommendViewFrame:CGRectMake(8, basic_view.bottom + 15, DEVICE_WIDTH - 16, 80)];
     [headerView addSubview:recommed_view];
     
     
     UIButton *btn;
     
     if (_inforum == 0) {
-        btn = [LTools createButtonWithType:UIButtonTypeCustom frame:CGRectMake(8, recommed_view.bottom + 15, 304, 93 / 2.f) normalTitle:nil image:nil backgroudImage:[UIImage imageNamed:@"jiaruluntan"] superView:headerView target:self action:@selector(clickJoinBBS:)];
+        btn = [LTools createButtonWithType:UIButtonTypeCustom frame:CGRectMake(8, recommed_view.bottom + 15, DEVICE_WIDTH - 16, 93 / 2.f) normalTitle:nil image:nil backgroudImage:[UIImage imageNamed:@"jiaruluntan"] superView:headerView target:self action:@selector(clickJoinBBS:)];
         
         self.navigationItem.rightBarButtonItems= nil;
     }else
@@ -551,7 +551,7 @@
         btn.top -= 15;
     }
     
-    headerView.frame = CGRectMake(0, 0, 320, basic_view.height + recommed_view.height + btn.height + 15 + aheight);
+    headerView.frame = CGRectMake(0, 0, DEVICE_WIDTH, basic_view.height + recommed_view.height + btn.height + 15 + aheight);
     
     return headerView;
 }
@@ -561,7 +561,7 @@
  */
 - (UIView *)createTableFooterView
 {
-    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 10)];
+    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 10)];
     headerView.backgroundColor = [UIColor clearColor];
     
     return headerView;

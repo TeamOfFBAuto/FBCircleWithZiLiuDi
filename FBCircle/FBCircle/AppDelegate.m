@@ -112,6 +112,20 @@
     self.window.rootViewController = _RootVC;
     
     
+//    NSString *url = @"http://cmstest.fblife.com/ajax.php?c=newstwonew&a=newsslide&classname=newcar&type=json";
+//    LTools *tool = [[LTools alloc]initWithUrl:url isPost:NO postData:nil];
+//    
+//    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+//        
+//        NSLog(@"result %@",[result objectForKey:@"news"]);
+//        
+//        
+//        
+//    } failBlock:^(NSDictionary *failDic, NSError *erro) {
+//        
+//        NSLog(@"faildic %@",failDic);
+//    }];
+    
     
     //百度地图
     _mapManager = [[BMKMapManager alloc]init];

@@ -155,7 +155,11 @@
     
     
     //1
+<<<<<<< HEAD
     _mainTabV=[[UITableView alloc]initWithFrame:CGRectMake(0,44,DEVICE_WIDTH,DEVICE_HEIGHT-64-44) style:UITableViewStylePlain];
+=======
+    _mainTabV=[[UITableView alloc]initWithFrame:CGRectMake(0,44,DEVICE_WIDTH,DEVICE_HEIGHT - 64-44) style:UITableViewStylePlain];
+>>>>>>> origin/master
     [self.view addSubview:_mainTabV];
     [_mainTabV registerClass:[BBSAddMemberCell class] forCellReuseIdentifier:@"identifier"];
     _mainTabV.delegate=self;
@@ -178,7 +182,11 @@
     _searchTabV.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     //3
+<<<<<<< HEAD
     _halfBlackV=[[UIView alloc]initWithFrame:CGRectMake(0,44,DEVICE_WIDTH, DEVICE_HEIGHT-75)];
+=======
+    _halfBlackV=[[UIView alloc]initWithFrame:CGRectMake(0,44,DEVICE_WIDTH, DEVICE_HEIGHT - 75)];
+>>>>>>> origin/master
     _halfBlackV.backgroundColor=RGBCOLOR(246,247,249);
     _halfBlackV.hidden=YES;
     [self.view addSubview:_halfBlackV];
@@ -451,7 +459,11 @@
         
         aview.image = [UIImage imageNamed:@"bbs_add_member_tiao"];
         
+<<<<<<< HEAD
         UILabel *_label=[[UILabel alloc]initWithFrame:CGRectMake(10, 0.5, DEVICE_WIDTH-24, 24)];
+=======
+        UILabel *_label=[[UILabel alloc]initWithFrame:CGRectMake(10, 0.5, DEVICE_WIDTH - 24, 24)];
+>>>>>>> origin/master
         
         _label.text=[NSString stringWithFormat:@"%c",'A'+section];
         _label.textColor = RGBCOLOR(171,179,188);

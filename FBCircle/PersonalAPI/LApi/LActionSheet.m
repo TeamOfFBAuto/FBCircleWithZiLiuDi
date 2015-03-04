@@ -57,7 +57,7 @@
                 UIImage *aImage = [images objectAtIndex:i];
                 NSString *title = [titles objectAtIndex:i];
                 
-                LButtonView *btn = [[LButtonView alloc]initWithFrame:CGRectMake(0, 50 * i, 320, 50) leftImage:aImage rightImage:nil title:title target:self action:@selector(actionToDo:) lineDirection:Line_No];
+                LButtonView *btn = [[LButtonView alloc]initWithFrame:CGRectMake(0, 50 * i, DEVICE_WIDTH, 50) leftImage:aImage rightImage:nil title:title target:self action:@selector(actionToDo:) lineDirection:Line_No];
                 btn.tag = 100 + i;
                 [section_bgview addSubview:btn];
                 
@@ -69,10 +69,10 @@
                 
             }
             
-            section_bgview.frame = CGRectMake(0, 5, 320, 50 * titles.count);
+            section_bgview.frame = CGRectMake(0, 5, DEVICE_WIDTH, 50 * titles.count);
             
             _sumHeight = 50 * titles.count + 5;
-            bgView.frame = CGRectMake(0, 0, 320, 0);
+            bgView.frame = CGRectMake(0, 0, DEVICE_WIDTH, 0);
             
             
         }else if (style == Style_SideBySide)
@@ -137,7 +137,7 @@
                 self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
                 self.alpha = 0.0;
                 bgView.backgroundColor = [UIColor colorWithHexString:@"edecf1"];
-                bgView.frame = CGRectMake(0, [UIApplication sharedApplication].keyWindow.bottom, 320, 10 + 60 * titles.count + 10);
+                bgView.frame = CGRectMake(0, [UIApplication sharedApplication].keyWindow.bottom, DEVICE_WIDTH, 10 + 60 * titles.count + 10);
             }
         }
         
@@ -190,7 +190,9 @@
         
         if (aStyle == Style_SideBySide) {
             
-            bgView.frame = CGRectMake(_sumHeight - 5 - 10 - 30, newFrame.origin.y - 5 + 1, _sumHeight - 5, bgView.height);
+            CGFloat aLeft = DEVICE_WIDTH - (320 - (_sumHeight - 5 - 10 - 30));
+            
+            bgView.frame = CGRectMake(aLeft, newFrame.origin.y - 5 + 1, _sumHeight - 5, bgView.height);
             
         }else
         {
@@ -206,7 +208,9 @@
                 [UIView animateWithDuration:0.1 animations:^{
 //                    bgView.left -= 5;
                     
-                    bgView.frame = CGRectMake(_sumHeight - 5 - 10 - 30, newFrame.origin.y - 5 + 1, _sumHeight - 5, bgView.height);
+                    CGFloat aLeft = DEVICE_WIDTH - (320 - (_sumHeight - 5 - 10 - 30));
+                    
+                    bgView.frame = CGRectMake(aLeft, newFrame.origin.y - 5 + 1, _sumHeight - 5, bgView.height);
 
                 }];
                 
@@ -215,35 +219,6 @@
         
     }];
 }
-
-//- (void)showFromView:(UIView *)aView
-//{
-//    //相对于屏幕坐标
-//    CGRect newFrame = [aView.superview convertRect:aView.frame toView:[UIApplication sharedApplication].keyWindow];
-//    
-//    CGRect aFrame = bgView.frame;
-//    
-//    if (aStyle == Style_Normal) {
-//        
-//        aFrame.origin.y = newFrame.origin.y + newFrame.size.height - 5;
-//        
-//    }else if (aStyle == Style_SideBySide){
-//        
-//        aFrame.origin.x = newFrame.origin.x - bgView.width - 5;
-//        aFrame.origin.y = newFrame.origin.y - 5;
-//        
-//    }else if (aStyle == Style_Bottom)
-//    {
-//        aFrame.origin.y = [UIApplication sharedApplication].keyWindow.bottom - aFrame.size.height;
-//    }
-//    
-//    [UIView animateWithDuration:0.3 animations:^{
-//        
-//        bgView.frame = aFrame;
-//        
-//        self.alpha = 1.0;
-//    }];
-//}
 
 - (void)actionToDo:(LButtonView *)button
 {

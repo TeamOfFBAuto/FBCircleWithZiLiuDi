@@ -102,7 +102,7 @@ typedef enum{
     [self.view addSubview:head];
     
     //数据展示table
-    _table = [[UITableView alloc]initWithFrame:CGRectMake(0, head.bottom, 320, self.view.height - 44 - 20 - 45-head.height) style:UITableViewStylePlain];
+    _table = [[UITableView alloc]initWithFrame:CGRectMake(0, head.bottom, DEVICE_WIDTH, self.view.height - 44 - 20 - 45-head.height) style:UITableViewStylePlain];
     _table.backgroundColor = [UIColor clearColor];
     _table.delegate = self;
     _table.dataSource = self;
@@ -714,7 +714,7 @@ typedef enum{
 - (void)createInputView
 {
     __weak typeof(self) weakSelf = self;
-    inputView = [[LInputView alloc]initWithFrame:CGRectMake(0, self.view.height - 45 - 20 - 44, 320, 45)inView:self.view inputText:^(NSString *inputText) {
+    inputView = [[LInputView alloc]initWithFrame:CGRectMake(0, self.view.height - 45 - 20 - 44, DEVICE_WIDTH, 45)inView:self.view inputText:^(NSString *inputText) {
 
         NSLog(@"inputText %@",inputText);
         
@@ -1007,15 +1007,15 @@ typedef enum{
     headerView.backgroundColor = [UIColor clearColor];
     //基本信息部分
     
-    UIView *basic_view = [self createBBSInfoViewFrame:CGRectMake(8, 15, 304, 0)];
+    UIView *basic_view = [self createBBSInfoViewFrame:CGRectMake(8, 15, DEVICE_WIDTH - 16, 0)];
     [headerView addSubview:basic_view];
     
     //遮盖圆角
-    UIView *basic_bottom = [[UIView alloc]initWithFrame:CGRectMake(8, basic_view.bottom - 3, 304, 3)];
+    UIView *basic_bottom = [[UIView alloc]initWithFrame:CGRectMake(8, basic_view.bottom - 3, DEVICE_WIDTH - 16, 3)];
     basic_bottom.backgroundColor = [UIColor whiteColor];
     [headerView addSubview:basic_bottom];
     
-    UIView *basic_line = [[UIView alloc]initWithFrame:CGRectMake(8, basic_view.bottom - 1, 304, 1)];
+    UIView *basic_line = [[UIView alloc]initWithFrame:CGRectMake(8, basic_view.bottom - 1, DEVICE_WIDTH - 16, 1)];
     basic_line.backgroundColor = COLOR_TABLE_LINE;
     [headerView addSubview:basic_line];
     
@@ -1023,7 +1023,7 @@ typedef enum{
     UIView *bgview = [[UIView alloc]initWithFrame:CGRectZero];
     [headerView addSubview:bgview];
     
-    UIView *recommed_view = [self createRecommendViewFrame:CGRectMake(8, basic_view.bottom, 304 + 8, 0) bgView:bgview];
+    UIView *recommed_view = [self createRecommendViewFrame:CGRectMake(8, basic_view.bottom, DEVICE_WIDTH - 16 + 8, 0) bgView:bgview];
     [headerView addSubview:recommed_view];
     
 //    UIView *mask_view = [[UIView alloc]initWithFrame:CGRectMake(8, basic_view.bottom, 304, 3)];
@@ -1031,7 +1031,7 @@ typedef enum{
 //    [headerView addSubview:mask_view];
     
     
-    headerView.frame = CGRectMake(0, 0, 320, basic_view.height + recommed_view.height + 15);
+    headerView.frame = CGRectMake(0, 0, DEVICE_WIDTH, basic_view.height + recommed_view.height + 15);
     
 //    UIView *hh_view = [[UIView alloc]initWithFrame:CGRectMake(8, headerView.height - 10, 304, 10)];
 //    hh_view.backgroundColor = [UIColor whiteColor];
@@ -1048,19 +1048,19 @@ typedef enum{
 
 - (UIView *)createTableFooterView
 {
-    UIView *footer_view = [[UIView alloc]initWithFrame:CGRectMake(8, 0, 304, 45 + 15)];
+    UIView *footer_view = [[UIView alloc]initWithFrame:CGRectMake(8, 0, DEVICE_WIDTH - 16, 45 + 15)];
     footer_view.backgroundColor = [UIColor clearColor];
     
-    UIView *bg_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 304, 45)];
+    UIView *bg_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH - 16, 45)];
     bg_view.backgroundColor = [UIColor whiteColor];
     bg_view.layer.cornerRadius = 3.f;
     [footer_view addSubview:bg_view];
     
-    UIView *hh_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 304, 10)];
+    UIView *hh_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH - 16, 10)];
     hh_view.backgroundColor = [UIColor whiteColor];
     [footer_view addSubview:hh_view];
     
-    UIView *line_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 304, 1)];
+    UIView *line_view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH - 16, 1)];
     line_view.backgroundColor = COLOR_TABLE_LINE;
     [footer_view addSubview:line_view];
     
@@ -1074,7 +1074,7 @@ typedef enum{
 //没有更多评论时的 footerView
 - (UIView *)noMoreCommentFooter
 {
-    UIView *footer_view = [[UIView alloc]initWithFrame:CGRectMake(8, 0, 304, 15)];
+    UIView *footer_view = [[UIView alloc]initWithFrame:CGRectMake(8, 0, DEVICE_WIDTH - 16, 15)];
     footer_view.backgroundColor = [UIColor clearColor];
     return footer_view;
 }

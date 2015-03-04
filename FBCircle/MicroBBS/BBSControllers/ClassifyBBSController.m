@@ -54,7 +54,7 @@
     //搜索
     [self createSearchView];
     
-    bgScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, search_bgview.bottom, 320, self.view.height - 44 - 20 - search_bgview.height)];
+    bgScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, search_bgview.bottom, DEVICE_WIDTH, self.view.height - 44 - 20 - search_bgview.height)];
     bgScroll.backgroundColor = [UIColor clearColor];
     bgScroll.showsHorizontalScrollIndicator = NO;
     bgScroll.showsVerticalScrollIndicator = YES;
@@ -212,11 +212,11 @@
  */
 - (void)createSearchView
 {
-    search_bgview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 45)];
+    search_bgview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 45)];
     search_bgview.backgroundColor = [UIColor colorWithHexString:@"cac9ce"];
     [self.view addSubview:search_bgview];
     
-    UISearchBar *bar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 320, 45)];
+    UISearchBar *bar = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 45)];
     bar.placeholder = @"搜索";
     bar.layer.borderWidth = 2.f;
     bar.layer.borderColor = COLOR_SEARCHBAR.CGColor;
@@ -252,7 +252,9 @@
         k = i % 4;
         line = i / 4;
         
-        LButtonView *lBtn = [[LButtonView alloc]initWithFrame:CGRectMake(10 + (5 + 72) * k,15 + (15 + 72) * line, 72, 67) imageUrl:nil placeHolderImage:nil title:title target:self action:@selector(clickToSubClassifyBBS:)];
+        CGFloat dis_h = (DEVICE_WIDTH - 72 * 4 - 20)/3.f;
+        
+        LButtonView *lBtn = [[LButtonView alloc]initWithFrame:CGRectMake(10 + (dis_h + 72) * k,15 + (15 + 72) * line, 72, 67) imageUrl:nil placeHolderImage:nil title:title target:self action:@selector(clickToSubClassifyBBS:)];
         lBtn.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"classification_big%@",imageUrl]];
         lBtn.titleLabel.font = [UIFont systemFontOfSize:FONT_SIZE_SMALL];
         lBtn.tag = 100 + i;
@@ -276,14 +278,16 @@
         line = i / 4;
         
         if (i % 4 == 0) {
-            UIView *line_bg = [[UIView alloc]initWithFrame:CGRectMake(0, aY + 45 * (i / 4), 320, 45)];
+            UIView *line_bg = [[UIView alloc]initWithFrame:CGRectMake(0, aY + 45 * (i / 4), DEVICE_WIDTH, 45)];
             line_bg.backgroundColor = [UIColor colorWithHexString:@"f0f1f3"];
             [bgScroll addSubview:line_bg];
         }
         
+        CGFloat aWidth = DEVICE_WIDTH / 4.f;
+        
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [btn setTitle:title forState:UIControlStateNormal];
-        btn.frame = CGRectMake(80 * k, aY + 45 * line, 80, 45);
+        btn.frame = CGRectMake(aWidth * k, aY + 45 * line, aWidth, 45);
         [btn setTitleColor:[UIColor colorWithHexString:@"6a7180"] forState:UIControlStateNormal];
         btn.backgroundColor = [UIColor colorWithHexString:@"f0f1f3"];
         btn.titleLabel.font = [UIFont systemFontOfSize:FONT_SIZE_13];
@@ -297,14 +301,14 @@
             [btn addSubview:hLineView];
         }else
         {
-            UIView *hLineView = [[UIView alloc]initWithFrame:CGRectMake(0, btn.bottom - 1, 320, 0.5)];
+            UIView *hLineView = [[UIView alloc]initWithFrame:CGRectMake(0, btn.bottom - 1, DEVICE_WIDTH, 0.5)];
             hLineView.backgroundColor = [UIColor colorWithHexString:@"bbbec3"];
             [bgScroll addSubview:hLineView];
         }
         
     }
     
-    bgScroll.contentSize = CGSizeMake(320, [bgScroll viewWithTag:(array.count + 1000 - 1)].bottom);
+    bgScroll.contentSize = CGSizeMake(DEVICE_WIDTH, [bgScroll viewWithTag:(array.count + 1000 - 1)].bottom);
 }
 
 #pragma mark - delegate
