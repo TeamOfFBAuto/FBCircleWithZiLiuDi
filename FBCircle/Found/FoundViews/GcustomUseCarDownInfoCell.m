@@ -75,13 +75,13 @@
     
     if (TheIndexPath.row == 0) {
         self.contentLabel.text = [GMAPI exchangeStringForDeleteNULL:poiModel.name];
-        [self.contentLabel setMatchedFrame4LabelWithOrigin:CGPointMake(52, 14) width:187];
+        [self.contentLabel setMatchedFrame4LabelWithOrigin:CGPointMake(52, 14) width:187*DEVICE_WIDTH/320.0f];
     }else if (TheIndexPath.row == 1){
         self.contentLabel.text = [GMAPI exchangeStringForDeleteNULL:poiModel.address];
-        [self.contentLabel setMatchedFrame4LabelWithOrigin:CGPointMake(52, 14) width:187];
+        [self.contentLabel setMatchedFrame4LabelWithOrigin:CGPointMake(52, 14) width:187*DEVICE_WIDTH/320.0f];
     }else if (TheIndexPath.row == 2){
         self.contentLabel.text = [GMAPI exchangeStringForDeleteNULL:poiModel.phone];
-        [self.contentLabel setMatchedFrame4LabelWithOrigin:CGPointMake(52, 14) width:187];
+        [self.contentLabel setMatchedFrame4LabelWithOrigin:CGPointMake(52, 14) width:187*DEVICE_WIDTH/320.0f];
         
     }
     

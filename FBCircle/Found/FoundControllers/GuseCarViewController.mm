@@ -72,7 +72,7 @@
     
     
     //导航栏
-    UIView *navigationbar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 64)];
+    UIView *navigationbar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 64)];
     navigationbar.backgroundColor = RGBCOLOR(34, 41, 44);
     [self.view addSubview:navigationbar];
     
@@ -110,7 +110,7 @@
     
     
     //按钮下面的背景view
-    UIView *btnBackView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, 320, 44)];
+    UIView *btnBackView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, DEVICE_WIDTH, 44)];
     btnBackView.backgroundColor = RGBCOLOR(240, 241, 243);
     [self.view addSubview:btnBackView];
     
@@ -121,7 +121,7 @@
     NSArray *array  = @[@"停车场",@"加油站",@"维修厂"];
     for (int i = 0; i<3; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(0+107*i, 64, 106, 44);
+        btn.frame = CGRectMake(0+(DEVICE_WIDTH/3.0+1)*i, 64, DEVICE_WIDTH/3.0, 44);
         btn.tag = 10+i;
         [btn setTitle:array[i] forState:UIControlStateNormal];
         [btn setTitleColor:RGBCOLOR(106, 114, 126) forState:UIControlStateNormal];
@@ -136,13 +136,13 @@
     
     //竖线
     for (int i = 0; i<2; i++) {
-        UIView *shuxian = [[UIView alloc]initWithFrame:CGRectMake(106+i*107, 64+7, 0.5, 28)];
+        UIView *shuxian = [[UIView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH/3.0+(DEVICE_WIDTH/3.0+1)*i, 64+7, 0.5, 28)];
         shuxian.backgroundColor = RGBCOLOR(216, 216, 218);
         [self.view addSubview:shuxian];
     }
     
     //横线
-    UIView *hengxian = [[UIView alloc]initWithFrame:CGRectMake(0, 64+43, 320, 0.5)];
+    UIView *hengxian = [[UIView alloc]initWithFrame:CGRectMake(0, 64+43, DEVICE_WIDTH, 0.5)];
     hengxian.backgroundColor = RGBCOLOR(148, 149, 153);
     [self.view addSubview:hengxian];
     
@@ -151,7 +151,7 @@
     
     
     //地图
-    _mapView = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 88+20, 320, iPhone5?568-88-20:480-88-20)];
+    _mapView = [[BMKMapView alloc]initWithFrame:CGRectMake(0, 88+20, DEVICE_WIDTH, iPhone5?DEVICE_HEIGHT-88-20:DEVICE_HEIGHT-88-20)];
     [_mapView setZoomLevel:17];// 设置地图级别
     _mapView.isSelectedAnnotationViewFront = YES;
     _mapView.delegate = self;//设置代理
@@ -184,10 +184,10 @@
     
     
     //下面信息view
-    _downInfoView = [[UIView alloc]initWithFrame:CGRectMake(0, 568, 320, 206)];
+    _downInfoView = [[UIView alloc]initWithFrame:CGRectMake(0, DEVICE_HEIGHT, DEVICE_WIDTH, 206)];
     _downInfoView.backgroundColor = RGBCOLOR(211, 214, 219);
     //底层view
-    _downBackView = [[UIView alloc]initWithFrame:CGRectMake(10, 12, 300, 150)];
+    _downBackView = [[UIView alloc]initWithFrame:CGRectMake(10, 12, DEVICE_WIDTH-20, 150)];
     _downBackView.backgroundColor = [UIColor whiteColor];
     _downBackView.layer.borderWidth = 0.5;
     _downBackView.layer.borderColor = [RGBCOLOR(200, 199, 204)CGColor];
@@ -195,7 +195,7 @@
     [_downInfoView addSubview:_downBackView];
     
     
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 300, 150) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH-20, 150) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.backgroundColor = [UIColor whiteColor];
@@ -454,7 +454,7 @@
         
         if (_isShowDownInfoView) {
             [UIView animateWithDuration:0.3 animations:^{
-                _downInfoView.frame = CGRectMake(0, 568, 320, 206);
+                _downInfoView.frame = CGRectMake(0, DEVICE_HEIGHT, DEVICE_WIDTH, 206);
             } completion:^(BOOL finished) {
                 _isShowDownInfoView = !_isShowDownInfoView;
             }];
@@ -573,7 +573,7 @@
     if (_isShowDownInfoView) {
         
         [UIView animateWithDuration:0.3 animations:^{
-            _downInfoView.frame = CGRectMake(0, 568, 320, 206);
+            _downInfoView.frame = CGRectMake(0, DEVICE_HEIGHT, DEVICE_WIDTH, 206);
         }];
         _isShowDownInfoView = NO;
     }
@@ -616,13 +616,13 @@
     
     if (!_isShowDownInfoView) {
         [UIView animateWithDuration:0.3 animations:^{
-            _downInfoView.frame = CGRectMake(0, 568-206, 320, 206);
+            _downInfoView.frame = CGRectMake(0, DEVICE_HEIGHT-206, DEVICE_WIDTH, 206);
         } completion:^(BOOL finished) {
             _isShowDownInfoView = !_isShowDownInfoView;
         }];
     }else{
         [UIView animateWithDuration:0.3 animations:^{
-            _downInfoView.frame = CGRectMake(0, 568, 320, 206);
+            _downInfoView.frame = CGRectMake(0, DEVICE_HEIGHT, DEVICE_WIDTH, 206);
         } completion:^(BOOL finished) {
             _isShowDownInfoView = !_isShowDownInfoView;
         }];

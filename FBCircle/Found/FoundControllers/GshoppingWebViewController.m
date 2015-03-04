@@ -62,13 +62,13 @@
     
     NSURLRequest *request =[NSURLRequest requestWithURL:url];
     
-    awebview=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?568-64-40:480-64-40)];
+    awebview=[[UIWebView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, iPhone5?DEVICE_HEIGHT-64-40:DEVICE_HEIGHT-64-40)];
     awebview.delegate=self;
     [awebview loadRequest:request];
     awebview.scalesPageToFit = YES;
     [self.view addSubview:awebview];;
     
-    UIView *toolview=[[UIView alloc]initWithFrame:CGRectMake(0, iPhone5?568-40-64:480-64-40, 320, 40)];
+    UIView *toolview=[[UIView alloc]initWithFrame:CGRectMake(0, iPhone5?DEVICE_HEIGHT-40-64:DEVICE_HEIGHT-64-40, 320, 40)];
     toolview.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"ios7_webviewbar.png"]];
     [self.view addSubview:toolview];
     

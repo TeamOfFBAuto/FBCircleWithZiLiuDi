@@ -14,11 +14,14 @@
 #import "AddFriendViewController.h"
 
 
-#define ScanKuangFrame CGRectMake(50, 70+89-6, 220, 220)
+#define ScanKuangFrame CGRectMake(50, 90, 220, 223)
 
+#define iPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
 
 @interface GmFoundScanViewController ()
-
+{
+    UIImageView * _fourJiaoImageView;
+}
 @end
 
 @implementation GmFoundScanViewController
@@ -28,6 +31,7 @@
 {
     
     NSLog(@"%s",__FUNCTION__);
+    
 }
 
 - (void)viewDidLoad
@@ -36,7 +40,7 @@
     self.view.backgroundColor = [UIColor blackColor];
     
     //上面的view
-    UIView *topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 64)];
+    UIView *topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 64)];
     topView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:topView];
     //返回view
@@ -68,30 +72,45 @@
     
     
     //半透明的浮层
-    UIImageView *backImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64+5.4-6, 320, 568-64-6)];
+    UIImageView *backImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT-64)];
     backImageView.image = [UIImage imageNamed:@"saoyisao_bg_640_996.png"];
     [self.view addSubview:backImageView];
     
     
     //四个角
-    UIImageView * imageView = [[UIImageView alloc]initWithFrame:ScanKuangFrame];
-    imageView.image = [UIImage imageNamed:@"fkuang.png"];
-    [self.view addSubview:imageView];
+    _fourJiaoImageView =[[UIImageView alloc]init];
+    
+    if (iPhone6){
+        [_fourJiaoImageView setFrame:CGRectMake(58, 108, 258, 266)];
+    }else{
+        [_fourJiaoImageView setFrame:ScanKuangFrame];
+    }
+    
+    NSLog(@"%f",DEVICE_WIDTH);
+    
+    if (DEVICE_WIDTH == 414) {
+        [_fourJiaoImageView setFrame:CGRectMake(65, 120, 285, 298)]; //150 270
+        
+    }
+    
+    _fourJiaoImageView.image = [UIImage imageNamed:@"fkuang.png"];
+    [self.view addSubview:_fourJiaoImageView];
     
     
     //文字提示label
     
-    UILabel *tishiLabel = [[UILabel alloc]initWithFrame:CGRectMake(imageView.frame.origin.x, CGRectGetMaxY(imageView.frame)+28, imageView.frame.size.width, 12)];
+    UILabel *tishiLabel = [[UILabel alloc]initWithFrame:CGRectMake(_fourJiaoImageView.frame.origin.x, CGRectGetMaxY(_fourJiaoImageView.frame)+28, _fourJiaoImageView.frame.size.width, 12)];
     tishiLabel.font = [UIFont systemFontOfSize:12];
     tishiLabel.textColor = [UIColor whiteColor];
     tishiLabel.backgroundColor = [UIColor clearColor];
+    tishiLabel.textAlignment = NSTextAlignmentCenter;
     tishiLabel.text = @"将二维码显示在扫描框内，即可自动扫描";
     [self.view addSubview:tishiLabel];
     
     
     //我的二维码
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(124, CGRectGetMaxY(tishiLabel.frame)+37, 70, 15);
+    btn.frame = CGRectMake(tishiLabel.frame.origin.x, CGRectGetMaxY(tishiLabel.frame)+37, tishiLabel.frame.size.width, 15);
     btn.titleLabel.font = [UIFont systemFontOfSize:13];
     
     [btn setTitle:@"我的二维码" forState:UIControlStateNormal];
@@ -101,11 +120,12 @@
     [self.view addSubview:btn];
     
     
+    
     upOrdown = NO;
     num =0;
     
     //上下滚动的条
-    _line = [[UIImageView alloc]initWithFrame:CGRectMake(40, 70+89-18-6, 240, 18)];
+    _line = [[UIImageView alloc]initWithFrame:CGRectMake(40, 6+89-18-6, 240, 18)];
     [_line setImage:[UIImage imageNamed:@"fshan.png"]];
     [self.view addSubview:_line];
     
@@ -124,8 +144,31 @@
     if (upOrdown == NO) {
         num ++;
         
-        _line.frame = CGRectMake(40, 70+89-9-6+2*num, 240, 18);
-        if (2*num == 220) {
+        
+        
+        if (iPhone6){
+            [_line setFrame:CGRectMake(48, 6+107-9-6+2*num, 278, 18)];
+        }else{
+            
+            _line.frame = CGRectMake(40, 6+89-9-6+2*num, 240, 18);
+            //CGRectMake(50, 90, 220, 223)
+        }
+        
+        NSLog(@"%f",DEVICE_WIDTH);
+        
+        if (DEVICE_WIDTH == 414) {
+            [_line setFrame:CGRectMake(55, 6+119-9-6+2*num, 305, 18)]; //150 270
+            
+        }
+        
+        
+        int hh = _fourJiaoImageView.frame.size.height;
+        
+        if (hh == 223) {
+            hh =220;
+        }
+        
+        if (2*num == hh) {
             
             upOrdown = YES;
         }
@@ -133,7 +176,21 @@
     }
     else {
         num --;
-        _line.frame = CGRectMake(40, 70+89-9-6+2*num, 240, 18);
+        
+        if (iPhone6){
+            [_line setFrame:CGRectMake(48, 6+107-9-6+2*num, 278, 18)];
+        }else{
+            _line.frame = CGRectMake(40, 6+89-9-6+2*num, 240, 18);
+        }
+        
+        NSLog(@"%f",DEVICE_WIDTH);
+        
+        if (DEVICE_WIDTH == 414) {
+            [_line setFrame:CGRectMake(55, 6+119-9-6+2*num, 305, 18)];
+            
+        }
+        
+        
         if (num == 0) {
             upOrdown = NO;
         }

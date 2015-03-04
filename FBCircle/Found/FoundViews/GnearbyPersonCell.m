@@ -58,11 +58,11 @@
     [self.btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.btn setTitle:@"发消息" forState:UIControlStateNormal];
     self.btn.layer.cornerRadius = 4;
-    self.btn.frame = CGRectMake(CGRectGetMaxX(self.userNameLabel.frame), 17, 51, 29);
+    self.btn.frame = CGRectMake(DEVICE_WIDTH-8-51, 17, 51, 29);
     [self.contentView addSubview:self.btn];
     [self.btn addTarget:self action:@selector(sendMessage) forControlEvents:UIControlEventTouchUpInside];
     
-    UIView *fengeLine = [[UIView alloc]initWithFrame:CGRectMake(0, 64.5, 320, 0.5)];
+    UIView *fengeLine = [[UIView alloc]initWithFrame:CGRectMake(0, 64.5, DEVICE_WIDTH, 0.5)];
     fengeLine.backgroundColor = RGBCOLOR(204, 204, 204);
     [self addSubview:fengeLine];
     

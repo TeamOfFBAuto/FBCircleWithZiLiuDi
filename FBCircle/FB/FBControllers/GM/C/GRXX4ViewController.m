@@ -95,29 +95,6 @@
     
     //主tableview
     self.navigationItem.title = @"个人信息";
-//    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0 , 320, iPhone5?568:480) style:UITableViewStylePlain];
-//    _tableView.delegate = self;
-//    _tableView.dataSource = self;
-//    _tableView.scrollEnabled = NO;
-//    _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-//    [self.view addSubview:_tableView];
-    
-    
-    
-//    //pickerview后面的view
-//    _backPickView = [[UIView alloc]initWithFrame:CGRectMake(0, 568, 320, 216)];
-//    _backPickView.backgroundColor = [UIColor whiteColor];
-//    [self.view addSubview:_backPickView];
-//    
-//    //地区pickview
-//    _pickeView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, 0, 320, 216)];
-//    _pickeView.delegate = self;
-//    _pickeView.dataSource = self;
-//    [_backPickView addSubview:_pickeView];
-//    _isChooseArea = NO;
-    
-    
-    
     
     NSString *path = [[NSBundle mainBundle]pathForResource:@"area" ofType:@"plist"];
     _data = [NSArray arrayWithContentsOfFile:path];
@@ -135,50 +112,11 @@
     
     //判断是否为好友 判断完成之后请求网络数据
     
-//    //开启监控
-//    [[AFNetworkActivityIndicatorManager sharedManager]setEnabled:YES];
-//    [[AFNetworkReachabilityManager sharedManager]startMonitoring];
-//    //设置网络状况监控后的代码块
-//    [[AFNetworkReachabilityManager sharedManager]setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-//        switch ([[AFNetworkReachabilityManager sharedManager]networkReachabilityStatus]) {
-//            case AFNetworkReachabilityStatusReachableViaWiFi:
-//                NSLog(@"WiFi");
-//                [self panduanIsFriend];
-//                break;
-//            case AFNetworkReachabilityStatusReachableViaWWAN:
-//                NSLog(@"WWAN");
-//                [self panduanIsFriend];
-//                break;
-//            case AFNetworkReachabilityStatusUnknown:
-//                NSLog(@"Unknown");
-//                
-//                
-//                break;
-//            case AFNetworkReachabilityStatusNotReachable:
-//                NSLog(@"NotReachable");
-//                break;
-//            default:
-//                break;
-//        }
-//    }];
-    
     
     _hud = [ZSNApi showMBProgressWithText:@"正在加载" addToView:self.view];
     _hud.delegate = self;
     
     
-    
-    
-//    //常用的设置
-//    //小矩形的背景色
-//    _hud.color = [UIColor clearColor];//这儿表示无背景
-//    //显示的文字
-//    _hud.labelText = @"Test";
-//    //细节文字
-//    _hud.detailsLabelText = @"Test detail";
-//    //是否有庶罩
-//    _hud.dimBackground = YES;
-
     
     [self panduanIsFriend];
 
@@ -192,11 +130,12 @@
     [hud removeFromSuperview];
     hud.delegate = nil;
     hud = nil;
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0 , 320, iPhone5?568:480) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0 , DEVICE_WIDTH, DEVICE_HEIGHT) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.scrollEnabled = NO;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+//    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     
     if ([_tableView respondsToSelector:@selector(setLayoutMargins:)]) {
@@ -209,7 +148,7 @@
     
     
     //pickerview后面的view
-    _backPickView = [[UIView alloc]initWithFrame:CGRectMake(0, 568, 320, 250)];
+    _backPickView = [[UIView alloc]initWithFrame:CGRectMake(0, DEVICE_HEIGHT, DEVICE_WIDTH, 250)];
     _backPickView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_backPickView];
     
@@ -223,7 +162,7 @@
     [_backPickView addSubview:btn];
     
     //地区pickview
-    _pickeView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, 30, 320, 250)];
+    _pickeView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, 30, DEVICE_WIDTH, 250)];
     _pickeView.delegate = self;
     _pickeView.dataSource = self;
     [_backPickView addSubview:_pickeView];
@@ -363,7 +302,7 @@
             __weak typeof(self) bself = self;
             
             //背景
-            GavatarView *backview = [[GavatarView alloc]initWithFrame:CGRectMake(280, 40, 0, 0)];
+            GavatarView *backview = [[GavatarView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH-40, 40, 0, 0)];
             backview.userInteractionEnabled = YES;
             backview.backgroundColor = RGBACOLOR(255, 255, 255, 0.9);
             
@@ -378,7 +317,7 @@
             //设置背景view点击的block
             [backview setAvatarClickedBlock:^{
                 [UIView animateWithDuration:0.2 animations:^{
-                    _wbackview.frame =  CGRectMake(280, 40, 0, 0);
+                    _wbackview.frame =  CGRectMake(DEVICE_WIDTH-40, 40, 0, 0);
                     view.frame = CGRectMake(0, 0, 0, 0);
                 } completion:^(BOOL finished) {
                     [_wbackview removeFromSuperview];
@@ -390,7 +329,7 @@
                 [bself.view addSubview:backview];
                 [UIView animateWithDuration:0.2 animations:^{
                     bview.frame = CGRectMake(20, 20, 200, 200);
-                    backview.frame = CGRectMake(0, 0, 320, 568-64);
+                    backview.frame = CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT-64);
                 } completion:^(BOOL finished) {
                     
                 }];
@@ -398,7 +337,7 @@
                 [view setImage:_weakCell.touxiangImaView.image];
                 [view setAvatarClickedBlock:^{
                     [UIView animateWithDuration:0.2 animations:^{
-                        backview.frame = CGRectMake(280, 40, 0, 0);
+                        backview.frame = CGRectMake(DEVICE_WIDTH-40, 40, 0, 0);
                         bview.frame = CGRectMake(0, 0, 0, 0);
                     } completion:^(BOOL finished) {
                         [backview removeFromSuperview];
@@ -427,7 +366,7 @@
             __weak typeof(cell) _weakCell=cell;
             __weak typeof(self) bself = self;
             //背景
-            GavatarView *backview = [[GavatarView alloc]initWithFrame:CGRectMake(280, 40, 0, 0)];
+            GavatarView *backview = [[GavatarView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH-40, 40, 0, 0)];
             backview.userInteractionEnabled = YES;
             backview.backgroundColor = RGBACOLOR(255, 255, 255, 0.9);
             __weak typeof (backview)_wbackview = backview;
@@ -438,7 +377,7 @@
             //设置背景view点击的block
             [backview setAvatarClickedBlock:^{
                 [UIView animateWithDuration:0.2 animations:^{
-                    _wbackview.frame =  CGRectMake(280, 40, 0, 0);
+                    _wbackview.frame =  CGRectMake(DEVICE_WIDTH-40, 40, 0, 0);
                     view.frame = CGRectMake(0, 0, 0, 0);
                 } completion:^(BOOL finished) {
                     [_wbackview removeFromSuperview];
@@ -450,14 +389,14 @@
                 [bself.view addSubview:backview];
                 [UIView animateWithDuration:0.2 animations:^{
                     bview.frame = CGRectMake(20, 20, 200, 200);
-                    backview.frame = CGRectMake(0, 0, 320, 568-64);
+                    backview.frame = CGRectMake(0, 0, 320, DEVICE_HEIGHT-64);
                 } completion:^(BOOL finished) {
                     
                 }];
                 [view setImage:_weakCell.touxiangImaView.image];
                 [view setAvatarClickedBlock:^{
                     [UIView animateWithDuration:0.2 animations:^{
-                        backview.frame = CGRectMake(280, 40, 0, 0);
+                        backview.frame = CGRectMake(DEVICE_WIDTH-40, 40, 0, 0);
                         bview.frame = CGRectMake(0, 0, 0, 0);
                     } completion:^(BOOL finished) {
                         [backview removeFromSuperview];
@@ -478,7 +417,7 @@
             __weak typeof(cell) _weakCell=cell;
             __weak typeof(self) bself = self;
             //背景
-            GavatarView *backview = [[GavatarView alloc]initWithFrame:CGRectMake(280, 40, 0, 0)];
+            GavatarView *backview = [[GavatarView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH-40, 40, 0, 0)];
             backview.userInteractionEnabled = YES;
             backview.backgroundColor = RGBACOLOR(255, 255, 255, 0.9);
             __weak typeof (backview)_wbackview = backview;
@@ -489,7 +428,7 @@
             //设置背景view点击的block
             [backview setAvatarClickedBlock:^{
                 [UIView animateWithDuration:0.2 animations:^{
-                    _wbackview.frame =  CGRectMake(280, 40, 0, 0);
+                    _wbackview.frame =  CGRectMake(DEVICE_WIDTH-40, 40, 0, 0);
                     view.frame = CGRectMake(0, 0, 0, 0);
                 } completion:^(BOOL finished) {
                     [_wbackview removeFromSuperview];
@@ -503,7 +442,7 @@
                 [bself.view addSubview:backview];
                 [UIView animateWithDuration:0.2 animations:^{
                     bview.frame = CGRectMake(20, 20, 200, 200);
-                    backview.frame = CGRectMake(0, 0, 320, 568-64);
+                    backview.frame = CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT-64);
                 } completion:^(BOOL finished) {
                     
                 }];
@@ -511,7 +450,7 @@
                 [view setImage:_weakCell.touxiangImaView.image];
                 [view setAvatarClickedBlock:^{
                     [UIView animateWithDuration:0.2 animations:^{
-                        backview.frame = CGRectMake(280, 40, 0, 0);
+                        backview.frame = CGRectMake(DEVICE_WIDTH-40, 40, 0, 0);
                         bview.frame = CGRectMake(0, 0, 0, 0);
                     } completion:^(BOOL finished) {
                         [backview removeFromSuperview];
@@ -547,7 +486,7 @@
             __weak typeof(cell) _weakCell=cell;
             __weak typeof(self) bself = self;
             //背景
-            GavatarView *backview = [[GavatarView alloc]initWithFrame:CGRectMake(280, 40, 0, 0)];
+            GavatarView *backview = [[GavatarView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH-40, 40, 0, 0)];
             backview.userInteractionEnabled = YES;
             backview.backgroundColor = RGBACOLOR(255, 255, 255, 0.9);
             __weak typeof (backview)_wbackview = backview;
@@ -558,7 +497,7 @@
             //设置背景view点击的block
             [backview setAvatarClickedBlock:^{
                 [UIView animateWithDuration:0.2 animations:^{
-                    _wbackview.frame =  CGRectMake(280, 40, 0, 0);
+                    _wbackview.frame =  CGRectMake(DEVICE_WIDTH-40, 40, 0, 0);
                     view.frame = CGRectMake(0, 0, 0, 0);
                 } completion:^(BOOL finished) {
                     [_wbackview removeFromSuperview];
@@ -570,14 +509,14 @@
                 [bself.view addSubview:backview];
                 [UIView animateWithDuration:0.2 animations:^{
                     bview.frame = CGRectMake(20, 20, 200, 200);
-                    backview.frame = CGRectMake(0, 0, 320, 568-64);
+                    backview.frame = CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT-64);
                 } completion:^(BOOL finished) {
                     
                 }];
                 [view setImage:_weakCell.touxiangImaView.image];
                 [view setAvatarClickedBlock:^{
                     [UIView animateWithDuration:0.2 animations:^{
-                        backview.frame = CGRectMake(280, 40, 0, 0);
+                        backview.frame = CGRectMake(DEVICE_WIDTH-40, 40, 0, 0);
                         bview.frame = CGRectMake(0, 0, 0, 0);
                     } completion:^(BOOL finished) {
                         [backview removeFromSuperview];
@@ -605,7 +544,7 @@
             __weak typeof(cell) _weakCell=cell;
             __weak typeof(self) bself = self;
             //背景
-            GavatarView *backview = [[GavatarView alloc]initWithFrame:CGRectMake(280, 40, 0, 0)];
+            GavatarView *backview = [[GavatarView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH-40, 40, 0, 0)];
             backview.userInteractionEnabled = YES;
             backview.backgroundColor = RGBACOLOR(255, 255, 255, 0.9);
             __weak typeof (backview)_wbackview = backview;
@@ -616,7 +555,7 @@
             //设置背景view点击的block
             [backview setAvatarClickedBlock:^{
                 [UIView animateWithDuration:0.2 animations:^{
-                    _wbackview.frame =  CGRectMake(280, 40, 0, 0);
+                    _wbackview.frame =  CGRectMake(DEVICE_WIDTH-40, 40, 0, 0);
                     view.frame = CGRectMake(0, 0, 0, 0);
                 } completion:^(BOOL finished) {
                     [_wbackview removeFromSuperview];
@@ -628,14 +567,14 @@
                 [bself.view addSubview:backview];
                 [UIView animateWithDuration:0.2 animations:^{
                     bview.frame = CGRectMake(20, 20, 200, 200);
-                    backview.frame = CGRectMake(0, 0, 320, 568-64);
+                    backview.frame = CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT-64);
                 } completion:^(BOOL finished) {
                     
                 }];
                 [view setImage:_weakCell.touxiangImaView.image];
                 [view setAvatarClickedBlock:^{
                     [UIView animateWithDuration:0.2 animations:^{
-                        backview.frame = CGRectMake(280, 40, 0, 0);
+                        backview.frame = CGRectMake(DEVICE_WIDTH-40, 40, 0, 0);
                         bview.frame = CGRectMake(0, 0, 0, 0);
                     } completion:^(BOOL finished) {
                         [backview removeFromSuperview];
@@ -940,20 +879,67 @@
         
         
         //请求文章数据
-        FBCircleModel *fbModel = [[FBCircleModel alloc]init];
-        self.fbModel = fbModel;
-        [fbModel initHttpRequestWithUid:self.passUserid Page:1 WithType:2 WithCompletionBlock:^( NSMutableArray *array) {
+//        FBCircleModel *fbModel = [[FBCircleModel alloc]init];
+//        self.fbModel = fbModel;
+//        [fbModel initHttpRequestWithUid:self.passUserid Page:1 WithType:2 WithCompletionBlock:^( NSMutableArray *array) {
+//            
+//            bself.wenzhangArray = array;
+//            
+//            isLoadWenzhangInfoSuccess = YES;
+//            if (isLoadWenzhangInfoSuccess && isLoadUserInfoSuccess) {
+//                [bself hudWasHidden:bhud];
+//            }
+//            
+//        } WithFailedBlock:^(NSString *operation) {
+//            
+//        }];
+        NSString *zujiStr = @"http://fb.fblife.com/openapi/index.php?mod=getweibo&code=mylist&fromtype=b5eeec0b&authkey=%@&page=%d&fbtype=json&uid=%@";
+        NSString* fullURL = [NSString stringWithFormat:zujiStr,[SzkAPI getAuthkeyGBK],1,[SzkAPI getUid]];
+        NSLog(@"请求足迹接口 : %@",fullURL);
+        ASIHTTPRequest * weiBo_request = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:fullURL]];
+        [weiBo_request setPersistentConnectionTimeoutSeconds:60];
+        [weiBo_request startAsynchronous];
+        __weak typeof(weiBo_request)wRequest = weiBo_request;
+        [wRequest setCompletionBlock:^{
+            NSDictionary * rootObject = [[NSDictionary alloc] initWithDictionary:[weiBo_request.responseData objectFromJSONData]];
+            NSString *errcode =[NSString stringWithFormat:@"%@",[rootObject objectForKey:ERRCODE]];
             
-            bself.wenzhangArray = array;
-            
-            isLoadWenzhangInfoSuccess = YES;
-            if (isLoadWenzhangInfoSuccess && isLoadUserInfoSuccess) {
-                [bself hudWasHidden:bhud];
+            if ([@"0" isEqualToString:errcode])
+            {
+                NSDictionary* userinfo = [rootObject objectForKey:@"weiboinfo"];
+                
+                NSLog(@"-----%@",userinfo);
+                
+                NSMutableArray *array = [NSMutableArray arrayWithCapacity:1];
+                NSArray * arr = [ZSNApi sortArrayWith:[userinfo allKeys]];
+                NSMutableArray * temp = [NSMutableArray array];
+                for (int i = 0;i < arr.count;i++) {
+                    NSString * key = [NSString stringWithFormat:@"%@",[arr objectAtIndex:i]];
+                    FBCircleModel * model = [[FBCircleModel alloc] initWithDictionary:[userinfo objectForKey:key]];
+                    [temp addObject:model];
+                }
+                [array addObjectsFromArray:temp];
+                bself.wenzhangArray = array;
+
+                isLoadWenzhangInfoSuccess = YES;
+                if (isLoadWenzhangInfoSuccess && isLoadUserInfoSuccess) {
+                    [bself hudWasHidden:bhud];
+                }
+                
             }
             
-        } WithFailedBlock:^(NSString *operation) {
+            
             
         }];
+        
+//        [wRequest setFailedBlock:^{
+//            [ZSNApi showAutoHiddenMBProgressWithText:@"加载失败" addToView:self.view];
+//        }];
+        
+        
+        
+        
+        
     }
     @catch (NSException *exception) {
         
@@ -1110,9 +1096,9 @@
     NSLog(@"_backPickView");
     [UIView animateWithDuration:0.3 animations:^{
         if (iPhone5) {
-            _backPickView.frame = CGRectMake(0, 280, 320, 250);
+            _backPickView.frame = CGRectMake(0, 280*DEVICE_HEIGHT/568.0, DEVICE_WIDTH, 250);
         }else{
-            _backPickView.frame = CGRectMake(0, 218, 320, 250);
+            _backPickView.frame = CGRectMake(0, 280*DEVICE_HEIGHT/568.0, DEVICE_WIDTH, 250);//CGRectMake(0, 218, DEVICE_WIDTH, 250)
         }
         
     }];
@@ -1124,9 +1110,9 @@
     
     [UIView animateWithDuration:0.3 animations:^{
         if (iPhone5) {
-            _backPickView.frame = CGRectMake(0, 568, 320, 216);
+            _backPickView.frame = CGRectMake(0, DEVICE_HEIGHT, DEVICE_WIDTH, 216);
         }else{
-            _backPickView.frame = CGRectMake(0, 480, 320, 216);
+            _backPickView.frame = CGRectMake(0, DEVICE_HEIGHT, DEVICE_WIDTH, 216);
         }
         
     }];
