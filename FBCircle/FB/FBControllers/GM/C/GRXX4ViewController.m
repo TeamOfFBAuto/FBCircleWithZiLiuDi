@@ -647,7 +647,7 @@
     }else if(indexPath.row == 5){//足迹
         num = 83;
     }else if (indexPath.row ==6){//最下面按钮
-        num = 155;
+        num = 500;
     }
     else{
         num = 47;
