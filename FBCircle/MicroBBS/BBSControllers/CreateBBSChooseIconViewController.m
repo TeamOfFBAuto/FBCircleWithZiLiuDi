@@ -53,11 +53,7 @@
     }
     
     
-<<<<<<< HEAD
-    _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,DEVICE_HEIGHT-64) style:UITableViewStylePlain];
-=======
     _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,DEVICE_HEIGHT - 64) style:UITableViewStylePlain];
->>>>>>> origin/master
     _myTableView.delegate = self;
     _myTableView.dataSource = self;
     _myTableView.backgroundColor = RGBCOLOR(240,241,243);
