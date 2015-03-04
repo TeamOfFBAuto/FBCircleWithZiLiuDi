@@ -132,20 +132,20 @@
     myfirendListArr=[NSMutableArray array];
     name_array = [NSMutableArray array];
     
-    myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,320,44)];
+    myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,44)];
     myScrollView.showsHorizontalScrollIndicator = NO;
     myScrollView.showsVerticalScrollIndicator = NO;
     myScrollView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:myScrollView];
     
-    name_content_label = [[UILabel alloc] initWithFrame:CGRectMake(15,0,300,44)];
+    name_content_label = [[UILabel alloc] initWithFrame:CGRectMake(15,0,DEVICE_WIDTH-20,44)];
     name_content_label.textAlignment = NSTextAlignmentLeft;
     name_content_label.font = [UIFont systemFontOfSize:14];
     name_content_label.textColor = RGBCOLOR(31,31,31);
     name_content_label.backgroundColor = [UIColor clearColor];
     [myScrollView addSubview:name_content_label];
     
-    mySearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,320,44)];
+    mySearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,44)];
     mySearchBar.placeholder = @"搜索";
     mySearchBar.delegate = self;
     mySearchBar.layer.borderWidth = 2.f;
@@ -155,7 +155,7 @@
     
     
     //1
-    _mainTabV=[[UITableView alloc]initWithFrame:CGRectMake(0,44,320,(iPhone5?568:480)-64-44) style:UITableViewStylePlain];
+    _mainTabV=[[UITableView alloc]initWithFrame:CGRectMake(0,44,DEVICE_WIDTH,DEVICE_HEIGHT-64-44) style:UITableViewStylePlain];
     [self.view addSubview:_mainTabV];
     [_mainTabV registerClass:[BBSAddMemberCell class] forCellReuseIdentifier:@"identifier"];
     _mainTabV.delegate=self;
@@ -164,6 +164,7 @@
     _mainTabV.separatorColor=RGBCOLOR(200,198,204);
     _mainTabV.rowHeight = 55;
     _mainTabV.separatorInset = UIEdgeInsetsZero;
+    _mainTabV.separatorStyle = UITableViewCellSeparatorStyleNone;
     _mainTabV.dataSource=self;
     
     //2
@@ -172,12 +173,12 @@
     _searchTabV.delegate=self;
     _searchTabV.separatorColor=RGBCOLOR(200,198,204);
     _searchTabV.dataSource=self;
-    
+    _searchTabV.separatorStyle = UITableViewCellSeparatorStyleNone;
     _searchTabV.hidden=YES;
     _searchTabV.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     //3
-    _halfBlackV=[[UIView alloc]initWithFrame:CGRectMake(0,44,320, iPhone5?568-75:480-75)];
+    _halfBlackV=[[UIView alloc]initWithFrame:CGRectMake(0,44,DEVICE_WIDTH, DEVICE_HEIGHT-75)];
     _halfBlackV.backgroundColor=RGBCOLOR(246,247,249);
     _halfBlackV.hidden=YES;
     [self.view addSubview:_halfBlackV];
@@ -199,7 +200,7 @@
     ///弹出框
     
     myAlertView = [[FBQuanAlertView alloc]  initWithFrame:CGRectMake(0,0,138,100)];
-    myAlertView.center = CGPointMake(160,(iPhone5?568:480)/2-70);
+    myAlertView.center = CGPointMake(DEVICE_WIDTH/2,DEVICE_HEIGHT/2-70);
     myAlertView.hidden = YES;
     [self.view addSubview:myAlertView];
     
@@ -360,7 +361,7 @@
     if (!cell) {
         
         cell=[[BBSAddMemberCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:stridentifier];
-        cell.line_view.hidden = YES;
+//        cell.line_view.hidden = YES;
     }
     cell.delegate = self;
     if (tableView==_mainTabV) {
@@ -437,7 +438,7 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    UIImageView *aview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 25)];
+    UIImageView *aview=[[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 25)];
     
     if (tableView==_mainTabV)
     {
@@ -450,7 +451,7 @@
         
         aview.image = [UIImage imageNamed:@"bbs_add_member_tiao"];
         
-        UILabel *_label=[[UILabel alloc]initWithFrame:CGRectMake(10, 0.5, 320-24, 24)];
+        UILabel *_label=[[UILabel alloc]initWithFrame:CGRectMake(10, 0.5, DEVICE_WIDTH-24, 24)];
         
         _label.text=[NSString stringWithFormat:@"%c",'A'+section];
         _label.textColor = RGBCOLOR(171,179,188);
@@ -772,7 +773,7 @@
     
     CGRect scrollView_frame = myScrollView.frame;
     
-    float total_height = (iPhone5?568:480)-64;
+    float total_height = DEVICE_HEIGHT-64;
     
     scrollView_frame.origin.y = isShow?44:0;
     

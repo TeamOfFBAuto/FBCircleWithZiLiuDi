@@ -44,7 +44,7 @@
         _nameLabel.textColor=[UIColor blackColor];
         [self.contentView addSubview:_nameLabel];
         
-        _line_view = [[UIView alloc] initWithFrame:CGRectMake(0,54.5,self.frame.size.width,0.5)];
+        _line_view = [[UIView alloc] initWithFrame:CGRectMake(0,54.5,DEVICE_WIDTH,0.5)];
         _line_view.backgroundColor = RGBCOLOR(200,198,204);
         [self.contentView addSubview:_line_view];
         
