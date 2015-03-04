@@ -117,7 +117,7 @@
     [self.view addSubview:myScrollView];
     
     
-    _title_textView = [[UITextView alloc] initWithFrame:CGRectMake(10,5,300,35)];
+    _title_textView = [[UITextView alloc] initWithFrame:CGRectMake(10,5,DEVICE_WIDTH-20,35)];
     _title_textView.textAlignment = NSTextAlignmentLeft;
     _title_textView.textColor = [UIColor blackColor];
     _title_textView.scrollEnabled = YES;
@@ -128,7 +128,7 @@
     [myScrollView addSubview:_title_textView];
 
     
-    title_place_label = [[UILabel alloc] initWithFrame:CGRectMake(10,0,300,33)];
+    title_place_label = [[UILabel alloc] initWithFrame:CGRectMake(10,0,DEVICE_WIDTH-20,33)];
     title_place_label.font = [UIFont systemFontOfSize:15];
     title_place_label.textColor = RGBCOLOR(173,173,173);
     title_place_label.text = @"输入标题(必填)不超过30个字";
@@ -138,11 +138,11 @@
     [_title_textView addSubview:title_place_label];
     
     
-    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(15.5,43,320,0.5)];
+    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(15.5,43,DEVICE_WIDTH,0.5)];
     lineView.backgroundColor = RGBCOLOR(188,191,195);
     [myScrollView addSubview:lineView];
     
-    _content_textView = [[UITextView alloc] initWithFrame:CGRectMake(10,50.5,300,65)];
+    _content_textView = [[UITextView alloc] initWithFrame:CGRectMake(10,50.5,DEVICE_WIDTH-20,65)];
     _content_textView.textAlignment = NSTextAlignmentLeft;
     _content_textView.textColor = RGBCOLOR(3,3,3);
     _content_textView.delegate = self;
@@ -153,7 +153,7 @@
     _content_textView.font = [UIFont systemFontOfSize:15];
     [myScrollView addSubview:_content_textView];
     
-    content_place_label = [[UILabel alloc] initWithFrame:CGRectMake(10,0,300,33)];
+    content_place_label = [[UILabel alloc] initWithFrame:CGRectMake(10,0,DEVICE_WIDTH-20,33)];
     content_place_label.font = [UIFont systemFontOfSize:15];
     content_place_label.textColor = RGBCOLOR(173,173,173);
     content_place_label.text = @"输入正文";
@@ -162,7 +162,7 @@
     content_place_label.userInteractionEnabled = NO;
     [_content_textView addSubview:content_place_label];
     
-    imageScrollView = [[SendPostsImageScrollView alloc] initWithFrame:CGRectMake(0,content_place_label.bottom + 30 + 25,320,150)];//lcw
+    imageScrollView = [[SendPostsImageScrollView alloc] initWithFrame:CGRectMake(0,content_place_label.bottom + 30 + 25,DEVICE_WIDTH,150)];//lcw
     imageScrollView.showsHorizontalScrollIndicator = NO;
     imageScrollView.showsVerticalScrollIndicator = NO;
     
@@ -171,7 +171,7 @@
     __weak typeof(self) bself = self;
     
     //选择相册 或是 相机
-    bottom_view = [[SendPostsBottomView alloc] initWithFrame:CGRectMake(0,(iPhone5?568:480)-40.5-64,320,40.5) WithBlock:^(int index) {
+    bottom_view = [[SendPostsBottomView alloc] initWithFrame:CGRectMake(0,DEVICE_HEIGHT-40.5-64,DEVICE_WIDTH,40.5) WithBlock:^(int index) {
         
         switch (index) {
             case 0://相机

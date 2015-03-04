@@ -46,7 +46,7 @@
     
     UIImage * image = [UIImage imageNamed:theType == MyChatViewCellTypeOutgoing ?@"duihua2-66_82.png":@"duihua1-66_82.png"];
     
-    _background_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(theType == MyChatViewCellTypeOutgoing?(DEVICE_WIDTH - point.x - 65):50,34,point.x+15,point.y)];
+    _background_imageView = [[UIImageView alloc] initWithFrame:CGRectMake(theType == MyChatViewCellTypeOutgoing?(DEVICE_WIDTH - point.x - 75):55,34,point.x+20,point.y+8)];
     _background_imageView.userInteractionEnabled = YES;
     _background_imageView.image = [image stretchableImageWithLeftCapWidth:30.f topCapHeight:30.f];
     [self.contentView addSubview:_background_imageView];

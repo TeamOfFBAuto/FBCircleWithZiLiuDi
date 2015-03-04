@@ -119,13 +119,14 @@
     NSLog(@"请求微博url---%@",fullURL);
     
     ASIHTTPRequest * weiBo_request = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:fullURL]];
-    [weiBo_request setPersistentConnectionTimeoutSeconds:120];
+    [weiBo_request setPersistentConnectionTimeoutSeconds:60];
     [weiBo_request startAsynchronous];
     
     __weak typeof(weiBo_request)wRequest = weiBo_request;
     [wRequest setCompletionBlock:^{
         @try
         {
+            loadsucess = YES;
             [loadview stopLoading:1];
             [self doneLoadingTableViewData];
             NSDictionary * rootObject = [[NSDictionary alloc] initWithDictionary:[weiBo_request.responseData objectFromJSONData]];
@@ -148,6 +149,7 @@
     }];
     
     [wRequest setFailedBlock:^{
+        loadsucess = YES;
         [ZSNApi showAutoHiddenMBProgressWithText:@"加载失败" addToView:self.view];
         [self doneLoadingTableViewData];
         [loadview stopLoading:1];
@@ -1821,6 +1823,7 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
 	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+    NSLog(@".........  %f",scrollView.contentOffset.y);
     if(scrollView.contentOffset.y > (scrollView.contentSize.height - scrollView.frame.size.height+40) && scrollView.contentOffset.y > 0)
     {
         if (loadview.normalLabel.hidden || [loadview.normalLabel.text isEqualToString:@"没有更多数据了"])

@@ -86,14 +86,14 @@
 -(void)setNavgationBar
 {
     
-    navImageView = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,64)];
+    navImageView = [[UIView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,64)];
     
     navImageView.backgroundColor = RGBCOLOR(229,229,229);
     
     [self.view addSubview:navImageView];
     
     
-    UIImageView * daohangView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,64)];
+    UIImageView * daohangView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,64)];
     
     daohangView.image = FBCIRCLE_NAVIGATION_IMAGE;
     
@@ -124,7 +124,7 @@
     
     title_label.textColor = RGBCOLOR(91,138,59);
     
-    title_label.center = CGPointMake(160,42);
+    title_label.center = CGPointMake(DEVICE_WIDTH/2,42);
     
     [daohangView addSubview:title_label];
     
@@ -138,7 +138,7 @@
     
     [chooseButton addTarget:self action:@selector(PreviewChooseTap:) forControlEvents:UIControlEventTouchUpInside];
     
-    chooseButton.center = CGPointMake(300,42);
+    chooseButton.center = CGPointMake(DEVICE_WIDTH-20,42);
     
     [daohangView addSubview:chooseButton];
     
@@ -156,7 +156,7 @@
     
     
     
-    bottomView = [[UIView alloc] initWithFrame:CGRectMake(0,(iPhone5?568:480)-44,320,44)];
+    bottomView = [[UIView alloc] initWithFrame:CGRectMake(0,DEVICE_HEIGHT-44,DEVICE_WIDTH,44)];
     
     bottomView.backgroundColor = RGBCOLOR(254,254,254);
     
@@ -165,7 +165,7 @@
     
     finish_button = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    finish_button.frame = CGRectMake(262,9,102/2,54/2);
+    finish_button.frame = CGRectMake(DEVICE_WIDTH-58,9,102/2,54/2);
     
     [finish_button addTarget:self action:@selector(finishTap:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -267,7 +267,7 @@
     _allImages = [NSMutableArray array];
     
     
-    _myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,340,iPhone5?568:480)];
+    _myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH+20,DEVICE_HEIGHT)];
     
     _myScrollView.delegate = self;
     
@@ -279,11 +279,11 @@
     
     _myScrollView.showsHorizontalScrollIndicator = NO;
     
-    _myScrollView.contentSize = CGSizeMake(340*self.AllImagesArray.count,0);
+    _myScrollView.contentSize = CGSizeMake((DEVICE_WIDTH+20)*self.AllImagesArray.count,0);
     
     [self.view addSubview:_myScrollView];
     
-    _myScrollView.contentOffset = CGPointMake(340*_currentPage,0);
+    _myScrollView.contentOffset = CGPointMake((DEVICE_WIDTH+20)*_currentPage,0);
     
  //   [self setNavgationBar];
     
@@ -410,7 +410,7 @@
                     
                     ALAsset *asset= bself.AllImagesArray[i];
                     
-                    [bself createShowViewWithAsset:asset WithFrame:CGRectMake(340*i,0,320,_myScrollView.frame.size.height) WithTag:(1000+i)];
+                    [bself createShowViewWithAsset:asset WithFrame:CGRectMake((DEVICE_WIDTH+20)*i,0,DEVICE_WIDTH,_myScrollView.frame.size.height) WithTag:(1000+i)];
                 });
             }
         }

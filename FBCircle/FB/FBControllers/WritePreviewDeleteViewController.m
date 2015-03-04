@@ -39,14 +39,14 @@
 -(void)setNavgationBar
 {
     
-    navImageView = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,64)];
+    navImageView = [[UIView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,64)];
     
     navImageView.backgroundColor = RGBCOLOR(229,229,229);
     
     [self.view addSubview:navImageView];
     
     
-    UIImageView * daohangView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,64)];
+    UIImageView * daohangView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,64)];
     
     daohangView.image = FBCIRCLE_NAVIGATION_IMAGE;
     
@@ -75,7 +75,7 @@
     
     title_label.textColor = [UIColor whiteColor];//RGBCOLOR(91,138,59);
     
-    title_label.center = CGPointMake(160,42);
+    title_label.center = CGPointMake(DEVICE_WIDTH/2,42);
     
     [daohangView addSubview:title_label];
     
@@ -91,7 +91,7 @@
     
     [chooseButton addTarget:self action:@selector(PreviewChooseTap:) forControlEvents:UIControlEventTouchUpInside];
     
-    chooseButton.center = CGPointMake(290,42);
+    chooseButton.center = CGPointMake(DEVICE_WIDTH-30,42);
     
     [daohangView addSubview:chooseButton];
 }
@@ -112,7 +112,7 @@
     self.view.backgroundColor = RGBCOLOR(229,229,229);
     
     
-    _myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,340,iPhone5?568:480)];
+    _myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH+20,DEVICE_HEIGHT)];
     
     _myScrollView.delegate = self;
     
@@ -128,7 +128,7 @@
     
     [self.view addSubview:_myScrollView];
     
-    _myScrollView.contentOffset = CGPointMake(340*_currentPage,0);
+    _myScrollView.contentOffset = CGPointMake((DEVICE_WIDTH+20)*_currentPage,0);
     
     
     [self loadAllViews];
@@ -147,7 +147,7 @@
     
     for (int i = 0;i < self.AllImagesArray.count;i++)
     {
-        QBShowImagesScrollView * ScrollView = [[QBShowImagesScrollView alloc] initWithFrame:CGRectMake(340*i,0,320,_myScrollView.frame.size.height) WithLocation:[self.AllImagesArray objectAtIndex:i]];
+        QBShowImagesScrollView * ScrollView = [[QBShowImagesScrollView alloc] initWithFrame:CGRectMake((DEVICE_WIDTH+20)*i,0,DEVICE_WIDTH,_myScrollView.frame.size.height) WithLocation:[self.AllImagesArray objectAtIndex:i]];
         ScrollView.aDelegate = self;
         ScrollView.tag = 1000+i;
         ScrollView.backgroundColor = RGBCOLOR(242,242,242);
@@ -239,8 +239,8 @@
             }
             
             title_label.text = [NSString stringWithFormat:@"选中%d张中的%d张",self.AllImagesArray.count,_currentPage+1];
-            _myScrollView.contentSize = CGSizeMake(340*_AllImagesArray.count,0);
-            _myScrollView.contentOffset = CGPointMake(340*_currentPage,0);
+            _myScrollView.contentSize = CGSizeMake((DEVICE_WIDTH+20)*_AllImagesArray.count,0);
+            _myScrollView.contentOffset = CGPointMake((DEVICE_WIDTH+20)*_currentPage,0);
             [self loadAllViews];
         }
             break;

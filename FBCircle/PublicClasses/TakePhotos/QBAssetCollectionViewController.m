@@ -147,10 +147,10 @@
     self.assets = [NSMutableArray array];
     self.selectedAssets = [NSMutableOrderedSet orderedSet];
     
-    self.imageSize = CGSizeMake(104,104);
+    self.imageSize = CGSizeMake((DEVICE_WIDTH-8)/3,(DEVICE_WIDTH-8)/3);
     
     // Table View
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,320,(iPhone5?568:480)-20-44) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,DEVICE_HEIGHT-20-44) style:UITableViewStylePlain];
     tableView.dataSource = self;
     tableView.delegate = self;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

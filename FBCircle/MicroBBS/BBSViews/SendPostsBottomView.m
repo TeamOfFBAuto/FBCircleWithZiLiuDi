@@ -29,7 +29,7 @@
     
     self.backgroundColor = [UIColor whiteColor];
     
-    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,0.5)];
+    UIView * lineView = [[UIView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,0.5)];
 
     lineView.backgroundColor = RGBCOLOR(181,181,183);
     
