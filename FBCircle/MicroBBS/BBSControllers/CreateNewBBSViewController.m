@@ -100,7 +100,7 @@
     
     for (int i = 0;i < 2;i++)
     {
-        UIView * select_view = [self loadIconOrClassificationViewsWithType:i WithFrame:CGRectMake(0,230 + 79*i,320,44) WithContent:[contentArray objectAtIndex:i]];
+        UIView * select_view = [self loadIconOrClassificationViewsWithType:i WithFrame:CGRectMake(0,230 + 79*i,DEVICE_WIDTH,44) WithContent:[contentArray objectAtIndex:i]];
         
         select_view.tag = 100 + i;
         
@@ -301,7 +301,7 @@
 
 -(UIView *)loadInputViews
 {
-    UIView * inputView = [[UIView alloc] initWithFrame:CGRectMake(0,36,320,159)];
+    UIView * inputView = [[UIView alloc] initWithFrame:CGRectMake(0,36,DEVICE_WIDTH,159)];
     inputView.backgroundColor = [UIColor whiteColor];
     inputView.layer.borderColor = RGBCOLOR(200,198,204).CGColor;
     inputView.layer.borderWidth = 0.5;
@@ -309,7 +309,7 @@
     inputView.layer.shadowOffset = CGSizeMake(0,1);
     inputView.layer.shadowOpacity = 0.07;
     ///线
-    UIView * line_view = [[UIView alloc] initWithFrame:CGRectMake(13,44,320,0.5)];
+    UIView * line_view = [[UIView alloc] initWithFrame:CGRectMake(13,44,DEVICE_WIDTH,0.5)];
     line_view.backgroundColor = RGBCOLOR(200,198,204);
     [inputView addSubview:line_view];
     

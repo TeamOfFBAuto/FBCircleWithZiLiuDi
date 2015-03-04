@@ -18,7 +18,7 @@
     if (self) {
         
         CGRect aFrame = frame;
-        aFrame.size.width = 304;
+        aFrame.size.width = DEVICE_WIDTH - 16;
         self.frame = aFrame;
         self.backgroundColor = [UIColor whiteColor];
         
@@ -37,7 +37,7 @@
         [_rightBtn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_rightBtn];
         
-        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, leftLabel.bottom, 304, 1)];
+        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, leftLabel.bottom, DEVICE_WIDTH - 16, 1)];
         line.backgroundColor = [UIColor colorWithHexString:@"dfdfdf"];
         [self addSubview:line];
     }

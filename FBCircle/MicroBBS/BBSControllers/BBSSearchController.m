@@ -80,7 +80,7 @@
     [self createSwapView];
     
     //数据展示table
-    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 45, 320, self.view.height - 44 - 20)];
+    _table = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 45, DEVICE_WIDTH, self.view.height - 44 - 20)];
     _table.refreshDelegate = self;
     _table.dataSource = self;
     _table.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -88,7 +88,7 @@
     [self.view addSubview:_table];
     
     //数据展示table
-    _historyTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 45, 320, self.view.height - 44 - 20) style:UITableViewStylePlain];
+    _historyTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 45, DEVICE_WIDTH, self.view.height - 44 - 20) style:UITableViewStylePlain];
     _historyTable.delegate = self;
     _historyTable.dataSource = self;
     _historyTable.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -295,7 +295,7 @@
 
 - (void)createSearchView
 {
-    navigationView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320 - 50, 44)];
+    navigationView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH - 50, 44)];
     navigationView.backgroundColor = [UIColor clearColor];
     
     [self.navigationController.navigationBar addSubview:navigationView];
@@ -332,7 +332,7 @@
 
 - (void)createSwapView
 {
-    UIImageView *bgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIImageView *bgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 44)];
     bgView.image = [UIImage imageNamed:@"BBS-kuang"];
     [self.view addSubview:bgView];
     
@@ -365,10 +365,10 @@
 
 - (void)createMoveView
 {
-    move = [[LMoveView alloc]initWithFrame:CGRectMake(0, self.view.height - 45 - 20 - 44, 320, 44)];
+    move = [[LMoveView alloc]initWithFrame:CGRectMake(0, self.view.height - 45 - 20 - 44, DEVICE_WIDTH, 44)];
     [self.view addSubview:move];
     
-    UIImageView *bgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIImageView *bgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 44)];
     bgView.image = [UIImage imageNamed:@"BBS-kuang-up"];
     [move addSubview:bgView];
     
@@ -532,7 +532,7 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, cell.height - 1, 320, 0.5)];
+            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, cell.height - 1, DEVICE_WIDTH, 0.5)];
             line.backgroundColor = [UIColor colorWithHexString:@"d7d7d7"];
             [cell.contentView addSubview:line];
         }
@@ -548,7 +548,7 @@
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell == nil) {
             cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
-            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 74, 320, 0.5)];
+            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 74, DEVICE_WIDTH, 0.5)];
             line.backgroundColor = [UIColor colorWithHexString:@"d7d7d7"];
             line.tag = 100;
             
@@ -578,7 +578,7 @@
         cell = [[[NSBundle mainBundle]loadNibNamed:@"SearchBBSCell" owner:self options:nil]objectAtIndex:0];
         
         NSLog(@"cell %@",cell);
-        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, cell.height - 1, 320, 0.5)];
+        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, cell.height - 1, DEVICE_WIDTH, 0.5)];
         line.backgroundColor = [UIColor colorWithHexString:@"d7d7d7"];
         [cell.contentView addSubview:line];
     }

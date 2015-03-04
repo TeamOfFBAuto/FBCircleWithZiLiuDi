@@ -237,7 +237,7 @@
 {
     self.titleLabel.text = infoModel.name;
     
-    UIView *first = [self createFirstViewFrame:CGRectMake(18, 15, 320 - 18 * 2, 0)];
+    UIView *first = [self createFirstViewFrame:CGRectMake(18, 15, DEVICE_WIDTH - 18 * 2, 0)];
     [self.view addSubview:first];
     
     UIView *second = [self createSecondViewFrame:CGRectMake(18, first.bottom + 15, first.width, 0)];

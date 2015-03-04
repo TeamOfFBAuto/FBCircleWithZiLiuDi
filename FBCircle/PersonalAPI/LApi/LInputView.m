@@ -7,7 +7,7 @@
 //
 #define SELF_HEIGHT 45  //本身的高度
 #define TEXT_HEIGHT 32 //输入框高度
-#define TEXT_WIDTH 218 //输入框宽带
+#define TEXT_WIDTH DEVICE_WIDTH - (320 - 218) //输入框宽带
 
 #define KLEFT 54 //左距离
 #define KTOP 7 //上
@@ -36,9 +36,9 @@
         [superView addGestureRecognizer:tap];
         
         self.backgroundColor = [UIColor colorWithHexString:@"f3f4f6"];
-        self.frame = CGRectMake(0, CGRectGetMinY(frame), 320, SELF_HEIGHT);
+        self.frame = CGRectMake(0, CGRectGetMinY(frame), DEVICE_WIDTH, SELF_HEIGHT);
         
-        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 1)];
+        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 1)];
 //        line.backgroundColor = [UIColor colorWithHexString:@"919499"];
         line.backgroundColor = COLOR_TABLE_LINE;
         [self addSubview:line];
@@ -71,7 +71,7 @@
 //_originalFrame的set方法  因为会调用setFrame  所以就不在此做赋值；
 - (void)setOriginalFrame:(CGRect)originalFrame
 {
-    self.frame = CGRectMake(0, CGRectGetMinY(originalFrame), 320, CGRectGetHeight(originalFrame));
+    self.frame = CGRectMake(0, CGRectGetMinY(originalFrame), DEVICE_WIDTH, CGRectGetHeight(originalFrame));
 }
 
 -(void)dealloc
@@ -85,10 +85,10 @@
 - (WeiBoFaceScrollView *)faceScrollView
 {
     if (faceScrollView == nil) {
-        faceScrollView = [[WeiBoFaceScrollView alloc] initWithFrame:CGRectMake(0,0,320,215) target:self];
+        faceScrollView = [[WeiBoFaceScrollView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,215) target:self];
         faceScrollView.delegate = self;
         faceScrollView.bounces = NO;
-        faceScrollView.contentSize = CGSizeMake(320*1,0);//设置有多少页表情
+        faceScrollView.contentSize = CGSizeMake(DEVICE_WIDTH * 1,0);//设置有多少页表情
     }
     return faceScrollView;
 }
