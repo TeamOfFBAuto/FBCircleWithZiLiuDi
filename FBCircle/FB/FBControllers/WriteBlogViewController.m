@@ -99,7 +99,7 @@
     
     [self loadChoosePictures];
     
-    self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,6.5,320,(iPhone5?568:480)-20-44-6.5) style:UITableViewStylePlain];
+    self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,6.5,DEVICE_WIDTH,DEVICE_HEIGHT-20-44-6.5) style:UITableViewStylePlain];
     self.myTableView.delegate = self;
     self.myTableView.dataSource = self;
     self.myTableView.separatorInset = UIEdgeInsetsZero;
@@ -107,12 +107,12 @@
     [self.view addSubview:self.myTableView];
     
     
-    UIView * vvvv = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,0)];
+    UIView * vvvv = [[UIView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,0)];
     
     self.myTableView.tableFooterView = vvvv;
     
     
-    contentView = [[UIView alloc] initWithFrame:CGRectMake(0,(iPhone5?568:480)-64,320,42)];
+    contentView = [[UIView alloc] initWithFrame:CGRectMake(0,DEVICE_HEIGHT-64,DEVICE_WIDTH,42)];
     contentView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:contentView];
     contentView.layer.borderColor = RGBCOLOR(206,206,206).CGColor;
@@ -124,12 +124,12 @@
     [smile_button addTarget:self action:@selector(switchSmileAndKeyBoard:) forControlEvents:UIControlEventTouchUpInside];
     [contentView addSubview:smile_button];
     
-    _face_back_view = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,215)];
+    _face_back_view = [[UIView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,215)];
     
-    faceScrollView = [[WeiBoFaceScrollView alloc] initWithFrame:CGRectMake(0,0,320,215) target:self];
+    faceScrollView = [[WeiBoFaceScrollView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,215) target:self];
     faceScrollView.delegate = self;
     faceScrollView.bounces = NO;
-    faceScrollView.contentSize = CGSizeMake(320*1,0);//设置有多少页表情
+    faceScrollView.contentSize = CGSizeMake(DEVICE_WIDTH*1,0);//设置有多少页表情
     [_face_back_view addSubview:faceScrollView];
 
 }
@@ -288,7 +288,7 @@
         case 0:
         {
             if (!_myTextView) {
-                _myTextView = [[UITextView alloc] initWithFrame:CGRectMake(12,5,296,157.0/2-10)];
+                _myTextView = [[UITextView alloc] initWithFrame:CGRectMake(12,5,DEVICE_WIDTH-24,157.0/2-10)];
                 _myTextView.font = [UIFont systemFontOfSize:14];
                 _myTextView.delegate = self;
                 _myTextView.showsHorizontalScrollIndicator = NO;
@@ -297,7 +297,7 @@
                 _myTextView.backgroundColor = [UIColor clearColor];
                 [cell.contentView addSubview:_myTextView];
                 
-                placeHolderLable = [[UILabel alloc] initWithFrame:CGRectMake(5,7,200,15)];
+                placeHolderLable = [[UILabel alloc] initWithFrame:CGRectMake(5,7,DEVICE_WIDTH-120,15)];
                 placeHolderLable.text = @"心情记录...";
                 placeHolderLable.backgroundColor = [UIColor clearColor];
                 placeHolderLable.textColor = RGBCOLOR(153,153,153);
@@ -348,7 +348,7 @@
         [cell.contentView addSubview:locaionMarkImageView];
         
         
-        _locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(45,0,200,43)];
+        _locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(45,0,DEVICE_WIDTH-120,43)];
         
         _locationLabel.text = @"正在获取位置信息...";
         
@@ -363,7 +363,7 @@
         
         locationSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0,0,38,19)];
         
-        locationSwitch.center = CGPointMake(280,43/2);
+        locationSwitch.center = CGPointMake(DEVICE_WIDTH-40,43/2);
         
         locationSwitch.on = YES;
         
@@ -618,11 +618,14 @@
     
     float theHeight = 28;
     
+    ///留边14像素，中间隔10像素
+    CGFloat image_width = (DEVICE_WIDTH-28-10*3)/4.0f;
+    
     if (self.allImageArray.count == 0)
     {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        button.frame = CGRectMake(16,14,65,65);
+        button.frame = CGRectMake(16,14,image_width,image_width);
         button.layer.masksToBounds = YES;
         button.layer.cornerRadius = 5;
         [button setImage:[UIImage imageNamed:@"WriteChoosePictures.png"] forState:UIControlStateNormal];
@@ -645,6 +648,7 @@
             row = 3;
         }
         
+        
         for (int i = 0;i < row;i++)
         {
             for (int j = 0;j < 4;j++) {
@@ -652,7 +656,7 @@
                 if (j+4*i < count) {
                     NSLog(@"papapap ----  %d",j+4*i);
                     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-                    button.frame = CGRectMake(16 + 74*j,14 + 74*i,65,65);
+                    button.frame = CGRectMake(14 + (image_width+10)*j,14 + (image_width+10)*i,image_width,image_width);
                     button.imageView.clipsToBounds = YES;
                     button.layer.masksToBounds = YES;
                     button.layer.cornerRadius = 5;
@@ -667,20 +671,21 @@
                     {
                         NSLog(@"piapiapia ----  %d",j+4*i);
                         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-                        button.frame = CGRectMake(16 + 74*j,14 + 74*i,65,65);
+                        button.frame = CGRectMake(14 + (image_width+10)*j,14 + (image_width+10)*i,image_width,image_width);
                         button.tag = 1000+ j + 4*i;
-                        [button setImage:[UIImage imageNamed:@"WriteChoosePictures.png"] forState:UIControlStateNormal];
+                        [button setImage:[[UIImage imageNamed:@"WriteChoosePictures.png"] stretchableImageWithLeftCapWidth:30 topCapHeight:30] forState:UIControlStateNormal];
+                        button.imageView.contentMode = UIViewContentModeScaleAspectFill;
                         [button addTarget:self action:@selector(ChooseMorePictures:) forControlEvents:UIControlEventTouchUpInside];
                         [picturesView addSubview:button];
                     }
                 }
             }
             
-            theHeight += (65 + (i?9:0));
+            theHeight += (image_width + (i?10:0));
         }
     }
     
-    picturesView.frame = CGRectMake(0,0,320,theHeight);
+    picturesView.frame = CGRectMake(0,0,DEVICE_WIDTH,theHeight);
 }
 
 
@@ -716,7 +721,7 @@
     {
         myAlertView=[[FBQuanAlertView alloc]initWithFrame:CGRectMake(0,0,140,100)];
         
-        myAlertView.center=CGPointMake(160,(iPhone5?568/2:240)-70);
+        myAlertView.center=CGPointMake(DEVICE_WIDTH/2,DEVICE_HEIGHT/2-70);
         
         [myAlertView setType:FBQuanAlertViewTypeHaveJuhua thetext:@"最多只能选取9张图片"];
         
@@ -851,7 +856,7 @@
     
     
     myAlertView=[[FBQuanAlertView alloc]initWithFrame:CGRectMake(0,0,140,100)];
-    myAlertView.center=CGPointMake(160,(iPhone5?568/2:240)-70);
+    myAlertView.center=CGPointMake(DEVICE_WIDTH/2,DEVICE_HEIGHT/2-70);
     [myAlertView setType:FBQuanAlertViewTypeHaveJuhua thetext:@"正在发送....."];
     myAlertView.hidden=NO;
     [self.view addSubview:myAlertView];

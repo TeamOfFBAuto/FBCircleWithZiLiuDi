@@ -19,7 +19,7 @@
     {
         self.image = [UIImage imageNamed:@"qbasset_collection_chose.png"];
         
-        _label = [[UILabel alloc] initWithFrame:CGRectMake(81,3,23,20)];
+        _label = [[UILabel alloc] initWithFrame:CGRectMake((DEVICE_WIDTH-8)/3-23,3,23,20)];
         
         _label.backgroundColor = [UIColor clearColor];
         

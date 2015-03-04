@@ -120,7 +120,7 @@
             
             placeHolderButton.frame =  [UIScreen mainScreen].bounds;
             
-            placeHolderButton.center = CGPointMake(160,(iPhone5?568:480)/2);
+            placeHolderButton.center = CGPointMake(DEVICE_WIDTH/2,DEVICE_HEIGHT/2);
             
             [placeHolderButton setImage:[UIImage imageNamed:@"bigImagesPlaceHolder.png"] forState:UIControlStateNormal];
             

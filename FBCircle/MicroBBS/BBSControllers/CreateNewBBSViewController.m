@@ -109,7 +109,7 @@
     
     
     myAlertView = [[FBQuanAlertView alloc]  initWithFrame:CGRectMake(0,0,138,50)];
-    myAlertView.center = CGPointMake(160,(iPhone5?568:480)/2-70);
+    myAlertView.center = CGPointMake(DEVICE_WIDTH/2,DEVICE_HEIGHT/2-70);
     myAlertView.hidden = YES;
     [self.view addSubview:myAlertView];
     
@@ -314,7 +314,7 @@
     [inputView addSubview:line_view];
     
 ///输入论坛名字
-    name_tf = [[UITextView alloc] initWithFrame:CGRectMake(10,7,300,30)];
+    name_tf = [[UITextView alloc] initWithFrame:CGRectMake(10,7,DEVICE_WIDTH-20,30)];
     name_tf.backgroundColor = [UIColor whiteColor];
     name_tf.delegate = self;
     name_tf.returnKeyType = UIReturnKeyDone;
@@ -333,7 +333,7 @@
     [name_tf addSubview:name_placeHolder];
     
 ///输入论坛简介
-    introduction_tf = [[UITextView alloc] initWithFrame:CGRectMake(10,44.5,300,114)];
+    introduction_tf = [[UITextView alloc] initWithFrame:CGRectMake(10,44.5,DEVICE_WIDTH-20,114)];
     introduction_tf.textColor = [UIColor blackColor];
     introduction_tf.delegate = self;
     introduction_tf.returnKeyType = UIReturnKeyDone;
@@ -382,13 +382,13 @@
     
     if (theType == 1)///加载图片icon
     {
-        iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(280,9.5,25,25)];
+        iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(DEVICE_WIDTH-40,9.5,25,25)];
 //        iconImage.image = [UIImage imageNamed:@"defaultPlaceHolder.png"];//张少南  这里需要修改下默认图片
         [inputView addSubview:iconImage];
         inputView.hidden = YES;
     }else
     {
-        sub_label = [[UILabel alloc] initWithFrame:CGRectMake(150,0,140,frame.size.height)];
+        sub_label = [[UILabel alloc] initWithFrame:CGRectMake(DEVICE_WIDTH-170,0,140,frame.size.height)];
         sub_label.text = @"必选";
         sub_label.textAlignment = NSTextAlignmentRight;
         sub_label.backgroundColor = [UIColor clearColor];
@@ -397,7 +397,7 @@
         [inputView addSubview:sub_label];
         
         UIImageView * arrow_imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tablecell_acessory_image.png"]];
-        arrow_imageView.center = CGPointMake(298,frame.size.height/2);
+        arrow_imageView.center = CGPointMake(DEVICE_WIDTH-22,frame.size.height/2);
         [inputView addSubview:arrow_imageView];
     }
     
