@@ -213,13 +213,14 @@
             
             if (imageArr.count>0) {//图片数组里有东西
                 //取出第一张图片
-                dic = imageArr[0];
-                self.imaCount++;
+//                dic = imageArr[0];
+//                self.imaCount++;
                 
                 NSLog(@"_imaCount = %d",self.imaCount);
                 
-                NSString *str = [dic objectForKey:@"link"];
+//                NSString *str = [dic objectForKey:@"link"];
                 
+                NSString *str = imageArr[0];
                 NSLog(@"图片地址%@",str);
                 
                 //UIImageView *imv = [[UIImageView alloc]initWithFrame:CGRectMake(200-self.imaCount*65, 5, 60, 60)];
@@ -375,7 +376,7 @@
             
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn setTitle:@"发消息" forState:UIControlStateNormal];
-            btn.frame = CGRectMake(10, DEVICE_WIDTH>480?23:10, DEVICE_WIDTH, 42);
+            btn.frame = CGRectMake(10, DEVICE_WIDTH>480?23:10, DEVICE_WIDTH-20, 42);
             [btn addTarget:self action:@selector(faxiaoxi) forControlEvents:UIControlEventTouchUpInside];
             self.faxiaoxiBtn = btn;
             
@@ -387,7 +388,7 @@
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn setTitle:@"添加为好友" forState:UIControlStateNormal];
             [btn addTarget:self action:@selector(jiahaoyou) forControlEvents:UIControlEventTouchUpInside];
-            btn.frame = CGRectMake(10, DEVICE_WIDTH>480?23:10, DEVICE_WIDTH, 42);
+            btn.frame = CGRectMake(10, DEVICE_WIDTH>480?23:10, DEVICE_WIDTH-20, 42);
             
             self.jiahaoyouBtn = btn;
             
@@ -400,7 +401,7 @@
         if (theIndexPath.row == 6) {
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn setTitle:@"正在添加中" forState:UIControlStateNormal];
-            btn.frame = CGRectMake(10, DEVICE_WIDTH>480?23:10, DEVICE_WIDTH, 42);
+            btn.frame = CGRectMake(10, DEVICE_WIDTH>480?23:10, DEVICE_WIDTH-20, 42);
             
             self.jiahaoyouBtn = btn;
             self.jiahaoyouBtn.userInteractionEnabled = NO;
@@ -412,7 +413,7 @@
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn setTitle:@"接受" forState:UIControlStateNormal];
             [btn addTarget:self action:@selector(yaoqing) forControlEvents:UIControlEventTouchUpInside];
-            btn.frame = CGRectMake(10, DEVICE_WIDTH>480?23:10, DEVICE_WIDTH, 42);
+            btn.frame = CGRectMake(10, DEVICE_WIDTH>480?23:10, DEVICE_WIDTH-20, 42);
             
             self.yaoqingBtn = btn;
             

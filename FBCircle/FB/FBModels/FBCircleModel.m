@@ -102,18 +102,29 @@
 
 -(FBCircleModel *)initWithDictionary:(NSDictionary *)dic
 {
+    
+    
     self = [super init];
     if (self)
     {
+        
+        
         self.fb_tid = [NSString stringWithFormat:@"%@",[dic objectForKey:@"tid"]];
         self.fb_uid = [NSString stringWithFormat:@"%@",[dic objectForKey:@"uid"]];
         self.fb_username = [NSString stringWithFormat:@"%@",[dic objectForKey:@"username"]];
         self.fb_content = [ZSNApi cleanHTMLWithString:[ZSNApi ddecodeSpecialCharactersStringWith:[NSString stringWithFormat:@"%@",[dic objectForKey:@"content"]]]];
+        
         self.fb_imageid = [NSString stringWithFormat:@"%@",[dic objectForKey:@"imageid"]];
+        
+        
+        
         if ([self.fb_imageid isEqualToString:@"<null>"] || [self.fb_imageid isEqual:[NSNull null]])
         {
             self.fb_imageid = @"";
         }
+        
+        
+        
         
         if ([[dic objectForKey:FB_IMAGEID] isEqualToString:@"0"]) {
             self.fb_image = [NSMutableArray array];

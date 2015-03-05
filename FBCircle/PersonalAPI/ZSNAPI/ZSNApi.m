@@ -741,12 +741,23 @@
 #pragma mark - 去除所有html标签
 +(NSString *)cleanHTMLWithString:(NSString *)string
 {
+    
+    
+    //终于找到你了 
+    
     NSString *regex_email = @"<([^>]*)>";
     NSArray *array_email = [string componentsMatchedByRegex:regex_email];
      NSMutableDictionary * aDic = [NSMutableDictionary dictionary];
     if ([string rangeOfString:@"<a>"].length && [string rangeOfString:@"</a>"].length)
     {
+        
+        NSLog(@"xxxsss==%@",string);
+        
         NSString * title = [[string substringToIndex:[string rangeOfString:@"</a>"].location] substringFromIndex:[string rangeOfString:@"<a>"].location+3];
+        
+        
+        
+        
         [aDic setObject:@"主题" forKey:title];
     }
     string.myDic = [NSMutableDictionary dictionaryWithDictionary:aDic];
@@ -774,8 +785,21 @@
             NSArray * array = [aStr componentsSeparatedByString:@"\""];
             if (array.count > 2)
             {
+                
+                
+                /*#<a id="1154285" >@eAndroid</a> [晕] [晕] [晕] 请输入话题名称#分享论坛：“步入土家苗寨，感受侗家年味”，链接：<a href="http://fb.cn/u/OIO"> http://fb.cn/u/OIO</a>*/
+                
+                /*#@eAndroid [晕] [晕] [晕] 请输入话题名称#分享论坛：“步入土家苗寨，感受侗家年味”，链接：<a href="http://fb.cn/u/OIO"> http://fb.cn/u/OIO*/
+                
                 NSString * url = [array objectAtIndex:1];
+                
+                
                 NSString * title = [[string substringToIndex:[string rangeOfString:@"</a>"].location] substringFromIndex:[string rangeOfString:aStr].location+aStr.length];
+                
+
+                
+                
+                
                 [aDic setObject:url forKey:title];
                 
             }

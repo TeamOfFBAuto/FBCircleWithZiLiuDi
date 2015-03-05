@@ -894,8 +894,8 @@
 //            
 //        }];
         NSString *zujiStr = @"http://fb.fblife.com/openapi/index.php?mod=getweibo&code=mylist&fromtype=b5eeec0b&authkey=%@&page=%d&fbtype=json&uid=%@";
-        NSString* fullURL = [NSString stringWithFormat:zujiStr,[SzkAPI getAuthkeyGBK],1,[SzkAPI getUid]];
-        NSLog(@"请求足迹接口 : %@",fullURL);
+        NSString* fullURL = [NSString stringWithFormat:zujiStr,[SzkAPI getAuthkeyGBK],1,self.passUserid];
+        NSLog(@"请求个人文章接口 : %@",fullURL);
         ASIHTTPRequest * weiBo_request = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:fullURL]];
         [weiBo_request setPersistentConnectionTimeoutSeconds:60];
         [weiBo_request startAsynchronous];
@@ -906,25 +906,63 @@
             
             if ([@"0" isEqualToString:errcode])
             {
+                
+                
                 NSDictionary* userinfo = [rootObject objectForKey:@"weiboinfo"];
                 
                 NSLog(@"-----%@",userinfo);
                 
-                NSMutableArray *array = [NSMutableArray arrayWithCapacity:1];
+                
                 NSArray * arr = [ZSNApi sortArrayWith:[userinfo allKeys]];
-                NSMutableArray * temp = [NSMutableArray array];
+                NSMutableArray * temp = [NSMutableArray arrayWithCapacity:1];
+                
                 for (int i = 0;i < arr.count;i++) {
-                    NSString * key = [NSString stringWithFormat:@"%@",[arr objectAtIndex:i]];
-                    FBCircleModel * model = [[FBCircleModel alloc] initWithDictionary:[userinfo objectForKey:key]];
-                    [temp addObject:model];
+                    
+                    
+                    
+                    
+                    @try {
+                        NSString * key = [NSString stringWithFormat:@"%@",[arr objectAtIndex:i]];
+                        NSLog(@"%@",key);
+                        FBCircleModel * model = [[FBCircleModel alloc] initWithDictionary:[userinfo objectForKey:key]];
+                       [temp addObject:model];
+                    }
+                    @catch (NSException *exception) {
+                        
+                        
+                        
+                        
+                        NSLog(@"exception===%@",exception);
+                    }
+                    @finally {
+                        
+                        
+                        
+                    }
+                    
+                    
+                   
+                    
+                    
+                    
+                    
+                    
                 }
-                [array addObjectsFromArray:temp];
-                bself.wenzhangArray = array;
+                NSLog(@"temp.count:%d",temp.count);
+                
+                NSLog(@"111");
+                
+                bself.wenzhangArray = temp;
 
                 isLoadWenzhangInfoSuccess = YES;
                 if (isLoadWenzhangInfoSuccess && isLoadUserInfoSuccess) {
                     [bself hudWasHidden:bhud];
                 }
+                
+                
+                
+                
+                
                 
             }
             
