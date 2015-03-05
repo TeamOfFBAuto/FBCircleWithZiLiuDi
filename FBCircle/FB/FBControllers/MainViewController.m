@@ -113,8 +113,8 @@
     */
     
     ///张少南 这里需要换成正式数据
-    NSString* fullURL = [NSString stringWithFormat:FB_WEIBOMYSELF_URL,[SzkAPI getAuthkey],currentPage];
-//    NSString * fullURL = [NSString stringWithFormat:@"http://t.fblife.com/openapi/index.php?mod=getweibo_quan&code=myfeed&fromtype=b5eeec0b&authkey=%@&page=%d&fbtype=json",[SzkAPI getAuthkeyGBK],currentPage];
+//    NSString* fullURL = [NSString stringWithFormat:FB_WEIBOMYSELF_URL,[SzkAPI getAuthkey],currentPage];
+    NSString * fullURL = [NSString stringWithFormat:@"http://t.fblife.com/openapi/index.php?mod=getweibo_quan&code=myfeed&fromtype=b5eeec0b&authkey=%@&page=%d&fbtype=json",@"X2tbP1czVTEAMVAzDHcCb1orUiZbbQI+CGk=",currentPage];
 
     NSLog(@"请求微博url---%@",fullURL);
     

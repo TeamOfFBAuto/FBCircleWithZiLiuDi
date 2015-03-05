@@ -44,12 +44,12 @@
 -(void)setNavgationBar
 {
     
-    navImageView = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,64)];
+    navImageView = [[UIView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,64)];
     navImageView.backgroundColor = RGBCOLOR(229,229,229);
     [self.view addSubview:navImageView];
     
     
-    UIImageView * daohangView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,320,64)];
+    UIImageView * daohangView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,64)];
     daohangView.image = FBCIRCLE_NAVIGATION_IMAGE;
     daohangView.userInteractionEnabled = YES;
     [navImageView addSubview:daohangView];
@@ -68,7 +68,7 @@
     title_label.font = TITLEFONT;
     title_label.textAlignment = NSTextAlignmentCenter;
     title_label.textColor = [UIColor whiteColor];//RGBCOLOR(91,138,59);
-    title_label.center = CGPointMake(160,42);
+    title_label.center = CGPointMake(DEVICE_WIDTH/2,42);
     [daohangView addSubview:title_label];
     
     
@@ -77,7 +77,7 @@
     chooseButton.frame = CGRectMake(0,0,30,30);
     [chooseButton setImage:[UIImage imageNamed:@"baocun40_48.png"] forState:UIControlStateNormal];
     [chooseButton addTarget:self action:@selector(SavePicturesClick:) forControlEvents:UIControlEventTouchUpInside];
-    chooseButton.center = CGPointMake(295,42);
+    chooseButton.center = CGPointMake(DEVICE_WIDTH-25,42);
     [daohangView addSubview:chooseButton];
     
 }
@@ -101,7 +101,7 @@
     
     [myAlertView setType:FBQuanAlertViewTypeNoJuhua thetext:@"保存图片成功"];
     
-    myAlertView.center = CGPointMake(160,(iPhone5?568:480)/2-20);
+    myAlertView.center = CGPointMake(DEVICE_WIDTH/2,DEVICE_HEIGHT/2-20);
     
     [self.view addSubview:myAlertView];
 
@@ -141,22 +141,22 @@
     self.title = [NSString stringWithFormat:@"%d/%d",_currentPage+1,self.allImagesUrlArray.count];
     
     
-    _myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,340,iPhone5?568:480)];
+    _myScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH+20,DEVICE_HEIGHT)];
     _myScrollView.delegate = self;
     _myScrollView.pagingEnabled = YES;
     _myScrollView.backgroundColor = RGBCOLOR(242,242,242);
     _myScrollView.showsHorizontalScrollIndicator = NO;
     _myScrollView.showsHorizontalScrollIndicator = NO;
-    _myScrollView.contentSize = CGSizeMake(340*self.allImagesUrlArray.count,0);
+    _myScrollView.contentSize = CGSizeMake((DEVICE_WIDTH+20)*self.allImagesUrlArray.count,0);
     [self.view addSubview:_myScrollView];
     
-    _myScrollView.contentOffset = CGPointMake(340*_currentPage,0);
+    _myScrollView.contentOffset = CGPointMake((DEVICE_WIDTH+20)*_currentPage,0);
     
     if ([[self.allImagesUrlArray objectAtIndex:0] isKindOfClass:[UIImage class]])
     {
         for (int i = 0;i < self.allImagesUrlArray.count;i++)
         {
-            QBShowImagesScrollView * scrollView = [[QBShowImagesScrollView alloc] initWithFrame:CGRectMake(340*i,0,320,_myScrollView.frame.size.height) WithUrl:@""];
+            QBShowImagesScrollView * scrollView = [[QBShowImagesScrollView alloc] initWithFrame:CGRectMake((DEVICE_WIDTH+20)*i,0,DEVICE_WIDTH,_myScrollView.frame.size.height) WithUrl:@""];
             scrollView.aDelegate = self;
             scrollView.tag = 1000+i;
             scrollView.locationImageView.image = [self.allImagesUrlArray objectAtIndex:i];
@@ -174,7 +174,7 @@
                 string=[string stringByReplacingOccurrencesOfString:@"small" withString:@"ori"];
             }
             
-            QBShowImagesScrollView * scrollView = [[QBShowImagesScrollView alloc] initWithFrame:CGRectMake(340*i,0,320,_myScrollView.frame.size.height) WithUrl:string];
+            QBShowImagesScrollView * scrollView = [[QBShowImagesScrollView alloc] initWithFrame:CGRectMake((DEVICE_WIDTH+20)*i,0,DEVICE_WIDTH,_myScrollView.frame.size.height) WithUrl:string];
             scrollView.aDelegate = self;
             scrollView.tag = 1000+i;
             scrollView.backgroundColor = RGBCOLOR(242,242,242);

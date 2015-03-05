@@ -240,6 +240,7 @@
 
 -(void)dealloc
 {
+    [super dealloc];
     _locationImageView.delegate = nil;
     
     _locationImageView.image = nil;
