@@ -56,7 +56,7 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     
-    
+    _wenzhangArray = [NSMutableArray array];
     _currentPage = 1;
     
     //接收通知
@@ -89,7 +89,7 @@
     
     
     //主tableveiw
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?568-64:480-44) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, iPhone5?DEVICE_HEIGHT-64:DEVICE_HEIGHT-44) style:UITableViewStyleGrouped];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     
@@ -125,7 +125,7 @@
     
     //下拉刷新
     
-    _refreshHeaderView = [[EGORefreshTableHeaderView alloc]initWithFrame:CGRectMake(0, 0-_tableView.bounds.size.height, 320, _tableView.bounds.size.height)];
+    _refreshHeaderView = [[EGORefreshTableHeaderView alloc]initWithFrame:CGRectMake(0, 0-_tableView.bounds.size.height, DEVICE_WIDTH, _tableView.bounds.size.height)];
     _refreshHeaderView.delegate = self;
     [_tableView addSubview:_refreshHeaderView];
     _currentPage = 1;
@@ -135,7 +135,7 @@
     
     
     //上提加载更多
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 40)];
     _upMoreView = [[LoadingIndicatorView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
     _upMoreView.type = 1;
     _upMoreView.hidden = YES;
@@ -233,12 +233,7 @@
 
 #pragma mark - 请求网络数据
 -(void)prepareNetDataWithPage:(int)thePage{
-    
-    
-    
-//    [_tableView reloadData];
-    
-//    __weak typeof (_tableView)btableView = _tableView;
+   
     
     @try {
         _wzRefresh = NO;
@@ -248,23 +243,64 @@
         __weak typeof (self)bself = self;
         
         //请求文章信息=======================================================
-        self.wenzhangModel = [[FBCircleModel alloc]init];
-        
-        [self.wenzhangModel initHttpRequestWithUid:[SzkAPI getUid] Page:thePage WithType:2 WithCompletionBlock:^(NSMutableArray *array) {
+        NSString *zujiStr = @"http://fb.fblife.com/openapi/index.php?mod=getweibo&code=mylist&fromtype=b5eeec0b&authkey=%@&page=%d&fbtype=json&uid=%@";
+        NSString* fullURL = [NSString stringWithFormat:zujiStr,[SzkAPI getAuthkeyGBK],_currentPage,[SzkAPI getUid]];
+        NSLog(@"请求足迹接口 : %@",fullURL);
+        ASIHTTPRequest * weiBo_request = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:fullURL]];
+        [weiBo_request setPersistentConnectionTimeoutSeconds:60];
+        [weiBo_request startAsynchronous];
+        __weak typeof(weiBo_request)wRequest = weiBo_request;
+        [wRequest setCompletionBlock:^{
+            [self doneLoadingTableViewData];
+            NSDictionary * rootObject = [[NSDictionary alloc] initWithDictionary:[weiBo_request.responseData objectFromJSONData]];
+            NSString *errcode =[NSString stringWithFormat:@"%@",[rootObject objectForKey:ERRCODE]];
             
-            
+            if ([@"0" isEqualToString:errcode])
+            {
+                NSDictionary* userinfo = [rootObject objectForKey:@"weiboinfo"];
+                
+                NSLog(@"-----%@",userinfo);
+                
+                NSArray * arr = [ZSNApi sortArrayWith:[userinfo allKeys]];
+                NSMutableArray * temp = [NSMutableArray array];
+                for (int i = 0;i < arr.count;i++) {
+                    NSString * key = [NSString stringWithFormat:@"%@",[arr objectAtIndex:i]];
+                    FBCircleModel * model = [[FBCircleModel alloc] initWithDictionary:[userinfo objectForKey:key]];
+                    [temp addObject:model];
+                }
+                [_wenzhangArray addObjectsFromArray:temp];
                 //数据持久化 缓存
                 if (thePage == 1) {
-                    [bself saveWenzhangDataWithArray:array];
-                    
+                    [bself saveWenzhangDataWithArray:_wenzhangArray];
                 }
+                [bself loadWenZhangBlockWithArray:_wenzhangArray];
+                
+            }
             
-            [bself loadWenZhangBlockWithArray:array];
-            
-        } WithFailedBlock:^(NSString *operation) {
             
             
         }];
+        
+        [wRequest setFailedBlock:^{
+            [ZSNApi showAutoHiddenMBProgressWithText:@"加载失败" addToView:self.view];
+            [self doneLoadingTableViewData];
+            [_tableView reloadData];
+        }];
+        
+//        self.wenzhangModel = [[FBCircleModel alloc]init];
+//        [self.wenzhangModel initHttpRequestWithUid:[SzkAPI getUid] Page:thePage WithType:2 WithCompletionBlock:^(NSMutableArray *array) {           
+//                //数据持久化 缓存
+//                if (thePage == 1) {
+//                    [bself saveWenzhangDataWithArray:array];
+//                    
+//                }
+//            
+//            [bself loadWenZhangBlockWithArray:array];
+//            
+//        } WithFailedBlock:^(NSString *operation) {
+//            
+//            
+//        }];
         
         
         
@@ -289,6 +325,52 @@
     
 }
 
+//-(void)dotheSuccessloadDtat:(NSDictionary *)userinfo{
+//    
+//    if (_currentPage != 1)
+//    {
+//        if ([userinfo isEqual:[NSNull null]])
+//        {
+//            [_tableView reloadData];
+//            return;
+//        }
+//    }else
+//    {
+//        [_wenzhangArray removeAllObjects];
+//    }
+//    
+//    if ([userinfo isEqual:[NSNull null]])
+//    {
+//        //如果没有微博的话
+//        [_tableView reloadData];
+//        return;
+//    }else
+//    {
+//        
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
+//            
+//            NSArray * arr = [ZSNApi sortArrayWith:[userinfo allKeys]];
+//            NSMutableArray * temp = [NSMutableArray array];
+//            for (int i = 0;i < arr.count;i++) {
+//                NSString * key = [NSString stringWithFormat:@"%@",[arr objectAtIndex:i]];
+//                FBCircleModel * model = [[FBCircleModel alloc] initWithDictionary:[userinfo objectForKey:key]];
+//                [temp addObject:model];
+//            }
+//            
+//            
+//            [_wenzhangArray addObjectsFromArray:temp];
+//            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [_tableView reloadData];
+//            });
+//        });
+//        
+//        
+//        
+//    }
+//    
+//    
+//}
 
 
 //多线程缓存文件到数据库
@@ -581,45 +663,6 @@
 
 
 
-//今天、加号部分
-
-//- (UIView *)photoAdd
-//{
-//    UIView *view = [[UIView alloc]initWithFrame:CGRectZero];
-//    
-//        view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 103)];
-//        view.backgroundColor = [UIColor whiteColor];
-//        
-//        //今天label
-//        UILabel *todayLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 57, 35)];
-//        [todayLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:28]];
-//        todayLabel.text = @"今天";
-//        [view addSubview:todayLabel];
-//        
-//        //加号
-//        GavatarView *addView = [[GavatarView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(todayLabel.frame)+15, 0, 75, 75)];
-//        addView.userInteractionEnabled = YES;
-//        
-//        
-//        _actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从手机相册选择",@"说说", nil];
-//        _actionSheet.tag = 100;
-//        __weak typeof (_actionSheet)bactionSheet = _actionSheet;
-//        
-//        __weak typeof (self)bself = self;
-//        [addView setAvatarClickedBlock:^{
-//            
-//            [bactionSheet showInView:bself.view];
-//            
-//        }];
-//        addView.image = [UIImage imageNamed:@"tianjia-150_150.png"];
-//        [view addSubview:addView];
-//        
-//    
-//    //view.backgroundColor = [UIColor redColor];
-//    return view;
-//}
-
-
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView *view = [[UIView alloc]initWithFrame:CGRectZero];
@@ -636,9 +679,6 @@
         //加号
         GavatarView *addView = [[GavatarView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(todayLabel.frame)+15, 0, 75, 75)];
         addView.userInteractionEnabled = YES;
-        
-        
-//        _actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从手机相册选择",@"说说", nil];
         
         _actionSheet = [[GcustomActionSheet alloc]initWithTitle:nil buttonTitles:@[@"拍照",@"从手机相册选择",@"说说"] buttonColor:RGBCOLOR(31,188,34) CancelTitle:@"取消" CancelColor:[UIColor whiteColor] actionBackColor:RGBCOLOR(236, 237, 241)];
         _actionSheet.delegate = self;

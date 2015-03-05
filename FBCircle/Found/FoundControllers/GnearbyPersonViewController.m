@@ -80,7 +80,7 @@
     titleLabel2.text = @"这需要使用您当前的位置。";
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(16, CGRectGetMaxY(titleLabel2.frame)+35, 320-16-16, 42);
+    btn.frame = CGRectMake(16, CGRectGetMaxY(titleLabel2.frame)+35, DEVICE_WIDTH-16-16, 42);
     btn.backgroundColor = RGBCOLOR(36, 192, 38);
     btn.layer.cornerRadius = 4;
     btn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
@@ -98,7 +98,7 @@
     if ([CLLocationManager locationServicesEnabled]==NO) {
         [[[UIAlertView alloc] initWithTitle:@"提示" message:@"无法获取您的位置信息，若要使用该功能，请到手机系统的设置-隐私-定位服务中打开定位服务，并允许fb使用定位服务。" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil] show];
     }else{
-        _tableView = [[GMRefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5 ? (568-64):(480-64))];
+        _tableView = [[GMRefreshTableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, iPhone5 ? (DEVICE_HEIGHT-64):(DEVICE_HEIGHT-64))];
         _tableView.refreshDelegate = self;
         _tableView.dataSource = self;
 //        _tableView.separatorInset = UIEdgeInsetsZero;

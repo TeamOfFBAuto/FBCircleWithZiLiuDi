@@ -64,11 +64,11 @@
             UIImageView *jiantou = [[UIImageView alloc]init];
             
             if (theIndexPath.row == 3){//地区
-                jiantou.frame = CGRectMake(303, 14, 8, 13);
+                jiantou.frame = CGRectMake(DEVICE_WIDTH-17, 14, 8, 13);
             }else if (theIndexPath.row == 4){//个性签名
-                jiantou.frame = CGRectMake(303, 20, 8, 13);
+                jiantou.frame = CGRectMake(DEVICE_WIDTH-17, 20, 8, 13);
             }else if (theIndexPath.row == 5){//足迹
-                jiantou.frame = CGRectMake(303, 35, 8, 13);
+                jiantou.frame = CGRectMake(DEVICE_WIDTH-17, 35, 8, 13);
             }
             
             [jiantou setImage:[UIImage imageNamed:@"tixiang-jiantou-16_26.png"]];
@@ -84,7 +84,7 @@
     if (theIndexPath.row == 0) {//头像
         titel.frame = CGRectMake(17, 23, 35, 30);
         titel.text = @"头像";
-        self.touxiangImaView = [[GavatarView alloc]initWithFrame:CGRectMake(244, 8, 64, 64)];
+        self.touxiangImaView = [[GavatarView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH-12-64, 8, 64, 64)];
         self.touxiangImaView.layer.cornerRadius = 5;
         self.touxiangImaView.layer.borderWidth = 0.5;
         self.touxiangImaView.layer.borderColor = [RGBCOLOR(196, 196, 196) CGColor];
@@ -343,7 +343,7 @@
     if (theGRXXtype == GRXX1) {//自己
         if (theIndexPath.row == 6) {
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = CGRectMake(10, iPhone5?23:10, 300, 42);
+            btn.frame = CGRectMake(10, DEVICE_WIDTH>480?23:10, DEVICE_WIDTH-20, 42);
             
 //            btn.layer.cornerRadius = 5;//设置那个圆角的有多圆
 //            btn.layer.borderWidth = 0.5;//设置边框的宽度，当然可以不要
@@ -375,7 +375,7 @@
             
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn setTitle:@"发消息" forState:UIControlStateNormal];
-            btn.frame = CGRectMake(10, iPhone5?23:10, 300, 42);
+            btn.frame = CGRectMake(10, DEVICE_WIDTH>480?23:10, DEVICE_WIDTH, 42);
             [btn addTarget:self action:@selector(faxiaoxi) forControlEvents:UIControlEventTouchUpInside];
             self.faxiaoxiBtn = btn;
             
@@ -387,7 +387,7 @@
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn setTitle:@"添加为好友" forState:UIControlStateNormal];
             [btn addTarget:self action:@selector(jiahaoyou) forControlEvents:UIControlEventTouchUpInside];
-            btn.frame = CGRectMake(10, iPhone5?23:10, 300, 42);
+            btn.frame = CGRectMake(10, DEVICE_WIDTH>480?23:10, DEVICE_WIDTH, 42);
             
             self.jiahaoyouBtn = btn;
             
@@ -400,7 +400,7 @@
         if (theIndexPath.row == 6) {
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn setTitle:@"正在添加中" forState:UIControlStateNormal];
-            btn.frame = CGRectMake(10, iPhone5?23:10, 300, 42);
+            btn.frame = CGRectMake(10, DEVICE_WIDTH>480?23:10, DEVICE_WIDTH, 42);
             
             self.jiahaoyouBtn = btn;
             self.jiahaoyouBtn.userInteractionEnabled = NO;
@@ -412,7 +412,7 @@
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             [btn setTitle:@"接受" forState:UIControlStateNormal];
             [btn addTarget:self action:@selector(yaoqing) forControlEvents:UIControlEventTouchUpInside];
-            btn.frame = CGRectMake(10, iPhone5?23:10, 300, 42);
+            btn.frame = CGRectMake(10, DEVICE_WIDTH>480?23:10, DEVICE_WIDTH, 42);
             
             self.yaoqingBtn = btn;
             

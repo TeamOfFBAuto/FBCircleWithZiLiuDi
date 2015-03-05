@@ -756,9 +756,19 @@
         aDic = nil;
         return string;
     }
+    
+  //  @"#<a id=\"1154285\" >@eAndroid</a> [晕] [晕] [晕] 请输入话题名称#分享论坛：“步入土家苗寨，感受侗家年味”，链接：<a href=\"http://fb.cn/u/OIO\"> http://fb.cn/u/OIO</a>"
    
-    for (NSString * aStr in array_email)
+    for (int i = 0;i < array_email.count;i++)
     {
+        NSString * aStr = [array_email objectAtIndex:i];
+        
+        if ([aStr isEqualToString:@"</a>"] && i+1 <array_email.count)
+        {
+            string = [[string substringToIndex:string.length] substringFromIndex:[string rangeOfString:@"</a>"].location+4];
+            continue;
+        }
+        
         if ([aStr rangeOfString:@"<a "].length)
         {
             NSArray * array = [aStr componentsSeparatedByString:@"\""];
@@ -767,12 +777,39 @@
                 NSString * url = [array objectAtIndex:1];
                 NSString * title = [[string substringToIndex:[string rangeOfString:@"</a>"].location] substringFromIndex:[string rangeOfString:aStr].location+aStr.length];
                 [aDic setObject:url forKey:title];
+                
             }
         }
         
         string = [string stringByReplacingOccurrencesOfString:aStr withString:@""];
     }
+    
+//    for (NSString * aStr in array_email)
+//    {
+//        if ([aStr isEqualToString:@"</a>"])
+//        {
+//            string = [[string substringToIndex:string.length] substringFromIndex:[string rangeOfString:@"</a>"].location+4];
+//            continue;
+//        }
+//        
+//        if ([aStr rangeOfString:@"<a "].length)
+//        {
+//            NSArray * array = [aStr componentsSeparatedByString:@"\""];
+//            if (array.count > 2)
+//            {
+//                NSString * url = [array objectAtIndex:1];
+//                NSString * title = [[string substringToIndex:[string rangeOfString:@"</a>"].location] substringFromIndex:[string rangeOfString:aStr].location+aStr.length];
+//                [aDic setObject:url forKey:title];
+//                
+//            }
+//        }
+//        
+//        string = [string stringByReplacingOccurrencesOfString:aStr withString:@""];
+//    }
+    
     string.myDic = [NSMutableDictionary dictionaryWithDictionary:aDic];
+    
+    
     [aDic removeAllObjects];
     aDic = nil;
     return string;

@@ -19,11 +19,11 @@
     if (self) {
         // Initialization code
         
-        hh_view = [[UIView alloc]initWithFrame:CGRectMake(8, 0, 304, 69)];
+        hh_view = [[UIView alloc]initWithFrame:CGRectMake(8, 0, DEVICE_WIDTH - 16, 69)];
         hh_view.backgroundColor = [UIColor whiteColor];
         [self addSubview:hh_view];
         
-        self.topLine = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 304, 1.f)];
+        self.topLine = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH - 16, 1.f)];
         _topLine.backgroundColor = COLOR_TABLE_LINE;
         [hh_view addSubview:_topLine];
         

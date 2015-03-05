@@ -52,7 +52,7 @@
     CGFloat height = 0;
     
     //顶部view
-    self.topImageView = [[GavatarView alloc]initWithFrame:CGRectMake(0, 0, 320, 256)];
+    self.topImageView = [[GavatarView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 256)];
     self.topImageView.backgroundColor = [UIColor grayColor];
     
     
@@ -97,7 +97,7 @@
     
     
     //头像下面带边框的view
-    UIView *backUserFaceView = [[UIView alloc]initWithFrame:CGRectMake(234.5, 205.5, 75, 75)];
+    UIView *backUserFaceView = [[UIView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH-10-75, 205.5, 75, 75)];
     backUserFaceView.layer.cornerRadius = 5;
     backUserFaceView.backgroundColor = [UIColor whiteColor];
     backUserFaceView.layer.borderWidth = 0.5;
@@ -358,7 +358,7 @@
         float gao = MAX(CGRectGetMaxY(rfb_content.frame), CGRectGetMaxY(picsView.frame)+5);
         CGFloat left = 83.f;
         CGFloat right = 12.f;
-        CGFloat aWidth = 320 - right - left;
+        CGFloat aWidth = DEVICE_WIDTH - right - left;
         view.frame = CGRectMake(left, 0, aWidth, gao);
         _cellHeight = gao+4;
     }else{
@@ -436,7 +436,7 @@
             
             CGFloat left = 83.f;
             CGFloat right = 12.f;
-            CGFloat aWidth = 320 - right - left;
+            CGFloat aWidth = DEVICE_WIDTH - right - left;
             
             view.frame = CGRectMake(left, 0, aWidth, gao);
             _cellHeight = gao+4;
@@ -551,7 +551,7 @@
             
             CGFloat left = 83.f;
             CGFloat right = 12.f;
-            CGFloat aWidth = 320 - right - left;
+            CGFloat aWidth = DEVICE_WIDTH - right - left;
             if (wenzhang.fb_image.count>0) {
                 view.frame = CGRectMake(left, 0, aWidth, gao);
             }else{

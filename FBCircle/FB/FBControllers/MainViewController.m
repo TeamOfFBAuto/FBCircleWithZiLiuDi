@@ -303,6 +303,13 @@
 
 - (void)viewDidLoad
 {
+   /// #<a id="1154285" >@eAndroid</a> [晕] [晕] [晕] 请输入话题名称#分享论坛：“步入土家苗寨，感受侗家年味”，链接：<a href="http://fb.cn/u/OIO"> http://fb.cn/u/OIO</a>*/
+    
+    NSString * aaaaaaa = @"#<a id=\"1154285\" >@eAndroid</a> [晕] [晕] [晕] 请输入话题名称#分享论坛：“步入土家苗寨，感受侗家年味”，链接：<a href=\"http://fb.cn/u/OIO\"> http://fb.cn/u/OIO</a>";
+    
+    [ZSNApi cleanHTMLWithString:aaaaaaa];
+    
+    
     [super viewDidLoad];
     loadsucess=YES;
 
