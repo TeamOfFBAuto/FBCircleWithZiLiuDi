@@ -398,8 +398,9 @@
             if (wenzhang.rfb_image.count >0) {
                 picsView.frame = CGRectMake(5, CGRectGetMaxY(fb_content.frame)+9, 40, 40);
                 UIImageView *imv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, picsView.frame.size.width, picsView.frame.size.height)];
-                NSDictionary *dic = wenzhang.rfb_image[0];
-                NSString *link = [dic objectForKey:@"link"];
+//                NSDictionary *dic = wenzhang.rfb_image[0];
+//                NSString *link = [dic objectForKey:@"link"];
+                NSString *link = wenzhang.rfb_image[0];
                 [imv setImageWithURL:[NSURL URLWithString:link] placeholderImage:nil];
                 [picsView addSubview:imv];
                 
@@ -458,8 +459,9 @@
             if (wenzhang.fb_image.count >0) {
                 picsView.frame = CGRectMake(0, 0, 75, 75);
                 UIImageView *imv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, picsView.frame.size.width, picsView.frame.size.height)];
-                NSDictionary *dic = wenzhang.fb_image[0];
-                NSString *link = [dic objectForKey:@"link"];
+//                NSDictionary *dic = wenzhang.fb_image[0];
+//                NSString *link = [dic objectForKey:@"link"];
+                NSString *link = wenzhang.fb_image[0];
                 
                 [imv setImageWithURL:[NSURL URLWithString:link] placeholderImage:nil];
                 [picsView addSubview:imv];

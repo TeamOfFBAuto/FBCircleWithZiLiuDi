@@ -435,6 +435,10 @@
         
         [self doneLoadingTableViewData];
     }
+    
+   
+    NSLog(@"%d",self.wenzhangTimeArray.count);
+    
 }
 
 
