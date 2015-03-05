@@ -113,8 +113,8 @@
     */
     
     ///张少南 这里需要换成正式数据
-//    NSString* fullURL = [NSString stringWithFormat:FB_WEIBOMYSELF_URL,[SzkAPI getAuthkey],currentPage];
-    NSString * fullURL = [NSString stringWithFormat:@"http://t.fblife.com/openapi/index.php?mod=getweibo_quan&code=myfeed&fromtype=b5eeec0b&authkey=%@&page=%d&fbtype=json",@"X2tbP1czVTEAMVAzDHcCb1orUiZbbQI+CGk=",currentPage];
+    NSString* fullURL = [NSString stringWithFormat:FB_WEIBOMYSELF_URL,[SzkAPI getAuthkey],currentPage];
+//    NSString * fullURL = [NSString stringWithFormat:@"http://t.fblife.com/openapi/index.php?mod=getweibo_quan&code=myfeed&fromtype=b5eeec0b&authkey=%@&page=%d&fbtype=json",@"X2tbP1czVTEAMVAzDHcCb1orUiZbbQI+CGk=",currentPage];
 
     NSLog(@"请求微博url---%@",fullURL);
     
@@ -303,13 +303,6 @@
 
 - (void)viewDidLoad
 {
-   /// #<a id="1154285" >@eAndroid</a> [晕] [晕] [晕] 请输入话题名称#分享论坛：“步入土家苗寨，感受侗家年味”，链接：<a href="http://fb.cn/u/OIO"> http://fb.cn/u/OIO</a>*/
-    
-    NSString * aaaaaaa = @"#<a id=\"1154285\" >@eAndroid</a> [晕] [晕] [晕] 请输入话题名称#分享论坛：“步入土家苗寨，感受侗家年味”，链接：<a href=\"http://fb.cn/u/OIO\"> http://fb.cn/u/OIO</a>";
-    
-    [ZSNApi cleanHTMLWithString:aaaaaaa];
-    
-    
     [super viewDidLoad];
     loadsucess=YES;
 
