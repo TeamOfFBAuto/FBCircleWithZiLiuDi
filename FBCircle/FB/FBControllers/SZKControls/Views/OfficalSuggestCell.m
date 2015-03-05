@@ -57,7 +57,7 @@
     
     _resourceLabel.frame=CGRectMake(71, (self.frame.size.height-20)/2, 200, 20);
     
-    _typeButton.frame=CGRectMake(256, 20, 50, 30);
+    _typeButton.frame=CGRectMake(DEVICE_WIDTH - 320 + 256, 20, 50, 30);
     
     
 }
@@ -73,7 +73,7 @@
     
     NSLog(@"face===%@",themodel.face);
     
-    [_headImageV setImageWithURL:[NSURL URLWithString:themodel.face] placeholderImage:[UIImage imageNamed:@"headimg150_150.png"]
+    [_headImageV sd_setImageWithURL:[NSURL URLWithString:themodel.face] placeholderImage:[UIImage imageNamed:@"headimg150_150.png"]
      ];
     
     _namelabel.text=themodel.username;

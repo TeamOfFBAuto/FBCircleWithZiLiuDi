@@ -16,7 +16,7 @@
     if (self) {
         
         self.frame=CGRectMake(0, 0, 220, 120);
-        self.center=CGPointMake(160, iPhone5?(-80+568)/2:480/2);
+        self.center=CGPointMake(DEVICE_WIDTH/2.f, DEVICE_HEIGHT/2);
         
         self.backgroundColor=[RGBCOLOR(20, 20, 30)colorWithAlphaComponent:0.6];
         
@@ -48,7 +48,7 @@
     switch (thetype) {
         case FBQuanAlertViewTypeHaveJuhua:
         {
-            self.frame=CGRectMake(50, iPhone5?(-120+568/2):-120+480/2, 220, 120);
+            self.frame=CGRectMake(50, -120 + DEVICE_HEIGHT/2, 220, 120);
 
             _juhuazhuan.hidden=NO;
             
@@ -61,7 +61,7 @@
             break;
         case FBQuanAlertViewTypeNoJuhua:
         {
-            self.frame=CGRectMake(50, iPhone5?(-120+568/2):-120+480/2, 220, 40);
+            self.frame=CGRectMake(50, (-120+DEVICE_HEIGHT/2), 220, 40);
 
             
             _juhuazhuan.hidden=YES;

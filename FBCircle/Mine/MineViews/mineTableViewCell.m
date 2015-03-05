@@ -63,18 +63,18 @@
     
     if (thetype==mineTableViewCellTypeFirst) {
         
-        self.whitView.frame=CGRectMake(0, 32, 320, 44);
+        self.whitView.frame=CGRectMake(0, 32, DEVICE_WIDTH, 44);
         
-        self.lineView.frame=CGRectMake(0, 43, 320, 1);
+        self.lineView.frame=CGRectMake(0, 43, DEVICE_WIDTH, 1);
         
         self.lineView.backgroundColor=RGBCOLOR(235, 235, 235);
         
         
     }else if(thetype==mineTableViewCellTypeSecond){
         
-        self.whitView.frame=CGRectMake(0, 32, 320, 44);
+        self.whitView.frame=CGRectMake(0, 32, DEVICE_WIDTH, 44);
         
-        self.lineView.frame=CGRectMake(0, 43, 320, 1);
+        self.lineView.frame=CGRectMake(0, 43, DEVICE_WIDTH, 1);
         
         self.lineView.backgroundColor=RGBCOLOR(235, 235, 235);
 
@@ -82,17 +82,17 @@
         
     }else if(thetype==FBQuanAlertViewTypeHaveOther){
         
-        self.whitView.frame=CGRectMake(0, 0, 320, 44);
+        self.whitView.frame=CGRectMake(0, 0, DEVICE_WIDTH, 44);
         
-        self.lineView.frame=CGRectMake(44, 43.5, 320, 0.5);
+        self.lineView.frame=CGRectMake(44, 43.5, DEVICE_WIDTH, 0.5);
         
         self.lineView.backgroundColor=RGBCOLOR(229, 232, 239);
 
     }else{
         
-        self.whitView.frame=CGRectMake(0, 0, 320, 44);
+        self.whitView.frame=CGRectMake(0, 0, DEVICE_WIDTH, 44);
         
-        self.lineView.frame=CGRectMake(0, 43, 320, 1);
+        self.lineView.frame=CGRectMake(0, 43, DEVICE_WIDTH, 1);
         
         self.lineView.backgroundColor=RGBCOLOR(235, 235, 235);
 

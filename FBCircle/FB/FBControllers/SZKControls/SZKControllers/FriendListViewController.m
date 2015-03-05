@@ -49,7 +49,7 @@
     [self setHidesBottomBarWhenPushed:YES];
 
     
-    _mainTabV.frame=CGRectMake(0, 0, 320, iPhone5?568-64:480-64);
+    _mainTabV.frame=CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT-64);
     _searchTabV.hidden=YES;
     [arrayOfSearchResault removeAllObjects];
     [_searchTabV reloadData];
@@ -79,7 +79,7 @@
 
     
     //1fhalfBlackV
-    _mainTabV=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?568-64:480-64)];
+    _mainTabV=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT-64)];
     [self.view addSubview:_mainTabV];
    [_mainTabV registerClass:[FriendListCell class] forCellReuseIdentifier:@"identifier"];
 
@@ -89,7 +89,7 @@
     _mainTabV.dataSource=self;
     
     //2
-    _searchTabV=[[UITableView alloc]initWithFrame:CGRectMake(0, 75, 320, iPhone5?568-75:480-75)];
+    _searchTabV=[[UITableView alloc]initWithFrame:CGRectMake(0, 75, DEVICE_WIDTH, DEVICE_HEIGHT-75)];
     [self.view addSubview:_searchTabV];
     _searchTabV.delegate=self;
     _searchTabV.separatorColor=RGBCOLOR(225, 225, 225);
@@ -98,7 +98,7 @@
     _searchTabV.hidden=YES;
     
     //3
-    _halfBlackV=[[UIView alloc]initWithFrame:CGRectMake(0, 75, 320, iPhone5?568-75:480-75)];
+    _halfBlackV=[[UIView alloc]initWithFrame:CGRectMake(0, 75, DEVICE_WIDTH, DEVICE_HEIGHT-75)];
     _halfBlackV.backgroundColor=[[UIColor blackColor]colorWithAlphaComponent:0.8];
     _halfBlackV.hidden=YES;
     [self.view addSubview:_halfBlackV];
@@ -161,14 +161,14 @@
 -(void)ReceiveMytabHeaderV{
 
                if (!_SearchheaderV) {
-            _SearchheaderV=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+            _SearchheaderV=[[UIView alloc] initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 100)];
             _SearchheaderV.backgroundColor=[UIColor whiteColor];
 
             __weak typeof(self) __weakself=self;
 
             //开始搜索
 
-            _zkingSearchV=[[ZkingSearchView alloc]initWithFrame:CGRectMake(0, 12, 320, 30) imgBG:[UIImage imageNamed:@"longSearch592_60.png"] shortimgbg:[UIImage imageNamed:@"shortSearch486_60.png"]  imgLogo:[UIImage imageNamed:@""] placeholder:@"搜索好友" ZkingSearchViewBlocs:^(NSString *strSearchText, int tag) {
+            _zkingSearchV=[[ZkingSearchView alloc]initWithFrame:CGRectMake(0, 12, DEVICE_WIDTH, 30) imgBG:[UIImage imageNamed:@"longSearch592_60.png"] shortimgbg:[UIImage imageNamed:@"shortSearch486_60.png"]  imgLogo:[UIImage imageNamed:@""] placeholder:@"搜索好友" ZkingSearchViewBlocs:^(NSString *strSearchText, int tag) {
 
                 [__weakself searchFriendWithname:strSearchText thetag:tag];
 
@@ -181,15 +181,15 @@
                    
                    
             [_SearchheaderV addSubview:_zkingSearchV];
-            UIButton *suggestFriendButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 54, 320, 72/2)];
+            UIButton *suggestFriendButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 54, DEVICE_WIDTH, 72/2)];
             [_SearchheaderV addSubview:suggestFriendButton];
             [suggestFriendButton addTarget:self action:@selector(turnToSuggestFriendVC) forControlEvents:UIControlEventTouchUpInside];
             [suggestFriendButton setTitle:@"新的朋友" forState:UIControlStateNormal];
                    suggestFriendButton.titleLabel.font=[UIFont systemFontOfSize:15];
             [suggestFriendButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [suggestFriendButton setImage:[UIImage imageNamed:@"tuijianhaoyou-94_94.png"] forState:UIControlStateNormal];
-            [suggestFriendButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0,0,166)];//上左下右
-            [suggestFriendButton setImageEdgeInsets:UIEdgeInsetsMake(0,0,0,197)];
+            [suggestFriendButton setTitleEdgeInsets:UIEdgeInsetsMake(0,0,0,DEVICE_WIDTH -(320 - 166))];//上左下右
+            [suggestFriendButton setImageEdgeInsets:UIEdgeInsetsMake(0,0,0,DEVICE_WIDTH - (320 - 197))];
             
        }
         _mainTabV.tableHeaderView= _SearchheaderV;
@@ -212,7 +212,7 @@
             [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
             self.navigationController.navigationBarHidden=NO;
-            _mainTabV.frame=CGRectMake(0, 0, 320, iPhone5?568-64:480-64);
+            _mainTabV.frame=CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT-64);
             _searchTabV.hidden=YES;
             [arrayOfSearchResault removeAllObjects];
             [_searchTabV reloadData];
@@ -227,7 +227,7 @@
             [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 
             
-            _mainTabV.frame=CGRectMake(0, 30-7, 320, iPhone5?568-30-64+7:480-30-64+7);
+            _mainTabV.frame=CGRectMake(0, 30-7, DEVICE_WIDTH, DEVICE_HEIGHT-30-64+7);
             _halfBlackV.hidden=NO;
 //            _mainTabV.contentOffset=CGPointMake(0, 0);
 //            _mainTabV.scrollEnabled=NO;
@@ -409,21 +409,21 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
   
-    UIView *aview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 23)];
+    UIView *aview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 23)];
 
     if (tableView==_mainTabV) {
         aview.backgroundColor=[UIColor whiteColor];
         
-        UIView *lingV=[[UIView alloc]initWithFrame:CGRectMake(12, 22.5, 320-24, 0.5)];
+        UIView *lingV=[[UIView alloc]initWithFrame:CGRectMake(12, 22.5, DEVICE_WIDTH-24, 0.5)];
         lingV.backgroundColor=RGBCOLOR(225, 225, 225);
         [aview addSubview:lingV];
         
         
-        UIView *lingV2=[[UIView alloc]initWithFrame:CGRectMake(12,0, 320-24, 0.5)];
+        UIView *lingV2=[[UIView alloc]initWithFrame:CGRectMake(12,0, DEVICE_WIDTH-24, 0.5)];
         lingV2.backgroundColor=RGBCOLOR(225, 225, 225);
         [aview addSubview:lingV2];
         
-        UILabel *_label=[[UILabel alloc]initWithFrame:CGRectMake(12, 0.5, 320-24, 22)];
+        UILabel *_label=[[UILabel alloc]initWithFrame:CGRectMake(12, 0.5, DEVICE_WIDTH-24, 22)];
         
         _label.text=[NSString stringWithFormat:@"    %c",'A'+section];
         

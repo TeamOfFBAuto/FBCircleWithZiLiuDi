@@ -87,7 +87,7 @@
     [super loadView];
     
  
-    mainTab=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?568:480-44-49)];
+    mainTab=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT - 44 - 49)];
     mainTab.delegate=self;
     mainTab.dataSource=self;
     mainTab.separatorColor=[UIColor clearColor];
@@ -113,7 +113,7 @@
         
         self.personModel = model;
         NSLog(@"danteng===%@",self.personModel.person_face);
-        [self.userFaceImageView setImageWithURL:[NSURL URLWithString:self.personModel.person_face] placeholderImage:[UIImage imageNamed:@"headimg150_150.png"]];
+        [self.userFaceImageView sd_setImageWithURL:[NSURL URLWithString:self.personModel.person_face] placeholderImage:[UIImage imageNamed:@"headimg150_150.png"]];
         self.userNameLabel.text = self.personModel.person_username;
         self.userWordsLabel.text = self.personModel.person_words;
         [mainTab reloadData];
@@ -221,13 +221,13 @@
         //头像 和 用户名 能点击部位
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setBackgroundImage:[UIImage imageNamed:@"geren320_103.png"] forState:UIControlStateHighlighted];
-        btn.frame = CGRectMake(0, 0, 320, 70);
+        btn.frame = CGRectMake(0, 0, DEVICE_WIDTH, 70);
         [btn addTarget:self action:@selector(doTap) forControlEvents:UIControlEventTouchUpInside];
         
         
         
         //箭头
-        UIImageView *jiantouV = [[UIImageView alloc]initWithFrame:CGRectMake(288, 30, 7, 14)];
+        UIImageView *jiantouV = [[UIImageView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH - (320 - 288), 30, 7, 14)];
         [jiantouV setImage:[UIImage imageNamed:@"geren-jiantou.png"]];
         [btn addSubview:jiantouV];
         
@@ -259,7 +259,7 @@
         if ([GlocalUserImage getUserFaceImage]) {
             [self.userFaceImageView setImage:[GlocalUserImage getUserFaceImage]];
         }else{
-            [self.userFaceImageView setImageWithURL:[NSURL URLWithString: self.string_photo ] placeholderImage:[UIImage imageNamed:@"geren_morentouxiang126_126.png"]];
+            [self.userFaceImageView sd_setImageWithURL:[NSURL URLWithString: self.string_photo ] placeholderImage:[UIImage imageNamed:@"geren_morentouxiang126_126.png"]];
         }
         
         
@@ -281,17 +281,17 @@
         [btn addSubview:self.userWordsLabel];
         
         
-        [self.userFaceImageView setImageWithURL:[NSURL URLWithString:self.personModel.person_face] placeholderImage:[UIImage imageNamed:@"headimg150_150.png"]];
+        [self.userFaceImageView sd_setImageWithURL:[NSURL URLWithString:self.personModel.person_face] placeholderImage:[UIImage imageNamed:@"headimg150_150.png"]];
         self.userNameLabel.text = self.personModel.person_username;
         self.userWordsLabel.text = self.personModel.person_words;
         
-        UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(0, 70, 320, 1)];
+        UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(0, 70, DEVICE_WIDTH, 1)];
         lineV.backgroundColor=RGBCOLOR(235, 235, 235);
         
 
         
         
-        UIView *aviewAll=[[UIView alloc]initWithFrame: CGRectMake(0, 0, 320, 103) ];
+        UIView *aviewAll=[[UIView alloc]initWithFrame: CGRectMake(0, 0, DEVICE_WIDTH, 103) ];
         [aviewAll addSubview:btn];
         [aviewAll addSubview:lineV];
         btn.backgroundColor=[UIColor whiteColor];

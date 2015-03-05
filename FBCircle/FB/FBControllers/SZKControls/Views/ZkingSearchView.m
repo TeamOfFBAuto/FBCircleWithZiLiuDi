@@ -27,7 +27,7 @@
         
         _mybloc=_bloc;
         
-        _searchBG=[[UIImageView alloc]initWithFrame:CGRectMake(12, 0, 288, _imglongbg.size.height)];
+        _searchBG=[[UIImageView alloc]initWithFrame:CGRectMake(12, 0,DEVICE_WIDTH - (320 - 288), _imglongbg.size.height)];
 //        _searchBG.layer.borderColor = [UIColor blackColor].CGColor;
 //        _searchBG.layer.borderWidth = 1.0;
         _searchBG.image=_imglongbg;
@@ -62,11 +62,11 @@
         [self addSubview:_cancelButton];
         
 
-        _aSearchField.frame=CGRectMake(40, (HEIGHT-15)/2, 260, 16);
+        _aSearchField.frame=CGRectMake(40, (HEIGHT-15)/2, DEVICE_WIDTH - (320 - 260), 16);
         
         _searchLogo.center=CGPointMake(8+_searchLogo.image.size.width/2, HEIGHT/2);
         
-        _cancelButton.frame=CGRectMake(264, 0, 40, 30);
+        _cancelButton.frame=CGRectMake(DEVICE_WIDTH - (320 - 264), 0, 40, 30);
 
         
        
@@ -86,7 +86,7 @@
     
     _cancelButton.hidden=YES;
     _searchBG.image=_imglongbg;
-    _searchBG.frame=CGRectMake(12, 0, 288, 30);
+    _searchBG.frame=CGRectMake(12, 0, DEVICE_WIDTH -(320 - 288), 30);
     
     _aSearchField.text=@"";
     [_aSearchField resignFirstResponder];
