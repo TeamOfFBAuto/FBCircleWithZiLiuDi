@@ -41,7 +41,7 @@
     
     
     //主tableveiw
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?568-64:480-44) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, iPhone5?DEVICE_HEIGHT-64:DEVICE_HEIGHT-44) style:UITableViewStyleGrouped];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.sectionFooterHeight = 0.0f;//设置Grouped类型的tableview的不同section之间的距离
@@ -62,7 +62,7 @@
     
     //下拉刷新
     
-    _refreshHeaderView = [[EGORefreshTableHeaderView alloc]initWithFrame:CGRectMake(0, 0-_tableView.bounds.size.height, 320, _tableView.bounds.size.height)];
+    _refreshHeaderView = [[EGORefreshTableHeaderView alloc]initWithFrame:CGRectMake(0, 0-_tableView.bounds.size.height, DEVICE_WIDTH, _tableView.bounds.size.height)];
     _refreshHeaderView.delegate = self;
     [_tableView addSubview:_refreshHeaderView];
     _currentPage = 1;
@@ -72,8 +72,8 @@
     
     
     //上提加载更多
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
-    _upMoreView = [[LoadingIndicatorView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 40)];
+    _upMoreView = [[LoadingIndicatorView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 40)];
     _upMoreView.type = 1;
     _upMoreView.hidden = YES;
     [view addSubview:_upMoreView];
@@ -162,7 +162,7 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 24)];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 24)];
     view.backgroundColor = [UIColor whiteColor];
     
     
@@ -213,7 +213,7 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     //设置不同时间文章之间的距离
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 25)];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 25)];
     view.backgroundColor = [UIColor whiteColor];
     
     
@@ -250,24 +250,64 @@
         __weak typeof (self)bself = self;
         
         //请求文章信息=======================================================
+//        NSString *str = [NSString stringWithFormat:@"http://quan.fblife.com/index.php?c=interface&a=getfrontpage&uid=%@&page=%d&ps=10&type=%d&fbtype=json",self.userId,thePage,2];
+//        NSURL *url = [NSURL URLWithString:str];
+//        
+//        NSLog(@"%@",str);
+//        
+//        [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:url] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+//            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+//            NSArray *array = [dic objectForKey:@"datainfo"];
+//            NSMutableArray *wenzhangArray = [NSMutableArray arrayWithCapacity:1];
+//            int count = array.count;
+//            for (int i = 0; i<count; i++) {
+//                FBCircleModel *wenzhangModel = [[FBCircleModel alloc]initWithDictionary:array[i]];
+//                [wenzhangArray addObject:wenzhangModel];
+//                
+//            }
+//            
+//            [bself loadWenZhangBlockWithArray:wenzhangArray];
+//        }];
         
-        NSString *str = [NSString stringWithFormat:@"http://quan.fblife.com/index.php?c=interface&a=getfrontpage&uid=%@&page=%d&ps=10&type=%d&fbtype=json",self.userId,thePage,2];
-        NSURL *url = [NSURL URLWithString:str];
-        
-        NSLog(@"%@",str);
-        
-        [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:url] queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            NSArray *array = [dic objectForKey:@"datainfo"];
-            NSMutableArray *wenzhangArray = [NSMutableArray arrayWithCapacity:1];
-            int count = array.count;
-            for (int i = 0; i<count; i++) {
-                FBCircleModel *wenzhangModel = [[FBCircleModel alloc]initWithDictionary:array[i]];
-                [wenzhangArray addObject:wenzhangModel];
+        NSString *zujiStr = @"http://fb.fblife.com/openapi/index.php?mod=getweibo&code=mylist&fromtype=b5eeec0b&authkey=%@&page=%d&fbtype=json&uid=%@";
+        NSString* fullURL = [NSString stringWithFormat:zujiStr,[SzkAPI getAuthkeyGBK],_currentPage,self.userId];
+        NSLog(@"请求好友足迹接口 : %@",fullURL);
+        ASIHTTPRequest * weiBo_request = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:fullURL]];
+        [weiBo_request setPersistentConnectionTimeoutSeconds:60];
+        [weiBo_request startAsynchronous];
+        __weak typeof(weiBo_request)wRequest = weiBo_request;
+        [wRequest setCompletionBlock:^{
+            [self doneLoadingTableViewData];
+            NSDictionary * rootObject = [[NSDictionary alloc] initWithDictionary:[weiBo_request.responseData objectFromJSONData]];
+            NSString *errcode =[NSString stringWithFormat:@"%@",[rootObject objectForKey:ERRCODE]];
+            
+            if ([@"0" isEqualToString:errcode])
+            {
+                NSDictionary* userinfo = [rootObject objectForKey:@"weiboinfo"];
+                
+                NSLog(@"-----%@",userinfo);
+                
+                NSArray * arr = [ZSNApi sortArrayWith:[userinfo allKeys]];
+                NSMutableArray * temp = [NSMutableArray array];
+                for (int i = 0;i < arr.count;i++) {
+                    NSString * key = [NSString stringWithFormat:@"%@",[arr objectAtIndex:i]];
+                    FBCircleModel * model = [[FBCircleModel alloc] initWithDictionary:[userinfo objectForKey:key]];
+                    [temp addObject:model];
+                }
+                [_wenzhangArray addObjectsFromArray:temp];
+                
+                [bself loadWenZhangBlockWithArray:_wenzhangArray];
                 
             }
             
-            [bself loadWenZhangBlockWithArray:wenzhangArray];
+            
+            
+        }];
+        
+        [wRequest setFailedBlock:^{
+            [ZSNApi showAutoHiddenMBProgressWithText:@"加载失败" addToView:self.view];
+            [self doneLoadingTableViewData];
+            [_tableView reloadData];
         }];
         
         
