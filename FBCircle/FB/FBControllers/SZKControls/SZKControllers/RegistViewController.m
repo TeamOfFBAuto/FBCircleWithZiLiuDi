@@ -62,23 +62,29 @@
     
     self.view.backgroundColor=[UIColor whiteColor];
     
-    _mmainTabV=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320,44*5)];//一共五个cell
-    _mmainTabV.separatorColor=RGBCOLOR(211, 211, 211);
+    _mmainTabV=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH,44*5)];//一共五个cell
+//    _mmainTabV.separatorColor=RGBCOLOR(211, 211, 211);
+    
+    _mmainTabV.separatorColor = [UIColor redColor];
+    _mmainTabV.separatorStyle = UITableViewCellSeparatorStyleNone;
     _mmainTabV.dataSource=self;
     _mmainTabV.delegate=self;
     _mmainTabV.contentOffset=CGPointMake(0, 0);
     _mmainTabV.scrollEnabled=NO;
+    _mmainTabV.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
-    _mmainTabV.tableFooterView=[[UIView alloc] initWithFrame:CGRectMake(0,0,320,0)];
+    _mmainTabV.tableFooterView=[[UIView alloc] initWithFrame:CGRectMake(0,0,DEVICE_WIDTH,0)];
     [self.view addSubview:_mmainTabV];
     
     _imgArr=[NSArray arrayWithObjects:@"yonghuming-icon-32_30.png",@"mima-icon-30_34.png",@"youxiang-34-34.png",@"shouji-26_38.png",@"xinfeng36_24.png" ,nil];
     
     _placHolderTextArr=[NSArray arrayWithObjects:@"请输入您的用户名",@"请输入密码",@"请输入邮箱",@"请输入您的手机号",@"请输入验证码", nil];
     
-    _bigNextButton=[[UIButton alloc]initWithFrame:CGRectMake((320-250)/2, 44*5+20, 250, 44)];
+    CGFloat aWidth = DEVICE_WIDTH - 320 + 250;
+    
+    _bigNextButton=[[UIButton alloc]initWithFrame:CGRectMake((DEVICE_WIDTH - aWidth)/2, 44*5+20,aWidth, 44)];
     [self.view addSubview:_bigNextButton];
-//    _bigNextButton.backgroundColor=[UIColor blueColor];
+
     [_bigNextButton setTitle:@"提交" forState:UIControlStateNormal];
     [_bigNextButton setBackgroundImage:[UIImage imageNamed:@"xiayibu-kedian-up-568_88.png"] forState:UIControlStateNormal];
     [_bigNextButton addTarget:self action:@selector(commitBiaodan) forControlEvents:UIControlEventTouchUpInside];
@@ -144,11 +150,15 @@
     __weak typeof(_mmainTabV)weaktabv=_mmainTabV;
     
     __weak typeof (_bigNextButton)weakbigbutton=_bigNextButton;
+    
+    
+//    cell.imgLine.backgroundColor = RGBCOLOR(211, 211, 211);
+
 
     if (indexPath.row==3) {
         
         [cell setFbRegistCellType:FbRegistCellTypeofButton placeHolderText:[_placHolderTextArr objectAtIndex:indexPath.row] str_img:[_imgArr objectAtIndex:indexPath.row]  fbregistbloc:^(int tag, NSInteger indexpathofrow, NSString *stringtext) {
-            weaktabv.frame=CGRectMake(0, 0, 320,44*5);
+            weaktabv.frame=CGRectMake(0, 0, DEVICE_WIDTH,44*5);
 
             NSLog(@"phonenumber==%@",stringtext);
             if (tag==101) {
@@ -166,8 +176,9 @@
        [cell setFbRegistCellType:FbRegistCellTypePassWord placeHolderText:[_placHolderTextArr objectAtIndex:indexPath.row] str_img:[_imgArr objectAtIndex:indexPath.row]  fbregistbloc:^(int tag, NSInteger indexpathofrow, NSString *stringtext) {
             
             [_weakself changewordwithstr:stringtext indexpathrow:indexpathofrow];
-           weaktabv.frame=CGRectMake(0, 0, 320,44*5);
-           weakbigbutton.frame=CGRectMake((320-250)/2, 44*5+20, 250, 44);
+           weaktabv.frame=CGRectMake(0, 0, DEVICE_WIDTH,44*5);
+           weakbigbutton.frame=CGRectMake((DEVICE_WIDTH-250)/2, 44*5+20, 250, 44);
+           weakbigbutton.backgroundColor = [UIColor orangeColor];
            
         } row:indexPath.row];
         
@@ -181,8 +192,11 @@
 //                weakbigbutton.frame=CGRectMake((320-250)/2, 44*5-60, 250, 44);
 
             }else{
-                weaktabv.frame=CGRectMake(0, 0, 320,44*5);
-                weakbigbutton.frame=CGRectMake((320-250)/2, 44*5+20, 250, 44);
+                weaktabv.frame=CGRectMake(0, 0, DEVICE_WIDTH,44*5);
+                weakbigbutton.frame=CGRectMake((DEVICE_WIDTH-250)/2, 44*5+20, 250, 44);
+                
+                weakbigbutton.backgroundColor = [UIColor orangeColor];
+
 
             }
             

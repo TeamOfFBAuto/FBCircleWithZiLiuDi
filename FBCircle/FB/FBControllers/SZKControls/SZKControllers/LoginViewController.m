@@ -39,7 +39,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginDismiss) name:@"successRegist" object:nil];
     
-    FbLoginView *loginV=[[FbLoginView alloc]initWithFrame:CGRectMake(0, 0,320 , iPhone5?568:480)];
+    FbLoginView *loginV=[[FbLoginView alloc]initWithFrame:CGRectMake(0, 0,DEVICE_WIDTH , DEVICE_HEIGHT)];
     
     [self.view addSubview:loginV];
     

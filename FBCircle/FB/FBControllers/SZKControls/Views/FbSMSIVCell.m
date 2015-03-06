@@ -47,7 +47,7 @@
     
  
     _selectimV.frame=CGRectMake(26,( 45-19)/2, 19, 19);
-    _selectButton.frame=CGRectMake(0, 0, 320, 45);
+    _selectButton.frame=CGRectMake(0, 0, DEVICE_WIDTH, 45);
     _nameLabel.frame=CGRectMake(65, 15, 200, 15);
     
     

@@ -19,20 +19,9 @@
         //self.backgroundColor=[UIColor colorWithPatternImage:iPhone5?[UIImage imageNamed:@"denglu-bg640_1136.png"]:[UIImage imageNamed:@"denglu-bg640_960.png"]];
         self.backgroundColor=[UIColor whiteColor];
     
-        _imgLogo=[[UIImageView alloc]initWithFrame:CGRectMake(242/2,iPhone5? (175/2):40, 144/2, 130/2)];
+        _imgLogo=[[UIImageView alloc]initWithFrame:CGRectMake(242/2,iPhone5? (175/2):40, 72, 65)];
         _imgLogo.image=[UIImage imageNamed:@"denglu_logo144_130.png"];
-        
-        
-//        _leftimg=[[UIImageView alloc]initWithFrame:CGRectMake(0,0, 142/2, 126/2)];
-//        _leftimg.image=[UIImage imageNamed:@"fb_142_126.png"];
-//        [_imgLogo addSubview:_leftimg];
-//        
-//        
-//        _rightimg=[[UIImageView alloc]initWithFrame:CGRectMake(55,0, 15, 15)];
-//       _rightimg.image=[UIImage imageNamed:@"Halfquan30_30.png"];
-//        [_imgLogo addSubview:_rightimg];
-//
-
+        _imgLogo.center = CGPointMake(DEVICE_WIDTH/2.f, _imgLogo.center.y);
         
         [self addSubview:_imgLogo];
         
@@ -40,10 +29,12 @@
         _centerKuangImgV=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"shurukuang_shouji528_268.png"]];
         [self addSubview:_centerKuangImgV];
         _centerKuangImgV.userInteractionEnabled=YES;
-        _centerKuangImgV.center=CGPointMake(160,iPhone5? 410:255);
         
         _centerKuangImgV.frame=CGRectMake(28,iPhone5? 300:242, _centerKuangImgV.image.size.width, _centerKuangImgV.image.size.height);
 
+        _centerKuangImgV.center=CGPointMake(DEVICE_WIDTH/2.f,iPhone5? 410:255);
+
+        
         //用手机号登录
         
         _phoneNumberButton=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 528/4, 45)];
@@ -52,8 +43,6 @@
         _phoneNumberButton.backgroundColor=[UIColor clearColor];
         
         [_centerKuangImgV addSubview:_phoneNumberButton];
-        
-        
         
         
         //用e族id登录
@@ -98,6 +87,7 @@
         [_loginButton addTarget:self action:@selector(dobutton:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_loginButton];
         
+        
         //        _forgetPassWordButton=[[UIButton alloc]init];
         //        _forgetPassWordButton.tag=102;
         //        [self addSubview:_forgetPassWordButton];
@@ -115,15 +105,13 @@
         
         [_regeistbutton setTitle:@"新用户注册" forState:UIControlStateNormal];
         
-        [_regeistbutton setTitleEdgeInsets:UIEdgeInsetsMake(0,120,0,0)];//上左下右
+        [_regeistbutton setTitleEdgeInsets:UIEdgeInsetsMake(0,DEVICE_WIDTH - 320 + 120,0,0)];//上左下右
         
         //右边的向右的小箭头
         
         UIImageView *imgrow=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"denglu_jiantou16_30.png"]];
-        imgrow.center=CGPointMake(280, 22);
+        imgrow.center=CGPointMake(DEVICE_WIDTH - 40, 22);
         [_regeistbutton addSubview:imgrow];
-        
-        
         
         //
 //        _theFbquanalertV=[[FBQuanAlertView alloc]initWithFrame:CGRectMake(0, 0, 140, 100)];
@@ -137,7 +125,7 @@
         
         UIActivityIndicatorView *_juhuazhuan=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [_juhuazhuan startAnimating];
-        _juhuazhuan.center = CGPointMake(160.0f,iPhone5? 190.0f: 130.0f);//只能设置中心，不能设置大小
+        _juhuazhuan.center = CGPointMake(DEVICE_WIDTH/2.f,iPhone5? 190.0f: 130.0f);//只能设置中心，不能设置大小
         _juhuazhuan.color = [UIColor blackColor]; // 改变圈圈的颜色为红色； iOS5引入
 
         [_zhuanquanview addSubview:_juhuazhuan];
@@ -148,20 +136,13 @@
 
 -(void)layoutSubviews{
     
-    
-    
-
-    
-    
     _userLabel.frame=CGRectMake(20,45, 200, 45);
     
     _passWordLabel.frame=CGRectMake(20, 90, 200, 45);
     
-    _loginButton.frame=CGRectMake((320-528/2)/2-1, _centerKuangImgV.frame.origin.y+_centerKuangImgV.frame.size.height, 528/2+1.5, 44);
+    _loginButton.frame=CGRectMake((DEVICE_WIDTH - 528/2)/2, _centerKuangImgV.frame.origin.y+_centerKuangImgV.frame.size.height, 528/2, 44);
     
-    _regeistbutton.frame=CGRectMake(0,iPhone5? 568-44:480-44, 320, 44);
-    
-    
+    _regeistbutton.frame=CGRectMake(0,DEVICE_HEIGHT - 44, DEVICE_WIDTH, 44);
     
 }
 
@@ -266,20 +247,20 @@
 
 -(void)sethigh{
     [UIView animateWithDuration:0.4 animations:^{
-        //动画内容
-        if (iPhone5) {
-            
-            _imgLogo.frame=   CGRectMake(242/2,-40+175/2, 144/2, 130/2);
-            _centerKuangImgV.center=CGPointMake(160, -100+320);
-            _loginButton.frame=CGRectMake((320-528/2)/2-1, _centerKuangImgV.frame.origin.y+_centerKuangImgV.frame.size.height, 528/2, 44);
-            
-        }else{
-        
-            _imgLogo.frame=CGRectMake(140,30, 144/4, 130/4);
-            _centerKuangImgV.center=CGPointMake(160, -168+320);
-            _loginButton.frame=CGRectMake((320-528/2)/2-1, _centerKuangImgV.frame.origin.y+_centerKuangImgV.frame.size.height, 528/2, 44);
-            
-        }
+//        //动画内容
+//        if (iPhone5) {
+//            
+//            _imgLogo.frame=   CGRectMake(242/2,-40+175/2, 72, 65);
+//            _centerKuangImgV.center=CGPointMake(160, -100+320);
+//            _loginButton.frame=CGRectMake((320-528/2)/2-1, _centerKuangImgV.frame.origin.y+_centerKuangImgV.frame.size.height, 528/2, 44);
+//            
+//        }else{
+//        
+//            _imgLogo.frame=CGRectMake(140,30, 144/4, 130/4);
+//            _centerKuangImgV.center=CGPointMake(160, -168+320);
+//            _loginButton.frame=CGRectMake((320-528/2)/2-1, _centerKuangImgV.frame.origin.y+_centerKuangImgV.frame.size.height, 528/2, 44);
+//            
+//        }
         
     }completion:^(BOOL finished)
      
@@ -292,19 +273,19 @@
 -(void)setnormal{
     
     [UIView animateWithDuration:0.4 animations:^{
-        if (iPhone5) {
-            _imgLogo.frame=CGRectMake(242/2, 175/2, 144/2, 130/2);
-            _centerKuangImgV.frame=CGRectMake(28, 300, _centerKuangImgV.image.size.width, _centerKuangImgV.image.size.height);
-            _loginButton.frame=CGRectMake((320-528/2)/2-1, _centerKuangImgV.frame.origin.y+_centerKuangImgV.frame.size.height, 528/2, 44);
-
-            
-        }else{
-            _imgLogo.frame=CGRectMake(242/2, 40, 144/2, 130/2);
-            _centerKuangImgV.frame=CGRectMake(28, 242, _centerKuangImgV.image.size.width, _centerKuangImgV.image.size.height);
-            _loginButton.frame=CGRectMake((320-528/2)/2-1, _centerKuangImgV.frame.origin.y+_centerKuangImgV.frame.size.height, 528/2, 44);
-            
-        
-        }
+//        if (iPhone5) {
+//            _imgLogo.frame=CGRectMake(242/2, 175/2, 72, 65);
+//            _centerKuangImgV.frame=CGRectMake(28, 300, _centerKuangImgV.image.size.width, _centerKuangImgV.image.size.height);
+//            _loginButton.frame=CGRectMake((320-528/2)/2-1, _centerKuangImgV.frame.origin.y+_centerKuangImgV.frame.size.height, 528/2, 44);
+//
+//            
+//        }else{
+//            _imgLogo.frame=CGRectMake(242/2, 40, 72, 65);
+//            _centerKuangImgV.frame=CGRectMake(28, 242, _centerKuangImgV.image.size.width, _centerKuangImgV.image.size.height);
+//            _loginButton.frame=CGRectMake((320-528/2)/2-1, _centerKuangImgV.frame.origin.y+_centerKuangImgV.frame.size.height, 528/2, 44);
+//            
+//        
+//        }
         [_userLabel resignFirstResponder];
         [_passWordLabel resignFirstResponder];
         
@@ -331,9 +312,7 @@
     rotationAnimation.duration = 1;
     rotationAnimation.cumulative = YES;
     rotationAnimation.repeatCount = 100;
-    
     [theImageV.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
-
 
 }
 

@@ -38,7 +38,7 @@
 
     _labeltitle.text=thetitle;
     
-    _shortLine.frame=CGRectMake(myrtpe?0:44, 45.5,320 , 0.5);
+    _shortLine.frame=CGRectMake(myrtpe?0:44, 45.5,DEVICE_WIDTH , 0.5);
 
 }
 -(void)layoutSubviews{

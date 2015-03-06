@@ -118,21 +118,21 @@
     [super loadView];
 
     //1
-    _mainTabV=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?568:480)];
+    _mainTabV=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT)];
     [self.view addSubview:_mainTabV];
     _mainTabV.delegate=self;
     _mainTabV.separatorColor=[UIColor clearColor];
     _mainTabV.dataSource=self;
     _mainTabV.backgroundColor=RGBCOLOR(236, 237, 240);
     //2
-    _searchTabV=[[UITableView alloc]initWithFrame:CGRectMake(0, 75, 320, iPhone5?568-75:480-75)];
+    _searchTabV=[[UITableView alloc]initWithFrame:CGRectMake(0, 75, DEVICE_WIDTH, DEVICE_HEIGHT-75)];
     [self.view addSubview:_searchTabV];
     _searchTabV.delegate=self;
     _searchTabV.separatorColor=RGBCOLOR(225, 225, 225);
     _searchTabV.dataSource=self;
     _searchTabV.hidden=YES;
     //3
-    _halfBlackV=[[UIView alloc]initWithFrame:CGRectMake(0, 75, 320, iPhone5?568-75:480-75)];
+    _halfBlackV=[[UIView alloc]initWithFrame:CGRectMake(0, 75, DEVICE_WIDTH, DEVICE_HEIGHT - 75)];
     _halfBlackV.backgroundColor=[[UIColor blackColor]colorWithAlphaComponent:0.8];
     _halfBlackV.hidden=YES;
     [self.view addSubview:_halfBlackV];
@@ -147,7 +147,7 @@
 #pragma mark-把搜索和进入推荐列表的放到一起作为tabV的headerView
 -(void)ReceiveMytabHeaderV{
     
-    UIView *aviews=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320,54)];
+    UIView *aviews=[[UIView alloc] initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH,54)];
     aviews.backgroundColor=  RGBCOLOR(245  , 245, 248);
 
         
@@ -155,7 +155,7 @@
         
         //开始搜索
         
-    ZkingSearchView * _zkingSearchV=[[ZkingSearchView alloc]initWithFrame:CGRectMake(0, 12, 320, 30) imgBG:[UIImage imageNamed:@"longSearch592_60.png"] shortimgbg:[UIImage imageNamed:@"shortSearch486_60.png"]  imgLogo:[UIImage imageNamed:@""] placeholder:@"请输入用户名/手机号码搜索朋友" ZkingSearchViewBlocs:^(NSString *strSearchText, int tag) {
+    ZkingSearchView * _zkingSearchV=[[ZkingSearchView alloc]initWithFrame:CGRectMake(0, 12, DEVICE_WIDTH, 30) imgBG:[UIImage imageNamed:@"longSearch592_60.png"] shortimgbg:[UIImage imageNamed:@"shortSearch486_60.png"]  imgLogo:[UIImage imageNamed:@""] placeholder:@"请输入用户名/手机号码搜索朋友" ZkingSearchViewBlocs:^(NSString *strSearchText, int tag) {
             
             [__weakself searchFriendWithname:strSearchText thetag:tag];
             
@@ -177,7 +177,7 @@
             self.navigationController.navigationBarHidden=NO;
             [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
-            _mainTabV.frame=CGRectMake(0, 0, 320, iPhone5?568:480);
+            _mainTabV.frame=CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT);
             _searchTabV.hidden=YES;
 //            [arrayOfSearchResault removeAllObjects];
             [_searchTabV reloadData];
@@ -190,7 +190,7 @@
             self.navigationController.navigationBarHidden=YES;
             [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 
-            _mainTabV.frame=CGRectMake(0, 30-7, 320, iPhone5?568-30+7:480-30+7);
+            _mainTabV.frame=CGRectMake(0, 30-7, DEVICE_WIDTH, DEVICE_HEIGHT-30+7);
             _halfBlackV.hidden=NO;
             NSLog(@"开始编辑");
             
@@ -368,7 +368,7 @@
             
             
 //            UIView *aview=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 30)];
-            UILabel *label_aha=[[UILabel alloc]initWithFrame:CGRectMake(0 ,0, 320-24, 30)];
+            UILabel *label_aha=[[UILabel alloc]initWithFrame:CGRectMake(0 ,0, DEVICE_WIDTH-24, 30)];
 //            [aview addSubview:label_aha];
             
             if (section==1) {

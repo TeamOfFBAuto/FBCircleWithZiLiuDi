@@ -15,14 +15,15 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
+        
         self.selectionStyle=UITableViewCellSelectionStyleNone;
         
         _imgLogo=[[UIImageView alloc]init];
         [self addSubview:_imgLogo];
         
-        _imgLine=[[UIImageView alloc]init];
+        _imgLine=[[UIImageView alloc]initWithFrame:CGRectMake(10, 43.5, DEVICE_WIDTH - 10, 0.5)];
         [self addSubview:_imgLine];
-        
+        _imgLine.backgroundColor = RGBCOLOR(211, 211, 211);
         
         _inputField=[[UITextField alloc]init];
         _inputField.delegate=self;
@@ -50,8 +51,8 @@
 -(void)layoutSubviews{
     
     //    _imgLine.center=CGPointMake(25, 28);
-    _inputField.frame=CGRectMake(50, (44-18)/2, 200, 18);
-    _sendVerficationButton.frame=CGRectMake(238, 11, 116/2, 22);
+    _inputField.frame=CGRectMake(50, (44-18)/2, DEVICE_WIDTH - 120, 18);
+    _sendVerficationButton.frame=CGRectMake(DEVICE_WIDTH - 320 + 238, 11, 116/2, 22);
     
     
 }
@@ -91,7 +92,8 @@
     }
     _inputField.placeholder=_plcaeText;
     _imgLogo.image=[UIImage imageNamed:_str_img];
-    _imgLogo.frame=CGRectMake(10, 15, _imgLogo.image.size.width, _imgLogo.image.size.height);
+    _imgLogo.frame=CGRectMake(10, 15, 30, _imgLogo.image.size.height);
+    _imgLogo.contentMode = UIViewContentModeCenter;
     _mybloc=_bloc;
     
 }

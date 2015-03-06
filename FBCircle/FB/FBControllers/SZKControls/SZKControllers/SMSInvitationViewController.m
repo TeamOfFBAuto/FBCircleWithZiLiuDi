@@ -39,14 +39,14 @@
 
     _arraySelect=[NSMutableArray array];
     //1
-    _mainTabV=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?568-60-64:480-60-64)];
+    _mainTabV=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT-60-64)];
     [self.view addSubview:_mainTabV];
     _mainTabV.delegate=self;
     _mainTabV.separatorColor=RGBCOLOR(225, 225, 225);
     _mainTabV.dataSource=self;
 
     //2
-    _bigNextButton=[[UIButton alloc]initWithFrame:CGRectMake((320-568/2)/2, _mainTabV.frame.size.height+7, 568/2, 44)];
+    _bigNextButton=[[UIButton alloc]initWithFrame:CGRectMake(10, _mainTabV.frame.size.height+7, DEVICE_WIDTH - 20, 44)];
     [self.view addSubview:_bigNextButton];
     //    _bigNextButton.backgroundColor=[UIColor blueColor];
     [_bigNextButton setTitle:@"邀请好友" forState:UIControlStateNormal];
@@ -256,15 +256,15 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    UIView *aview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 25)];
+    UIView *aview=[[UIView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 25)];
     
         aview.backgroundColor=[UIColor whiteColor];
         
-        UIView *lingV=[[UIView alloc]initWithFrame:CGRectMake(12, 24.5, 320-24, 0.5)];
+        UIView *lingV=[[UIView alloc]initWithFrame:CGRectMake(12, 24.5, DEVICE_WIDTH-24, 0.5)];
         lingV.backgroundColor=RGBCOLOR(225, 225, 225);
         [aview addSubview:lingV];
     
-        UILabel *_label=[[UILabel alloc]initWithFrame:CGRectMake(12, 0, 320-24, 24.5)];
+        UILabel *_label=[[UILabel alloc]initWithFrame:CGRectMake(12, 0, DEVICE_WIDTH-24, 24.5)];
         
         _label.text=[NSString stringWithFormat:@"   %c",'A'+(int)section];
         

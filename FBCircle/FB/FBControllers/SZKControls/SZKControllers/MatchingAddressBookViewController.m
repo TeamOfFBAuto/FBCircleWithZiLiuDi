@@ -104,7 +104,7 @@
     self.view.backgroundColor=[UIColor whiteColor];
     
     //1
-    _mainTabV=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?568-64:480-64)];
+    _mainTabV=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT-64)];
     [self.view addSubview:_mainTabV];
     _mainTabV.delegate=self;
     _mainTabV.separatorColor=RGBCOLOR(225, 225, 225);
@@ -113,7 +113,7 @@
     
     
     _theFbquanalertV=[[FBQuanAlertView alloc]initWithFrame:CGRectMake(0, 0, 140, 100)];
-    _theFbquanalertV.center=CGPointMake(160, iPhone5?568/2:240);
+    _theFbquanalertV.center=CGPointMake(DEVICE_WIDTH/2.f, DEVICE_HEIGHT/2.f);
     [_theFbquanalertV setType:FBQuanAlertViewTypeHaveJuhua thetext:@"正在加载通讯录，请稍后..."];
     _theFbquanalertV.hidden=YES;
     [self.view addSubview:_theFbquanalertV];

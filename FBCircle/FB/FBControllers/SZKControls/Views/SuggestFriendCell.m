@@ -58,7 +58,7 @@
     
     _resourceLabel.frame=CGRectMake(71, 40, 200, 15);
     
-    _typeButton.frame=CGRectMake(256, 20, 50, 30);
+    _typeButton.frame=CGRectMake(DEVICE_WIDTH - 320 + 256, 20, 50, 30);
     
 
 }
