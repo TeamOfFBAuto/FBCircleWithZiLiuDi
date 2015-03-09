@@ -199,6 +199,8 @@
 //根据文章内容加载控件
 -(CGFloat)loadCutomViewWithNetData:(NSArray *)sameTimeWenZhangArray indexPath:(NSIndexPath*)theIndexPath{
     
+    NSLog(@"section = %d row = %d",theIndexPath.section,theIndexPath.row);
+    
     if (theIndexPath.row == 0) {
         //日
         self.DayTimeLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(12, 0, 16, 24)];
@@ -378,13 +380,6 @@
             fb_content.textColor = [UIColor blackColor];
             
             fb_content.text =  [ZSNApi FBImageChange:[wenzhang.fb_content stringByReplacingEmojiCheatCodesWithUnicode]];
-//            CGRect contentFrame = fb_content.frame;
-//            CGSize optimumsSize = [fb_content optimumSize];
-//            contentFrame.size.height = optimumsSize.height+3;
-//            fb_content.frame = contentFrame;
-//            
-//            
-//            NSLog(@"%@ %@",fb_content.text,NSStringFromCGRect(fb_content.frame));
             
             fb_content.font = [UIFont boldSystemFontOfSize:13];
             fb_content.frame = CGRectMake(5, 5, 192, 18);//原来是高度是16但是g这个字符显示不全所以加了两个像素高度
@@ -398,9 +393,14 @@
             if (wenzhang.rfb_image.count >0) {
                 picsView.frame = CGRectMake(5, CGRectGetMaxY(fb_content.frame)+9, 40, 40);
                 UIImageView *imv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, picsView.frame.size.width, picsView.frame.size.height)];
-//                NSDictionary *dic = wenzhang.rfb_image[0];
-//                NSString *link = [dic objectForKey:@"link"];
-                NSString *link = wenzhang.rfb_image[0];
+                
+                id temp = wenzhang.rfb_image[0];
+                NSString *link;
+                if ([temp isKindOfClass:[NSString class]]) {
+                    link = temp;
+                }else if ([temp isKindOfClass:[NSDictionary class]]){
+                    link = temp[@"link"];
+                }
                 [imv setImageWithURL:[NSURL URLWithString:link] placeholderImage:nil];
                 [picsView addSubview:imv];
                 
@@ -461,7 +461,17 @@
                 UIImageView *imv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, picsView.frame.size.width, picsView.frame.size.height)];
 //                NSDictionary *dic = wenzhang.fb_image[0];
 //                NSString *link = [dic objectForKey:@"link"];
-                NSString *link = wenzhang.fb_image[0];
+                
+                id temp = wenzhang.fb_image[0];
+                
+                NSString *link;
+                if ([temp isKindOfClass:[NSString class]]) {
+                    link = temp;
+                }else if ([temp isKindOfClass:[NSDictionary class]]){
+                    link = temp[@"link"];
+                }
+
+                
                 
                 [imv setImageWithURL:[NSURL URLWithString:link] placeholderImage:nil];
                 [picsView addSubview:imv];

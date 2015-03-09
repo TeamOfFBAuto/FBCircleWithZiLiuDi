@@ -260,6 +260,9 @@
                 NSDictionary* userinfo = [rootObject objectForKey:@"weiboinfo"];
                 
                 NSLog(@"-----%@",userinfo);
+                if (!userinfo) {
+                    return ;
+                }
                 
                 NSArray * arr = [ZSNApi sortArrayWith:[userinfo allKeys]];
                 NSMutableArray * temp = [NSMutableArray array];
@@ -287,20 +290,7 @@
             [_tableView reloadData];
         }];
         
-//        self.wenzhangModel = [[FBCircleModel alloc]init];
-//        [self.wenzhangModel initHttpRequestWithUid:[SzkAPI getUid] Page:thePage WithType:2 WithCompletionBlock:^(NSMutableArray *array) {           
-//                //数据持久化 缓存
-//                if (thePage == 1) {
-//                    [bself saveWenzhangDataWithArray:array];
-//                    
-//                }
-//            
-//            [bself loadWenZhangBlockWithArray:array];
-//            
-//        } WithFailedBlock:^(NSString *operation) {
-//            
-//            
-//        }];
+
         
         
         
@@ -308,6 +298,7 @@
         
         self.userModel = [[FBCirclePersonalModel alloc]init];
         [self.userModel loadPersonWithUid:[SzkAPI getUid] WithBlock:^(FBCirclePersonalModel *model) {
+            
             [bself loadUserDataWithModel:model];
             
         } WithFailedBlcok:^(NSString *string) {
@@ -325,52 +316,7 @@
     
 }
 
-//-(void)dotheSuccessloadDtat:(NSDictionary *)userinfo{
-//    
-//    if (_currentPage != 1)
-//    {
-//        if ([userinfo isEqual:[NSNull null]])
-//        {
-//            [_tableView reloadData];
-//            return;
-//        }
-//    }else
-//    {
-//        [_wenzhangArray removeAllObjects];
-//    }
-//    
-//    if ([userinfo isEqual:[NSNull null]])
-//    {
-//        //如果没有微博的话
-//        [_tableView reloadData];
-//        return;
-//    }else
-//    {
-//        
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
-//            
-//            NSArray * arr = [ZSNApi sortArrayWith:[userinfo allKeys]];
-//            NSMutableArray * temp = [NSMutableArray array];
-//            for (int i = 0;i < arr.count;i++) {
-//                NSString * key = [NSString stringWithFormat:@"%@",[arr objectAtIndex:i]];
-//                FBCircleModel * model = [[FBCircleModel alloc] initWithDictionary:[userinfo objectForKey:key]];
-//                [temp addObject:model];
-//            }
-//            
-//            
-//            [_wenzhangArray addObjectsFromArray:temp];
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [_tableView reloadData];
-//            });
-//        });
-//        
-//        
-//        
-//    }
-//    
-//    
-//}
+
 
 
 //多线程缓存文件到数据库
@@ -482,12 +428,8 @@
     
     
     
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
         [_tableView reloadData];
-    });
-        
-        
+    
         //数据请求完成之后改变refresh状态
         _wzRefresh = YES;
         if (_wzRefresh && _perRefresh) {
@@ -1115,6 +1057,7 @@
 
 -(void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView *)view{
     _currentPage = 1;
+    [_wenzhangArray removeAllObjects];
     _isupMore = NO;
     [self reloadTableViewDataSource];
     [self prepareNetDataWithPage:_currentPage];
