@@ -84,9 +84,8 @@
     
     
     //接收通知
-    [[NSNotificationCenter defaultCenter]
-     
-     addObserver:self selector:@selector(prepareNetData) name:@"chagePersonalInformation" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(prepareNetData) name:@"chagePersonalInformation" object:nil];
+    
     
     
     
@@ -135,7 +134,6 @@
     _tableView.dataSource = self;
     _tableView.scrollEnabled = NO;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-//    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     
     if ([_tableView respondsToSelector:@selector(setLayoutMargins:)]) {
@@ -143,7 +141,7 @@
     }
     
     [self.view addSubview:_tableView];
-//    [_tableView reloadData];
+
     
     
     
@@ -158,7 +156,7 @@
 //    btn.backgroundColor = [UIColor redColor];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(areaQueDing) forControlEvents:UIControlEventTouchUpInside];
-    [btn setFrame:CGRectMake(270, 0, 35, 35)];
+    [btn setFrame:CGRectMake(DEVICE_WIDTH-50, 0, 35, 35)];
     [_backPickView addSubview:btn];
     
     //地区pickview
@@ -879,20 +877,6 @@
         
         
         //请求文章数据
-//        FBCircleModel *fbModel = [[FBCircleModel alloc]init];
-//        self.fbModel = fbModel;
-//        [fbModel initHttpRequestWithUid:self.passUserid Page:1 WithType:2 WithCompletionBlock:^( NSMutableArray *array) {
-//            
-//            bself.wenzhangArray = array;
-//            
-//            isLoadWenzhangInfoSuccess = YES;
-//            if (isLoadWenzhangInfoSuccess && isLoadUserInfoSuccess) {
-//                [bself hudWasHidden:bhud];
-//            }
-//            
-//        } WithFailedBlock:^(NSString *operation) {
-//            
-//        }];
         NSString *zujiStr = @"http://fb.fblife.com/openapi/index.php?mod=getweibo&code=mylist&fromtype=b5eeec0b&authkey=%@&page=%d&fbtype=json&uid=%@";
         NSString* fullURL = [NSString stringWithFormat:zujiStr,[SzkAPI getAuthkeyGBK],1,self.passUserid];
         NSLog(@"请求个人文章接口 : %@",fullURL);

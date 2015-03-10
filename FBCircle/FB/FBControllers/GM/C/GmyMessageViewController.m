@@ -54,7 +54,7 @@
     
     
     //主tableview
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 6, 320, iPhone5?568-64:480-44) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 6, DEVICE_WIDTH, iPhone5?DEVICE_HEIGHT-64:DEVICE_HEIGHT-44) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     
@@ -67,7 +67,7 @@
     
     //下拉刷新
 
-    _refreshHeaderView = [[EGORefreshTableHeaderView alloc]initWithFrame:CGRectMake(0, 0-_tableView.bounds.size.height, 320, _tableView.bounds.size.height)];
+    _refreshHeaderView = [[EGORefreshTableHeaderView alloc]initWithFrame:CGRectMake(0, 0-_tableView.bounds.size.height, DEVICE_WIDTH, _tableView.bounds.size.height)];
     _refreshHeaderView.delegate = self;
     
     [_tableView addSubview:_refreshHeaderView];
@@ -78,7 +78,7 @@
     
     //上提加载更多
     
-    _upMoreView = [[GloadingView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
+    _upMoreView = [[GloadingView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, 40)];
     _upMoreView.type = 1;
     _upMoreView.isMessage = YES;
     _upMoreView.backgroundColor = RGBCOLOR(236, 236, 236);
