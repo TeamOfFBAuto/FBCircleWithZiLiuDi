@@ -181,13 +181,17 @@
         NSMutableArray *imageArr =wenzhang.fb_image;
         
         //初始化一个dic 里面存图片地址
-        NSDictionary*dic = [[NSDictionary alloc]init];
-        
         if (imageArr.count>0) {//图片数组里有东西
-            //取出第一张图片
-            dic = imageArr[0];
             self.imaCount++;
-            NSString *str = [dic objectForKey:@"link"];
+            //取出第一张图片
+            id temp = wenzhang.fb_image[0];
+            NSString *str;
+            if ([temp isKindOfClass:[NSString class]]) {
+                str = temp;
+            }else if ([temp isKindOfClass:[NSDictionary class]]){
+                str = temp[@"link"];
+            }
+            
             
             //创建展示图片iamge
             UIImageView *imv = [[UIImageView alloc]init];
