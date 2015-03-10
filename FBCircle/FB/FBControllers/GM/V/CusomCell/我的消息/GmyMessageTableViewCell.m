@@ -86,14 +86,15 @@
     [self.contentView addSubview:self.nameLabel];
     [self.contentView addSubview:self.contentLabel];
     [self.contentView addSubview:self.timeLabel];
+    
     [self.contentView addSubview:self.yuanwenContentView];
     
     //调试颜色
-            self.faceImageView.backgroundColor = [UIColor redColor];
-            self.nameLabel.backgroundColor = [UIColor orangeColor];
-            self.contentLabel.backgroundColor = [UIColor purpleColor];
-            self.timeLabel.backgroundColor = [UIColor grayColor];
-            self.yuanwenContentView.backgroundColor = [UIColor redColor];
+//            self.faceImageView.backgroundColor = [UIColor redColor];
+//            self.nameLabel.backgroundColor = [UIColor orangeColor];
+//            self.contentLabel.backgroundColor = [UIColor purpleColor];
+//            self.timeLabel.backgroundColor = [UIColor grayColor];
+//            self.yuanwenContentView.backgroundColor = [UIColor redColor];
 }
 
 
