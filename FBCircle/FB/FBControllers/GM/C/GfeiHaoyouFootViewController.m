@@ -287,6 +287,16 @@
                 
                 NSLog(@"-----%@",userinfo);
                 
+                if (!userinfo) {
+                    [_upMoreView stopLoading:3];
+                    return ;
+                }
+                
+                if ([userinfo isKindOfClass:[NSNull class]]) {
+                    [_upMoreView stopLoading:3];
+                    return;
+                }
+                
                 NSArray * arr = [ZSNApi sortArrayWith:[userinfo allKeys]];
                 NSMutableArray * temp = [NSMutableArray array];
                 for (int i = 0;i < arr.count;i++) {
