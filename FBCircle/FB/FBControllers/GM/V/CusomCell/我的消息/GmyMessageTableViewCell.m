@@ -45,7 +45,7 @@
     
     
     //用户名
-    self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.faceImageView.frame)+10, self.faceImageView.frame.origin.y, 160, 18)];
+    self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.faceImageView.frame)+10, self.faceImageView.frame.origin.y, 160*DEVICE_WIDTH/320.0f, 18)];
     //self.nameLabel.font = [UIFont  fontWithName:@"Helvetica-Bold"  size:15];
     self.nameLabel.font = [UIFont systemFontOfSize:15];
     self.nameLabel.textColor = RGBCOLOR(94, 157, 45);
@@ -54,7 +54,7 @@
     
     
     //原文内容
-    self.yuanwenContentView  = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.faceImageView.frame)+192, self.nameLabel.frame.origin.y, 60, 60)];
+    self.yuanwenContentView  = [[UIView alloc]initWithFrame:CGRectMake(DEVICE_WIDTH-65, self.nameLabel.frame.origin.y, 60, 60)];
     
     
     NSLog(@"%@",NSStringFromCGRect(self.yuanwenContentView.frame));
@@ -89,11 +89,11 @@
     [self.contentView addSubview:self.yuanwenContentView];
     
     //调试颜色
-    //        self.faceImageView.backgroundColor = [UIColor redColor];
-    //        self.nameLabel.backgroundColor = [UIColor orangeColor];
-    //        self.contentLabel.backgroundColor = [UIColor purpleColor];
-    //        self.timeLabel.backgroundColor = [UIColor grayColor];
-    //        self.yuanwenContentView.backgroundColor = [UIColor redColor];
+            self.faceImageView.backgroundColor = [UIColor redColor];
+            self.nameLabel.backgroundColor = [UIColor orangeColor];
+            self.contentLabel.backgroundColor = [UIColor purpleColor];
+            self.timeLabel.backgroundColor = [UIColor grayColor];
+            self.yuanwenContentView.backgroundColor = [UIColor redColor];
 }
 
 
