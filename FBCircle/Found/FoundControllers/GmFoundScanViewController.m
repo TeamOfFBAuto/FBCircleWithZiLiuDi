@@ -72,9 +72,9 @@
     
     
     //半透明的浮层
-    UIImageView *backImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, DEVICE_WIDTH, DEVICE_HEIGHT-64)];
-    backImageView.image = [UIImage imageNamed:@"saoyisao_bg_640_996.png"];
-    [self.view addSubview:backImageView];
+//    UIImageView *backImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 64, DEVICE_WIDTH, DEVICE_HEIGHT-64)];
+//    backImageView.image = [UIImage imageNamed:@"saoyisao_bg_640_996.png"];
+//    [self.view addSubview:backImageView];
     
     
     //四个角

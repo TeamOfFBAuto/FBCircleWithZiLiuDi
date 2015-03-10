@@ -261,7 +261,13 @@
                 
                 NSLog(@"-----%@",userinfo);
                 if (!userinfo) {
+                    [_upMoreView stopLoading:3];
                     return ;
+                }
+                
+                if ([userinfo isKindOfClass:[NSNull class]]) {
+                    [_upMoreView stopLoading:3];
+                    return;
                 }
                 
                 NSArray * arr = [ZSNApi sortArrayWith:[userinfo allKeys]];
@@ -282,7 +288,7 @@
             
             
             
-        }];
+        }]; 
         
         [wRequest setFailedBlock:^{
             [ZSNApi showAutoHiddenMBProgressWithText:@"加载失败" addToView:self.view];

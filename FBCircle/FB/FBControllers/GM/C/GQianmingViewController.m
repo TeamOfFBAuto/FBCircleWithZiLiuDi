@@ -46,7 +46,7 @@
    
     _gholderTextView.font = [UIFont systemFontOfSize:15];
     
-    UIView *backview = [[UIView alloc]initWithFrame:CGRectMake(0, 6, 320, 210)];
+    UIView *backview = [[UIView alloc]initWithFrame:CGRectMake(0, 6, DEVICE_WIDTH, 210)];
     backview.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:backview];
 
