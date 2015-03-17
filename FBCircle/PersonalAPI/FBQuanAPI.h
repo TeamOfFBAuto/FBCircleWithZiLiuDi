@@ -146,11 +146,12 @@ alpha:(a)]
 #pragma mark-FB圈接口
 
 #define FBCIRCLE_URL @"http://quan.fblife.com/index.php?c=interface&a=getfrontpage&uid=%@&page=%d&ps=20&type=%d&fbtype=json"
-
-#define FBCIRCLE_PRAISE_URL @"http://quan.fblife.com/index.php?c=interface&a=dopraise&authkey=%@&tid=%@&fbtype=json"
-
-//#define FBCIRCLE_COMMENT_URL @"http://quan.fblife.com/index.php?c=interface&a=doreply&authkey=%@&tid=%@&touid=%@&content=%@&fbtype=json"//发表评论的接口
-#define FBCIRCLE_COMMENT_URL @"http://quan.fblife.com/index.php?c=interface&a=doreply&fbtype=json"//发表评论的接口
+//老版点赞接口
+//#define FBCIRCLE_PRAISE_URL @"http://quan.fblife.com/index.php?c=interface&a=dopraise&authkey=%@&tid=%@&fbtype=json"
+//新版点赞接口，对自留地微博点赞
+#define FBCIRCLE_PRAISE_URL @"http://t.fblife.com/openapi/index.php?mod=dotopic&code=dianzan&authkey=%@&tid=%@&fbtype=json"
+//发表评论的接口
+#define FBCIRCLE_COMMENT_URL @"http://quan.fblife.com/index.php?c=interface&a=doreply&fbtype=json"
 
 //#define FBCIRCLE_FORWARD_URL @"http://quan.fblife.com/index.php?c=interface&a=doforward&authkey=%@&tid=%@&touid=%@&content=%@&fbtype=json"
 #define FBCIRCLE_FORWARD_URL @"http://quan.fblife.com/index.php?c=interface&a=doforward&fbtype=json"

@@ -113,8 +113,8 @@
     */
     
     ///张少南 这里需要换成正式数据
-    NSString* fullURL = [NSString stringWithFormat:FB_WEIBOMYSELF_URL,[SzkAPI getAuthkey],currentPage];
-//    NSString * fullURL = [NSString stringWithFormat:@"http://t.fblife.com/openapi/index.php?mod=getweibo_quan&code=myfeed&fromtype=b5eeec0b&authkey=%@&page=%d&fbtype=json",@"X2tbP1czVTEAMVAzDHcCb1orUiZbbQI+CGk=",currentPage];
+//    NSString* fullURL = [NSString stringWithFormat:FB_WEIBOMYSELF_URL,[SzkAPI getAuthkey],currentPage];
+    NSString * fullURL = @"http://t.fblife.com/openapi/index.php?mod=getweibo&code=getuserweibo&authkey=X2tbP1czVTEAMVAzDHcCb1orUiZbbQI+CGk=&page=1&fbtype=json";//[NSString stringWithFormat:@"http://t.fblife.com/openapi/index.php?mod=getweibo_quan&code=myfeed&fromtype=b5eeec0b&authkey=%@&page=%d&fbtype=json",@"X2tbP1czVTEAMVAzDHcCb1orUiZbbQI+CGk=",currentPage];
 
     NSLog(@"请求微博url---%@",fullURL);
     
@@ -1148,24 +1148,24 @@
     
     headerView.frame = CGRectMake(0,0,DEVICE_WIDTH,BANNAR_HEIGHT + 70 + (isHaveNewMessage?40:0));
     
-//    if ([GlocalUserImage getUserBannerImage])
-//    {
-//        bannerView.image = [GlocalUserImage getUserBannerImage];
-//    }else
-//    {
-//        NSString * string = [NSString stringWithFormat:@"%@",_personModel.person_frontpic];
-//        if ([string isEqualToString:@"http://quan.fblife.com/resource/front//"])
-//        {
-//            [bannerView loadImageFromURL:@"" withPlaceholdImage:[UIImage imageNamed:@"fengmian_640_512.png"]];
-//        }else
-//        {
-//            [bannerView setImageWithURL:[NSURL URLWithString:_personModel.person_frontpic] placeholderImage:[UIImage imageNamed:@"fengmian_loading_640_512.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-//                [GlocalUserImage setUserBannerImageWithData:UIImageJPEGRepresentation(image,0.5)];
-//            }];
-//        }
-//    }
+    if ([GlocalUserImage getUserBannerImage])
+    {
+        bannerView.image = [GlocalUserImage getUserBannerImage];
+    }else
+    {
+        NSString * string = [NSString stringWithFormat:@"%@",_personModel.person_frontpic];
+        if ([string isEqualToString:@"http://quan.fblife.com/resource/front//"])
+        {
+            [bannerView loadImageFromURL:@"" withPlaceholdImage:[UIImage imageNamed:@"fengmian_640_512.png"]];
+        }else
+        {
+            [bannerView setImageWithURL:[NSURL URLWithString:_personModel.person_frontpic] placeholderImage:[UIImage imageNamed:@"fengmian_loading_640_512.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                [GlocalUserImage setUserBannerImageWithData:UIImageJPEGRepresentation(image,0.5)];
+            }];
+        }
+    }
     
-    [bannerView sd_setImageWithURL:[NSURL URLWithString:@"http://fb.cn/images/userface/000/01/56/face_60_0.jpg"] placeholderImage:nil];
+//    [bannerView sd_setImageWithURL:[NSURL URLWithString:@"http://fb.cn/images/userface/000/01/56/face_60_0.jpg"] placeholderImage:nil];
     
     
     if ([GlocalUserImage getUserFaceImage])
@@ -1310,7 +1310,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FBCircleModel * model = [self.data_array objectAtIndex:indexPath.row];
-    if (_cell_height_array) {
+    if (_cell_height_array && indexPath.row < _cell_height_array.count) {
         return [[_cell_height_array objectAtIndex:indexPath.row] floatValue] + (model.isShowMenuView?42:0);
     }else
     {
@@ -1653,7 +1653,7 @@
                 
                 
                 myAlertView = [[FBQuanAlertView alloc]  initWithFrame:CGRectMake(0,0,138,50)];
-                myAlertView.center = CGPointMake(160,(iPhone5?568:480)/2-50);
+                myAlertView.center = CGPointMake(DEVICE_WIDTH/2,DEVICE_HEIGHT/2-50);
                 [myAlertView setType:FBQuanAlertViewTypeNoJuhua thetext:[allDic objectForKey:@"errinfo"]];
                 [self.view addSubview:myAlertView];
                 [self performSelector:@selector(dismissPromptView) withObject:nil afterDelay:1.5];
@@ -1725,7 +1725,7 @@
         {
             myAlertView = [[FBQuanAlertView alloc]  initWithFrame:CGRectMake(0,0,138,50)];
             
-            myAlertView.center = CGPointMake(160,(iPhone5?568:480)/2-50);
+            myAlertView.center = CGPointMake(DEVICE_WIDTH/2,DEVICE_HEIGHT/2-50);
             
             [myAlertView setType:FBQuanAlertViewTypeNoJuhua thetext:@"您已经赞过了"];
             
@@ -2184,7 +2184,7 @@
     if (myTextString.length == 0)
     {
         myAlertView = [[FBQuanAlertView alloc]  initWithFrame:CGRectMake(0,0,138,50)];
-        myAlertView.center = CGPointMake(160,(iPhone5?568:480)/2-20);
+        myAlertView.center = CGPointMake(DEVICE_WIDTH,DEVICE_HEIGHT/2-20);
         [myAlertView setType:FBQuanAlertViewTypeNoJuhua thetext:@"发送内容不能为空"];
         [self.view addSubview:myAlertView];
         [self performSelector:@selector(dismissPromptView) withObject:nil afterDelay:1];
